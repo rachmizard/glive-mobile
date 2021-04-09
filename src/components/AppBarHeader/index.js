@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Appbar} from 'react-native-paper';
-import {color} from './../../assets';
+import {color, fontConfig} from './../../assets';
 
 const AppBarHeader = ({navigation, previous, scene}) => {
   const {options} = scene.descriptor;
@@ -24,6 +24,7 @@ const AppBarHeader = ({navigation, previous, scene}) => {
       <Appbar.Content
         style={styles.appBarContent(isTitleCenter)}
         title={title}
+        titleStyle={fontConfig.fontStylesheet.subtitle1}
       />
     </Appbar.Header>
   );
@@ -33,7 +34,7 @@ export default AppBarHeader;
 
 const styles = StyleSheet.create({
   appBarHeader: {
-    backgroundColor: color.surface
+    backgroundColor: color.surface,
   },
   appBarContent: isTitleCenter => ({
     alignItems: isTitleCenter ? 'center' : 'flex-start',

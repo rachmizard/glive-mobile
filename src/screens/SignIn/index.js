@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import {Button, HelperText, Text, TextInput} from 'react-native-paper';
+import {StyleSheet, View} from 'react-native';
+import {HelperText, Text, TextInput} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
-import IconGoogle from './../../assets/images/icon-google.png';
+import {BaseButton, ButtonGoogle} from '../../components';
 
-const SignInScreen = ({navigation}) => {
+const SignInScreen = ({navigation, theme}) => {
+  console.log(theme);
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -101,35 +102,20 @@ const SignInScreen = ({navigation}) => {
         </View>
       </View>
       <View style={styles.signInButton}>
-        <Button
-          contentStyle={{height: 48}}
-          labelStyle={fontConfig.fontStylesheet.button}
-          mode="contained"
-          compact={true}
-          uppercase={false}
-          onPress={() => _handleRedirectHome()}>
-          Login
-        </Button>
-        <Button
-          icon={() => (
-            <Image
-              source={IconGoogle}
-              style={{width: 24, height: 24, marginRight: 80}}
-            />
-          )}
-          style={{marginTop: 16}}
-          contentStyle={{
-            height: 48,
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-          }}
-          labelStyle={fontConfig.fontStylesheet.button}
-          mode="contained"
-          compact={true}
-          uppercase={false}
-          color={color.white}>
-          Continue With Google
-        </Button>
+        <View>
+          <BaseButton
+            mode="contained"
+            uppercase={false}
+            size="medium"
+            onPress={() => _handleRedirectHome()}>
+            Login
+          </BaseButton>
+        </View>
+        <View style={{marginTop: 16}}>
+          <ButtonGoogle uppercase={false} onPress={() => console.log('Hello')}>
+            Continue With Google
+          </ButtonGoogle>
+        </View>
       </View>
     </View>
   );

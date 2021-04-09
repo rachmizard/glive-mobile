@@ -14,7 +14,7 @@ const SplashScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 96}}>Logo</Text>
+      <Text style={{fontSize: 96}}>Glive</Text>
     </View>
   );
 };

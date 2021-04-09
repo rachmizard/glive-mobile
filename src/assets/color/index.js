@@ -8,6 +8,8 @@ const color = {
   text: '#EAEAEA',
   background: '#1A1E23',
   surface: '#252A31',
+  placeholder: '#393E46',
+  disabled: '#393E46',
   greyDark: '#393E46',
   greyMedium: '#8F97A3',
   greyLine: '#9DA4AE',
