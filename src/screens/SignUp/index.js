@@ -5,18 +5,26 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
 import {BaseButton, ButtonGoogle} from '../../components';
 
-const SignInScreen = ({navigation}) => {
+const SignUpScreen = ({navigation}) => {
   const [state, setState] = useState({
+    username: '',
     email: '',
     password: '',
     showPassword: false,
     iconPassword: 'eye',
     errors: {
-      email: {
-        message: 'Email not invalid',
+      username: {
+        message: 'Username cannot be empty',
         isError: false,
       },
-      password: {},
+      email: {
+        message: 'Email is invalid',
+        isError: false,
+      },
+      password: {
+        message: 'Password cannot be empty',
+        isError: false,
+      },
     },
   });
 
@@ -28,38 +36,78 @@ const SignInScreen = ({navigation}) => {
     });
   };
 
-  const _handleRedirectHome = () => {
-    navigation.replace('Home');
+  const onChangeUsername = e => {
+    setState({...state, username: e});
   };
 
   const onChangeEmail = e => {
-    let copy = {...state};
-
     setState({...state, email: e});
-
-    if (!e.includes('@')) {
-      setState(copy);
-      copy.errors.email.isError = true;
-    } else {
-      copy.errors.email.isError = false;
-      setState(copy);
-    }
   };
 
   const onChangePassword = e => {
     setState({...state, password: e});
   };
 
+  const _handleSubmitRegister = () => {
+    const copyState = {...state};
+    copyState.errors.username.isError = false;
+    copyState.errors.email.isError = false;
+    copyState.errors.password.isError = false;
+
+    if (state.username === '') {
+      copyState.errors.username.isError = true;
+    }
+
+    if (!state.email.includes('@')) {
+      copyState.errors.email.isError = true;
+    }
+
+    if (state.password === '') {
+      copyState.errors.password.isError = true;
+    }
+
+    setState(copyState);
+
+    if (
+      !state.errors.username.isError &&
+      !state.errors.email.isError &&
+      !state.errors.password.isError
+    ) {
+      navigation.replace('Home');
+      return;
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.signInTitleWrapper}>
-        <Text style={styles.signInTitleHeadingText}>Welcome to GLiVE</Text>
-        <Text style={styles.signInTitleSubHeadingText}>
-          Social club for gamers and game developers
+      <View style={styles.signUpTitleWrapper}>
+        <Text style={styles.signUpTitleHeadingText}>
+          GLiVE Account Registration
+        </Text>
+        <Text style={styles.signUpTitleSubHeadingText}>
+          Please fill in the field below :)
         </Text>
       </View>
-      <View style={styles.signInFormWrapper}>
-        <View style={styles.signInFormControl}>
+      <View style={styles.signUpFormWrapper}>
+        <View style={styles.signUpFormControl}>
+          <TextInput
+            mode="outlined"
+            label="Username"
+            onChangeText={onChangeUsername}
+            error={state.errors.username.isError}
+            theme={{
+              colors: {
+                placeholder: color.greyLine,
+                text: color.greyLine,
+                primary: color.greyLine,
+              },
+            }}
+          />
+          <HelperText type="error" visible={state.errors.username.isError}>
+            {state.errors.username.message}
+          </HelperText>
+        </View>
+        <View style={styles.signUpFormControl}>
           <TextInput
             mode="outlined"
             label="Email"
@@ -77,11 +125,12 @@ const SignInScreen = ({navigation}) => {
             {state.errors.email.message}
           </HelperText>
         </View>
-        <View style={styles.signInFormControl}>
+        <View style={styles.signUpFormControl}>
           <TextInput
             mode="outlined"
             label="Password"
             secureTextEntry={!state.showPassword}
+            error={state.errors.password.isError}
             onChangeText={onChangePassword}
             theme={{
               colors: {
@@ -105,51 +154,42 @@ const SignInScreen = ({navigation}) => {
               )
             }
           />
+          <HelperText type="error" visible={state.errors.password.isError}>
+            {state.errors.password.message}
+          </HelperText>
         </View>
       </View>
-      <View style={styles.signInButton}>
+      <View style={styles.signUpButton}>
         <View>
           <BaseButton
             mode="contained"
             uppercase={false}
             size="medium"
-            onPress={() => _handleRedirectHome()}>
-            Login
-          </BaseButton>
-        </View>
-        <View style={{marginTop: 16}}>
-          <ButtonGoogle uppercase={false} onPress={() => console.log('Hello')}>
-            Continue With Google
-          </ButtonGoogle>
-        </View>
-        <View style={{marginTop: 16, alignItems: 'center'}}>
-          <Text
-            onPress={() => navigation.navigate('SignUp')}
-            style={fontConfig.fontStylesheet.subtitle1}>
+            onPress={() => _handleSubmitRegister()}>
             Register
-          </Text>
+          </BaseButton>
         </View>
       </View>
     </View>
   );
 };
 
-export default SignInScreen;
+export default SignUpScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 16,
   },
-  signInTitleWrapper: {
+  signUpTitleWrapper: {
     marginTop: 24,
   },
-  signInTitleHeadingText: fontConfig.fontStylesheet.h5,
-  signInTitleSubHeadingText: fontConfig.fontStylesheet.body1,
-  signInFormWrapper: {
+  signUpTitleHeadingText: fontConfig.fontStylesheet.h5,
+  signUpTitleSubHeadingText: fontConfig.fontStylesheet.body1,
+  signUpFormWrapper: {
     marginVertical: 24,
   },
-  signInFormControl: {
+  signUpFormControl: {
     marginBottom: 5,
   },
 });

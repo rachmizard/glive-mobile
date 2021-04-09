@@ -14,9 +14,16 @@ const AppBarHeader = ({navigation, previous, scene}) => {
       : scene.route.name;
 
   let isTitleCenter = false;
+  let backAction = null;
 
-  if (title === 'Sign In') {
+  if (title === 'Sign In' || title === 'Sign Up') {
     isTitleCenter = true;
+  }
+
+  if (previous) {
+    backAction = (
+      <Appbar.BackAction color={color.primary} onPress={navigation.goBack} />
+    );
   }
 
   const _handleRedirectMessage = () => {
@@ -25,7 +32,7 @@ const AppBarHeader = ({navigation, previous, scene}) => {
 
   return (
     <Appbar.Header style={styles.appBarHeader}>
-      {previous ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
+      {backAction}
       <Appbar.Content
         style={styles.appBarContent(isTitleCenter)}
         title={title}
