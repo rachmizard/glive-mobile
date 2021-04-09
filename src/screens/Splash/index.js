@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
+import { fontConfig } from '../../assets';
 
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
@@ -14,7 +15,7 @@ const SplashScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 96}}>Glive</Text>
+      <Text style={fontConfig.fontStylesheet.h1}>Glive</Text>
     </View>
   );
 };

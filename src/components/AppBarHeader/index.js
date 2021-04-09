@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import {color, fontConfig} from './../../assets';
+import IconDirectMessage from './../../assets/images/icon-send.png';
 
 const AppBarHeader = ({navigation, previous, scene}) => {
   const {options} = scene.descriptor;
@@ -18,6 +19,10 @@ const AppBarHeader = ({navigation, previous, scene}) => {
     isTitleCenter = true;
   }
 
+  const _handleRedirectMessage = () => {
+    console.log('Hello');
+  };
+
   return (
     <Appbar.Header style={styles.appBarHeader}>
       {previous ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
@@ -26,6 +31,14 @@ const AppBarHeader = ({navigation, previous, scene}) => {
         title={title}
         titleStyle={fontConfig.fontStylesheet.subtitle1}
       />
+      {title === 'Home' && (
+        <Appbar.Action
+          icon={() => (
+            <Image source={IconDirectMessage} style={{width: 24, height: 24}} />
+          )}
+          onPress={_handleRedirectMessage}
+        />
+      )}
     </Appbar.Header>
   );
 };

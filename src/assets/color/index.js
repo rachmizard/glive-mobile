@@ -5,6 +5,8 @@ const color = {
   primaryDark: '#00048f',
   white: '#FFFFFF',
   blue: '#13B9FF',
+  yellow: '#F2C94C',
+  black: '#000000',
   text: '#EAEAEA',
   background: '#1A1E23',
   surface: '#252A31',

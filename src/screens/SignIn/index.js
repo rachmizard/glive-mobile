@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {HelperText, Text, TextInput} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
-import {BaseButton, ButtonGoogle} from '../../components';
+import {BaseButton, ButtonGoogle, ButtonSteam} from '../../components';
 
 const SignInScreen = ({navigation}) => {
   const [state, setState] = useState({
