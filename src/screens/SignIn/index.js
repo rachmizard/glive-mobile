@@ -5,8 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
 import {BaseButton, ButtonGoogle} from '../../components';
 
-const SignInScreen = ({navigation, theme}) => {
-  console.log(theme);
+const SignInScreen = ({navigation}) => {
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -25,7 +24,7 @@ const SignInScreen = ({navigation, theme}) => {
     setState({
       ...state,
       showPassword: !state.showPassword,
-      iconPassword: state.showPassword ? 'eye-off' : 'eye',
+      iconPassword: state.showPassword ? 'eye' : 'eye-off',
     });
   };
 
@@ -45,6 +44,10 @@ const SignInScreen = ({navigation, theme}) => {
       copy.errors.email.isError = false;
       setState(copy);
     }
+  };
+
+  const onChangePassword = e => {
+    setState({...state, password: e});
   };
 
   return (
@@ -79,6 +82,7 @@ const SignInScreen = ({navigation, theme}) => {
             mode="outlined"
             label="Password"
             secureTextEntry={!state.showPassword}
+            onChangeText={onChangePassword}
             theme={{
               colors: {
                 placeholder: color.greyLine,
@@ -87,16 +91,18 @@ const SignInScreen = ({navigation, theme}) => {
               },
             }}
             right={
-              <TextInput.Icon
-                name={() => (
-                  <Icon
-                    name={state.iconPassword}
-                    size={24}
-                    color={color.greyLine}
-                  />
-                )}
-                onPress={() => _handleTogglePassword()}
-              />
+              state.password !== '' && (
+                <TextInput.Icon
+                  name={() => (
+                    <Icon
+                      name={state.iconPassword}
+                      size={24}
+                      color={color.greyLine}
+                    />
+                  )}
+                  onPress={() => _handleTogglePassword()}
+                />
+              )
             }
           />
         </View>
