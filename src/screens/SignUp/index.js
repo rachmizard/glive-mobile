@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {HelperText, Text, TextInput} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
-import {BaseButton, ButtonGoogle} from '../../components';
+import {BaseButton} from '../../components';
 
 const SignUpScreen = ({navigation}) => {
   const [state, setState] = useState({
@@ -73,7 +73,7 @@ const SignUpScreen = ({navigation}) => {
       !state.errors.email.isError &&
       !state.errors.password.isError
     ) {
-      navigation.replace('Home');
+      navigation.replace('SuccessSignUp');
       return;
     }
   };

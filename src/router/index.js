@@ -1,6 +1,12 @@
 import React from 'react';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import {HomeScreen, SignInScreen, SignUpScreen, SplashScreen} from '../screens';
+import {
+  HomeScreen,
+  SignInScreen,
+  SignUpScreen,
+  SplashScreen,
+  SuccessSignUpScreen,
+} from '../screens';
 import AppBarHeader from '../components/AppBarHeader';
 
 const Stack = createStackNavigator();
@@ -26,6 +32,11 @@ const RootRouter = () => {
       <Stack.Screen
         name="SignUp"
         component={SignUpScreen}
+        options={{headerTitle: 'Sign Up'}}
+      />
+      <Stack.Screen
+        name="SuccessSignUp"
+        component={SuccessSignUpScreen}
         options={{headerTitle: 'Sign Up'}}
       />
       <Stack.Screen
