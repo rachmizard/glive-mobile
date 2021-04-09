@@ -1,0 +1,60 @@
+import React from 'react';
+import {StyleSheet, TouchableOpacity} from 'react-native';
+import {color, fontConfig} from '../../assets';
+import IconHome from './../../assets/images/icon-home.svg';
+import IconHomeActive from './../../assets/images/icon-home-active.svg';
+import IconProfile from './../../assets/images/icon-profile.svg';
+import IconProfileActive from './../../assets/images/icon-profile-active.svg';
+
+const AppBottomTabItem = ({
+  label,
+  options,
+  onPress,
+  onLongPress,
+  isFocused,
+}) => {
+  let icon = null;
+  switch (label) {
+    case 'Home':
+      icon = isFocused ? (
+        <IconHomeActive width={18} height={18} />
+      ) : (
+        <IconHome width={18} height={18} />
+      );
+      break;
+
+    case 'Profile':
+      icon = isFocused ? (
+        <IconProfileActive width={18} height={18} />
+      ) : (
+        <IconProfile width={18} height={18} />
+      );
+      break;
+
+    default:
+      icon = <IconHome />;
+      break;
+  }
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      onLongPress={onLongPress}
+      style={styles.container}>
+      {icon}
+    </TouchableOpacity>
+  );
+};
+
+export default AppBottomTabItem;
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80,
+  },
+  text: isFocused => ({
+    color: isFocused ? color.primary : color.greyLight,
+    fontFamily: fontConfig.fontStylesheet.subtitle1,
+  }),
+});

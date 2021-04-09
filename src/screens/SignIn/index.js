@@ -29,7 +29,7 @@ const SignInScreen = ({navigation}) => {
   };
 
   const _handleRedirectHome = () => {
-    navigation.replace('Home');
+    navigation.replace('MainScreen', {screen: 'Home'});
   };
 
   const onChangeEmail = e => {

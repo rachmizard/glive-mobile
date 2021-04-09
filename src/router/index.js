@@ -1,15 +1,40 @@
 import React from 'react';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   HomeScreen,
+  ProfileScreen,
   SignInScreen,
   SignUpScreen,
   SplashScreen,
   SuccessSignUpScreen,
 } from '../screens';
 import AppBarHeader from '../components/AppBarHeader';
+import {AppBotomNavigation} from '../components';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function getHeaderTitle(route) {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
+
+  switch (routeName) {
+    case 'Home':
+      return 'Home';
+    case 'Profile':
+      return 'My profile';
+  }
+}
+
+const MainScreen = () => {
+  return (
+    <Tab.Navigator tabBar={props => <AppBotomNavigation {...props} />}>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+};
 
 const RootRouter = () => {
   return (
@@ -40,9 +65,11 @@ const RootRouter = () => {
         options={{headerTitle: 'Sign Up'}}
       />
       <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{title: 'Home'}}
+        name="MainScreen"
+        component={MainScreen}
+        options={({route}) => ({
+          headerTitle: getHeaderTitle(route),
+        })}
       />
     </Stack.Navigator>
   );

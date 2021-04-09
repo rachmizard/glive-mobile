@@ -24,7 +24,7 @@ const ButtonDiscord = ({children, onPress, onLongPress, uppercase}) => {
       icon={() => (
         <Image
           source={IconDiscord}
-          style={{width: 24, height: 24, marginRight: 80}}
+          style={{width: 24, height: 24, marginRight: 60}}
         />
       )}
       contentStyle={contentStyle}

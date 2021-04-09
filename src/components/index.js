@@ -4,6 +4,8 @@ import BaseButton from './BaseButton';
 import ButtonSteam from './ButtonSteam';
 import ButtonDiscord from './ButtonDiscord';
 import BaseTag from './BaseTag';
+import AppBotomNavigation from './AppBotomNavigation';
+import AppBottomTabItem from './AppBottomTabItem';
 
 export {
   AppBarHeader,
@@ -12,4 +14,6 @@ export {
   ButtonSteam,
   ButtonDiscord,
   BaseTag,
+  AppBotomNavigation,
+  AppBottomTabItem,
 };

@@ -3,6 +3,7 @@ import HomeScreen from './Home';
 import SignInScreen from './SignIn';
 import SignUpScreen from './SignUp';
 import SuccessSignUpScreen from './SuccessSignUp';
+import ProfileScreen from './Profile';
 
 export {
   SplashScreen,
@@ -10,4 +11,5 @@ export {
   SignInScreen,
   SignUpScreen,
   SuccessSignUpScreen,
+  ProfileScreen,
 };

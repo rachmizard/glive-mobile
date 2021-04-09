@@ -5,7 +5,10 @@ import {fontConfig} from '../../assets';
 import {BaseButton, ButtonDiscord} from '../../components';
 import IconStartUpOutline from './../../assets/images/icon-startup-outline.png';
 
-const SuccessSignUpScreen = () => {
+const SuccessSignUpScreen = ({navigation}) => {
+  const _handleTakeHome = () =>
+    navigation.reset({index: 0, routes: [{name: 'MainScreen'}]});
+
   return (
     <View style={styles.container}>
       <View style={styles.successHeadingTextWrapper}>
@@ -25,7 +28,10 @@ const SuccessSignUpScreen = () => {
           <ButtonDiscord>Continue Discord Account</ButtonDiscord>
         </View>
         <View style={{marginBottom: 16}}>
-          <BaseButton mode="contained" uppercase={false}>
+          <BaseButton
+            mode="contained"
+            uppercase={false}
+            onPress={_handleTakeHome}>
             Take me "Home"
           </BaseButton>
         </View>
