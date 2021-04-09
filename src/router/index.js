@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import {HomeScreen, SplashScreen} from '../screens';
+import {HomeScreen, SignInScreen, SplashScreen} from '../screens';
 import AppBarHeader from '../components/AppBarHeader';
 
 const Stack = createStackNavigator();
@@ -17,6 +17,11 @@ const RootRouter = () => {
         name="Splash"
         component={SplashScreen}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{headerTitle: 'Sign In'}}
       />
       <Stack.Screen
         name="Home"

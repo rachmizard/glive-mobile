@@ -5,7 +5,7 @@ import {Text} from 'react-native-paper';
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.replace('Home');
+      navigation.replace('SignIn');
     }, 2000);
     return () => {
       clearTimeout(timeout());

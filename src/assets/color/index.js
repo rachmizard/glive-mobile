@@ -4,6 +4,7 @@ const color = {
   primaryLight: '#825ef5',
   primaryDark: '#00048f',
   white: '#FFFFFF',
+  blue: '#13B9FF',
   text: '#EAEAEA',
   background: '#1A1E23',
   surface: '#252A31',

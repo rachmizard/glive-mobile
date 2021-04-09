@@ -13,11 +13,11 @@ import fontConfig from './../font-config';
 export default {
   ...PaperDefaultTheme,
   ...NavigationDefaultTheme,
-  roundness: 2,
+  roundness: 8,
   colors: {
     ...PaperDefaultTheme.colors,
     ...NavigationDefaultTheme.colors,
-    ...color
+    ...color,
   },
-  fonts: configureFonts(fontConfig),
+  fonts: configureFonts(fontConfig.fontDefault),
 };
