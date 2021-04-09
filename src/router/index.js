@@ -1,6 +1,6 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import {SplashScreen} from '../screens';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {HomeScreen, SplashScreen} from '../screens';
 import AppBarHeader from '../components/AppBarHeader';
 
 const Stack = createStackNavigator();
@@ -8,9 +8,21 @@ const Stack = createStackNavigator();
 const RootRouter = () => {
   return (
     <Stack.Navigator
-      screenOptions={{header: props => <AppBarHeader {...props} />}}
+      screenOptions={{
+        header: props => <AppBarHeader {...props} />,
+        ...TransitionPresets.FadeFromBottomAndroid,
+      }}
       initialRouteName="Splash">
-      <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="Splash"
+        component={SplashScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{title: 'Home'}}
+      />
     </Stack.Navigator>
   );
 };

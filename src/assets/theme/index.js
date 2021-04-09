@@ -15,7 +15,9 @@ export default {
   ...NavigationDefaultTheme,
   roundness: 2,
   colors: {
-    ...color,
+    ...PaperDefaultTheme.colors,
+    ...NavigationDefaultTheme.colors,
+    ...color
   },
   fonts: configureFonts(fontConfig),
 };

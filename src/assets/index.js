@@ -1,3 +1,5 @@
 import theme from './theme';
+import color from './color';
+import fontConfig from './font-config';
 
-export {theme};
+export {theme, color, fontConfig};
