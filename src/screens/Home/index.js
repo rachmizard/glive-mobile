@@ -1,31 +1,11 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {BaseTag} from '../../components';
+import {tags} from './../../mocks';
 
 const HomeScreen = () => {
   const [state, setState] = useState({
-    tags: [
-      {
-        name: '#all',
-        active: true,
-      },
-      {
-        name: '#tothebone',
-        active: false,
-      },
-      {
-        name: '#E32022',
-        active: false,
-      },
-      {
-        name: '#hashtagpanjang',
-        active: false,
-      },
-      {
-        name: '#panjangtagnya',
-        active: false,
-      },
-    ],
+    tags: tags,
   });
 
   const _handlePressTag = index => {

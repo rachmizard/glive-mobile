@@ -1,5 +1,4 @@
-import gameRooms from "./gameRooms";
+import gameRooms from './gameRooms';
+import tags from './tags';
 
-export {
-    gameRooms
-}
+export {tags, gameRooms};
