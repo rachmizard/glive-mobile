@@ -9,6 +9,8 @@ import {
   SignUpScreen,
   SplashScreen,
   SuccessSignUpScreen,
+  ActivityScreen,
+  NotificationScreen,
 } from '../screens';
 import AppBarHeader from '../components/AppBarHeader';
 import {AppBotomNavigation} from '../components';
@@ -16,21 +18,12 @@ import {AppBotomNavigation} from '../components';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function getHeaderTitle(route) {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
-
-  switch (routeName) {
-    case 'Home':
-      return 'Home';
-    case 'Profile':
-      return 'My profile';
-  }
-}
-
 const MainScreen = () => {
   return (
     <Tab.Navigator tabBar={props => <AppBotomNavigation {...props} />}>
       <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Activity" component={ActivityScreen} />
+      <Tab.Screen name="Notification" component={NotificationScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
@@ -76,3 +69,18 @@ const RootRouter = () => {
 };
 
 export default RootRouter;
+
+const getHeaderTitle = route => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
+
+  switch (routeName) {
+    case 'Home':
+      return 'Home';
+    case 'Activity':
+      return 'Activity';
+    case 'Notification':
+      return 'Notification';
+    case 'Profile':
+      return 'My profile';
+  }
+};

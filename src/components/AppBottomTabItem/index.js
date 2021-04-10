@@ -3,6 +3,10 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {color, fontConfig} from '../../assets';
 import IconHome from './../../assets/images/icon-home.svg';
 import IconHomeActive from './../../assets/images/icon-home-active.svg';
+import IconActivity from './../../assets/images/icon-activity.svg';
+import IconActivityActive from './../../assets/images/icon-activity-active.svg';
+import IconNotification from './../../assets/images/icon-notification.svg';
+import IconNotificationActive from './../../assets/images/icon-notification-active.svg';
 import IconProfile from './../../assets/images/icon-profile.svg';
 import IconProfileActive from './../../assets/images/icon-profile-active.svg';
 
@@ -20,6 +24,22 @@ const AppBottomTabItem = ({
         <IconHomeActive width={18} height={18} />
       ) : (
         <IconHome width={18} height={18} />
+      );
+      break;
+
+    case 'Activity':
+      icon = isFocused ? (
+        <IconActivityActive width={18} height={18} />
+      ) : (
+        <IconActivity width={18} height={18} />
+      );
+      break;
+
+    case 'Notification':
+      icon = isFocused ? (
+        <IconNotificationActive width={18} height={18} />
+      ) : (
+        <IconNotification width={18} height={18} />
       );
       break;
 
