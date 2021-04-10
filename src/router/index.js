@@ -24,7 +24,14 @@ const Tab = createBottomTabNavigator();
 
 const MainScreen = () => {
   return (
-    <Tab.Navigator tabBar={props => <AppBotomNavigation {...props} />}>
+    <Tab.Navigator
+      tabBarOptions={{
+        keyboardHidesTabBar: false,
+        style: {
+          position: 'absolute',
+        },
+      }}
+      tabBar={props => <AppBotomNavigation {...props} />}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Activity" component={ActivityScreen} />
       <Tab.Screen name="Add" component={AddContentScreen} />

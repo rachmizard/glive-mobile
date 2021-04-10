@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {YourDivisionContainer} from '../../containers';
+import {Divider} from 'react-native-paper';
+import {
+  ExploreDivisionContainer,
+  YourDivisionContainer,
+} from '../../containers';
 import GameRoomContainer from '../../containers/GameRoom';
-import {gameRooms, yourDivisions} from '../../mocks';
+import {exploreDivisions, gameRooms, yourDivisions} from '../../mocks';
 
 const ActivityScreen = ({navigation}) => {
   const [state, setState] = useState({
     isLoadingGameRoom: false,
     gameRooms: gameRooms,
     yourDivisions: yourDivisions,
+    exploreDivisions: exploreDivisions,
   });
 
   useEffect(() => {
@@ -24,7 +29,17 @@ const ActivityScreen = ({navigation}) => {
           isLoading={state.isLoadingGameRoom}
           gameRooms={state.gameRooms}
         />
-        <YourDivisionContainer yourDivisions={state.yourDivisions} />
+        <YourDivisionContainer
+          navigation={navigation}
+          yourDivisions={state.yourDivisions}
+        />
+        <Divider
+          style={{marginVertical: 8, borderColor: '#4F4F4F', borderWidth: 0.5}}
+        />
+        <ExploreDivisionContainer
+          navigation={navigation}
+          exploreDivisions={state.exploreDivisions}
+        />
       </ScrollView>
     </View>
   );

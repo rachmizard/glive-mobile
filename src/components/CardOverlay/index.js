@@ -6,16 +6,28 @@ import {color, fontConfig} from '../../assets';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const CardOverlay = ({colors, start, end, tagText, totalUser, title, img}) => {
+const CardOverlay = ({
+  colors,
+  start,
+  end,
+  tagText,
+  totalUser,
+  title,
+  img,
+  overlay = false,
+  onPress,
+  onLongPress,
+  touchable,
+}) => {
   let gradient = {
     colors: colors,
     start: start,
     end: end,
   };
 
-  return (
-    <TouchableOpacity>
-      <View style={styles.card}>
+  const RenderLinearGradient = () => {
+    if (overlay) {
+      return (
         <LinearGradient
           style={{borderRadius: 8}}
           colors={colors}
@@ -23,6 +35,18 @@ const CardOverlay = ({colors, start, end, tagText, totalUser, title, img}) => {
           end={gradient.end}>
           <Image source={img} style={styles.cardImage} />
         </LinearGradient>
+      );
+    }
+
+    return <Image source={img} style={styles.cardImage} />;
+  };
+  return (
+    <TouchableOpacity
+      disabled={touchable}
+      onPress={onPress}
+      onLongPress={onLongPress}>
+      <View style={styles.card}>
+        <RenderLinearGradient />
         <View style={styles.cardContent}>
           <Text
             style={[
@@ -51,8 +75,8 @@ export default CardOverlay;
 
 const styles = StyleSheet.create({
   card: {
-    marginTop: 8,
     marginRight: 16,
+    marginVertical: 8,
     borderRadius: 8,
   },
   cardImage: {
@@ -85,10 +109,16 @@ CardOverlay.propTypes = {
   totalUser: PropTypes.number,
   img: PropTypes.any,
   title: PropTypes.string,
+  overlay: PropTypes.bool,
+  onPress: PropTypes.func,
+  onLongPress: PropTypes.func,
+  touchable: PropTypes.bool,
 };
 
 CardOverlay.defaultProps = {
   colors: ['#1A1E23', '#4B32C1'],
   start: {x: 1, y: 0.25},
   end: {x: 1, y: 1},
+  overlay: false,
+  touchable: false,
 };
