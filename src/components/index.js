@@ -6,6 +6,7 @@ import ButtonDiscord from './ButtonDiscord';
 import BaseTag from './BaseTag';
 import AppBotomNavigation from './AppBotomNavigation';
 import AppBottomTabItem from './AppBottomTabItem';
+import CardOverlay from './CardOverlay';
 
 export {
   AppBarHeader,
@@ -16,4 +17,5 @@ export {
   BaseTag,
   AppBotomNavigation,
   AppBottomTabItem,
+  CardOverlay
 };

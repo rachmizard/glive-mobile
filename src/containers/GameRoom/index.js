@@ -27,7 +27,7 @@ const GameRoomContainer = ({gameRooms, isLoading, navigation}) => {
     <ActivityIndicator
       color={color.white}
       size={30}
-      style={{alignItems: 'center'}}
+      style={{alignItems: 'center', height: 100}}
     />
   );
 
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
   },
   gameRoomWrapper: {
     flexDirection: 'row',
+    height: 100,
   },
   gameRoomItem: {
     alignItems: 'center',

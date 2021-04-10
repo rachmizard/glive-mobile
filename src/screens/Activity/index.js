@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
+import {YourDivisionContainer} from '../../containers';
 import GameRoomContainer from '../../containers/GameRoom';
-import { gameRooms } from '../../mocks';
+import {gameRooms, yourDivisions} from '../../mocks';
 
 const ActivityScreen = ({navigation}) => {
   const [state, setState] = useState({
     isLoadingGameRoom: false,
     gameRooms: gameRooms,
+    yourDivisions: yourDivisions,
   });
 
   useEffect(() => {
@@ -22,6 +24,7 @@ const ActivityScreen = ({navigation}) => {
           isLoading={state.isLoadingGameRoom}
           gameRooms={state.gameRooms}
         />
+        <YourDivisionContainer yourDivisions={state.yourDivisions} />
       </ScrollView>
     </View>
   );
