@@ -15,6 +15,10 @@ import {
 import AppBarHeader from '../components/AppBarHeader';
 import {AppBotomNavigation} from '../components';
 
+const AddContentScreen = () => {
+  return null;
+};
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +27,7 @@ const MainScreen = () => {
     <Tab.Navigator tabBar={props => <AppBotomNavigation {...props} />}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Activity" component={ActivityScreen} />
+      <Tab.Screen name="Add" component={AddContentScreen} />
       <Tab.Screen name="Notification" component={NotificationScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>

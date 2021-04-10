@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: color.surface,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     paddingHorizontal: 30,
     paddingVertical: 10,
     width: Dimensions.get('screen').width,

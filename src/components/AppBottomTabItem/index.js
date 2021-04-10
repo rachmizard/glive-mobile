@@ -5,6 +5,7 @@ import IconHome from './../../assets/images/icon-home.svg';
 import IconHomeActive from './../../assets/images/icon-home-active.svg';
 import IconActivity from './../../assets/images/icon-activity.svg';
 import IconActivityActive from './../../assets/images/icon-activity-active.svg';
+import IconAddContent from './../../assets/images/icon-add-content.svg';
 import IconNotification from './../../assets/images/icon-notification.svg';
 import IconNotificationActive from './../../assets/images/icon-notification-active.svg';
 import IconProfile from './../../assets/images/icon-profile.svg';
@@ -33,6 +34,10 @@ const AppBottomTabItem = ({
       ) : (
         <IconActivity width={18} height={18} />
       );
+      break;
+
+    case 'Add':
+      icon = <IconAddContent width={36} height={36} />;
       break;
 
     case 'Notification':
