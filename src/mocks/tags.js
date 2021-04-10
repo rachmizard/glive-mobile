@@ -19,4 +19,20 @@ export default [
     name: '#panjangtagnya',
     active: false,
   },
+  {
+    name: '#test',
+    active: false,
+  },
+  {
+    name: '#long',
+    active: false,
+  },
+  {
+    name: '#tag',
+    active: false,
+  },
+  {
+    name: '#scroll',
+    active: false,
+  },
 ];

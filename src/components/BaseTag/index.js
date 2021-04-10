@@ -15,7 +15,7 @@ const BaseTag = ({tags, onPress}) => {
           <Text
             onPress={() => onPress(key)}
             key={key}
-            style={styles.tag(tag.active)}>
+            style={styles.tag(tag.active, tags.length, key)}>
             {tag.name}
           </Text>
         ))}
@@ -34,14 +34,15 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     paddingBottom: 8,
   },
-  tag: active => ({
+  tag: (active, length, key) => ({
     ...fontConfig.fontStylesheet.subtitle2,
     padding: 4,
     textAlign: 'center',
     backgroundColor: active ? color.yellow : color.greyLight,
     color: color.black,
     borderRadius: 5,
-    marginHorizontal: 8,
+    marginLeft: 8,
+    marginRight: key + 1 == length ? 8 : 0,
   }),
 });
 
