@@ -1,11 +1,15 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Headline} from 'react-native-paper';
+import ProfileCardContainer from '../../containers/ProfileCard';
+import ProfileTabBarContainer from '../../containers/ProfileTabBar';
 
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-      <Headline>Profile Screen!</Headline>
+      <View style={styles.profileCardWrapper}>
+        <ProfileCardContainer />
+      </View>
+      <ProfileTabBarContainer />
     </View>
   );
 };
@@ -15,7 +19,9 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  },
+  profileCardWrapper: {
+    marginHorizontal: 16,
+    marginVertical: 16,
   },
 });

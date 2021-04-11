@@ -18,6 +18,8 @@ target 'Glive' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+  pod 'react-native-pager-view', :path => '../node_modules/react-native-pager-view'
+
   target 'GliveTests' do
     inherit! :complete
     # Pods for testing

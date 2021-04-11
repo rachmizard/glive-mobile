@@ -93,6 +93,6 @@ const getHeaderTitle = route => {
     case 'Notification':
       return 'Notification';
     case 'Profile':
-      return 'My profile';
+      return 'Profile';
   }
 };
