@@ -77,10 +77,10 @@ const styles = StyleSheet.create({
   gameRoomWrapper: {
     flexDirection: 'row',
     height: 100,
+    paddingHorizontal: 8,
   },
   gameRoomItem: {
     alignItems: 'center',
-    marginLeft: 8,
     marginRight: 16,
   },
   gameRoomItemImg: {

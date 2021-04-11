@@ -4,6 +4,8 @@ import {
   Forza,
   MonsterHunterWorld,
   Pubg,
+  Osu,
+  Apex,
 } from './../assets/images/gameroom';
 
 export default [
@@ -26,5 +28,13 @@ export default [
   {
     name: 'Forza Horizon 4',
     img: Forza,
+  },
+  {
+    name: 'OSU!',
+    img: Osu,
+  },
+  {
+    name: 'Apex Legends',
+    img: Apex,
   },
 ];
