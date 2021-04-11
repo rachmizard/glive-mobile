@@ -12,7 +12,7 @@ const HomeScreen = () => {
     setState({
       ...state,
       ...(state.tags = tags.map(function(x) { 
-        x.active = false; 
+        x.active = false;
         return x
       })),
     });
