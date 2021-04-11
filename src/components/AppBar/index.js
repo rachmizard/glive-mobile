@@ -45,12 +45,6 @@ export default AppBar;
 const styles = StyleSheet.create({
   appBarWrapper: {
     marginTop: 1,
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    top: 0,
-    elevation: 8,
     height: 64,
   },
   appBarContent: {
