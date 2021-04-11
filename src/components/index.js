@@ -1,3 +1,4 @@
+import AppBar from './AppBar';
 import AppBarHeader from './AppBarHeader';
 import ButtonGoogle from './ButtonGoogle';
 import BaseButton from './BaseButton';
@@ -9,6 +10,7 @@ import AppBottomTabItem from './AppBottomTabItem';
 import CardOverlay from './CardOverlay';
 
 export {
+  AppBar,
   AppBarHeader,
   ButtonGoogle,
   BaseButton,
@@ -17,5 +19,5 @@ export {
   BaseTag,
   AppBotomNavigation,
   AppBottomTabItem,
-  CardOverlay
+  CardOverlay,
 };

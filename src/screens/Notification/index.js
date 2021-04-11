@@ -1,11 +1,17 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Headline} from 'react-native-paper';
+import AppBar from '../../components/AppBar';
 
 const NotificationScreen = () => {
   return (
     <View style={styles.container}>
-      <Headline>Notification Screen!</Headline>
+      <AppBar
+        title="Friend Requests"
+        titleIcon="account-plus"
+        touchable={true}
+        withBadge
+        badgeCounter={12}
+      />
     </View>
   );
 };
@@ -15,7 +21,5 @@ export default NotificationScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
