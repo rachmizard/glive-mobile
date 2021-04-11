@@ -9,8 +9,13 @@ const HomeScreen = () => {
   });
 
   const _handlePressTag = index => {
-    // TODO: set all tags 'active' state to false 
-    // before selecting selected tags
+    setState({
+      ...state,
+      ...(state.tags = tags.map(function(x) { 
+        x.active = false;
+        return x
+      })),
+    });
 
     setState({
       ...state,
