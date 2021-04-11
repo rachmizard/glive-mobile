@@ -1,8 +1,8 @@
 import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
-import {Text, Caption, Headline, Subheading} from 'react-native-paper';
+import {Headline, Subheading} from 'react-native-paper';
 import {fontConfig} from '../../assets';
-import {BaseButton, ButtonDiscord} from '../../components';
+import {BaseButton, ButtonSocial} from '../../components';
 import IconStartUpOutline from './../../assets/images/icon-startup-outline.png';
 
 const SuccessSignUpScreen = ({navigation}) => {
@@ -25,7 +25,12 @@ const SuccessSignUpScreen = ({navigation}) => {
       </View>
       <View style={styles.buttonWrapper}>
         <View style={{marginBottom: 16}}>
-          <ButtonDiscord>Continue Discord Account</ButtonDiscord>
+          <ButtonSocial
+            social="discord"
+            uppercase={false}
+            onPress={() => console.log('Hello')}>
+            Continue Discord Account
+          </ButtonSocial>
         </View>
         <View style={{marginBottom: 16}}>
           <BaseButton

@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {HelperText, Text, TextInput} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
-import {BaseButton, ButtonGoogle} from '../../components';
+import {BaseButton, ButtonSocial} from '../../components';
 
 const SignInScreen = ({navigation}) => {
   const [state, setState] = useState({
@@ -118,9 +118,12 @@ const SignInScreen = ({navigation}) => {
           </BaseButton>
         </View>
         <View style={{marginTop: 16}}>
-          <ButtonGoogle uppercase={false} onPress={() => console.log('Hello')}>
+          <ButtonSocial
+            social="google"
+            uppercase={false}
+            onPress={() => console.log('Hello')}>
             Continue With Google
-          </ButtonGoogle>
+          </ButtonSocial>
         </View>
         <View style={{marginTop: 16, alignItems: 'center'}}>
           <Text
