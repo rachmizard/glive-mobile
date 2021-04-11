@@ -13,7 +13,7 @@ const SignInScreen = ({navigation}) => {
     iconPassword: 'eye',
     errors: {
       email: {
-        message: 'Email not invalid',
+        message: 'Invalid email, Here is a hint: bernard@gmail.com',
         isError: false,
       },
       password: {},
@@ -61,6 +61,7 @@ const SignInScreen = ({navigation}) => {
       <View style={styles.signInFormWrapper}>
         <View style={styles.signInFormControl}>
           <TextInput
+            autoCompleteType="off"
             mode="outlined"
             label="Email"
             onChangeText={onChangeEmail}
@@ -69,16 +70,22 @@ const SignInScreen = ({navigation}) => {
               colors: {
                 placeholder: color.greyLine,
                 text: color.greyLine,
-                primary: color.greyLine,
+                primary: color.blue,
+                error: color.blue,
               },
+              roundness: 4,
             }}
           />
-          <HelperText type="error" visible={state.errors.email.isError}>
+          <HelperText
+            type="error"
+            theme={{colors: {error: color.yellow}}}
+            visible={state.errors.email.isError}>
             {state.errors.email.message}
           </HelperText>
         </View>
         <View style={styles.signInFormControl}>
           <TextInput
+            autoCompleteType="off"
             mode="outlined"
             label="Password"
             secureTextEntry={!state.showPassword}
@@ -87,22 +94,22 @@ const SignInScreen = ({navigation}) => {
               colors: {
                 placeholder: color.greyLine,
                 text: color.greyLine,
-                primary: color.greyLine,
+                primary: color.blue,
+                error: color.blue,
               },
+              roundness: 4,
             }}
             right={
-              state.password !== '' && (
-                <TextInput.Icon
-                  name={() => (
-                    <Icon
-                      name={state.iconPassword}
-                      size={24}
-                      color={color.greyLine}
-                    />
-                  )}
-                  onPress={() => _handleTogglePassword()}
-                />
-              )
+              <TextInput.Icon
+                name={() => (
+                  <Icon
+                    name={state.iconPassword}
+                    size={24}
+                    color={color.greyLine}
+                  />
+                )}
+                onPress={() => _handleTogglePassword()}
+              />
             }
           />
         </View>

@@ -18,7 +18,7 @@ const SignUpScreen = ({navigation}) => {
         isError: false,
       },
       email: {
-        message: 'Email is invalid',
+        message: 'Invalid email, Here is a hint: bernard@gmail.com',
         isError: false,
       },
       password: {
@@ -99,11 +99,16 @@ const SignUpScreen = ({navigation}) => {
               colors: {
                 placeholder: color.greyLine,
                 text: color.greyLine,
-                primary: color.greyLine,
+                primary: color.blue,
+                error: color.blue,
               },
+              roundness: 4,
             }}
           />
-          <HelperText type="error" visible={state.errors.username.isError}>
+          <HelperText
+            type="error"
+            theme={{colors: {error: color.yellow}}}
+            visible={state.errors.username.isError}>
             {state.errors.username.message}
           </HelperText>
         </View>
@@ -117,11 +122,16 @@ const SignUpScreen = ({navigation}) => {
               colors: {
                 placeholder: color.greyLine,
                 text: color.greyLine,
-                primary: color.greyLine,
+                primary: color.blue,
+                error: color.blue,
               },
+              roundness: 4,
             }}
           />
-          <HelperText type="error" visible={state.errors.email.isError}>
+          <HelperText
+            type="error"
+            theme={{colors: {error: color.yellow}}}
+            visible={state.errors.email.isError}>
             {state.errors.email.message}
           </HelperText>
         </View>
@@ -136,39 +146,40 @@ const SignUpScreen = ({navigation}) => {
               colors: {
                 placeholder: color.greyLine,
                 text: color.greyLine,
-                primary: color.greyLine,
+                primary: color.blue,
+                error: color.blue,
               },
+              roundness: 4,
             }}
             right={
-              state.password !== '' && (
-                <TextInput.Icon
-                  name={() => (
-                    <Icon
-                      name={state.iconPassword}
-                      size={24}
-                      color={color.greyLine}
-                    />
-                  )}
-                  onPress={() => _handleTogglePassword()}
-                />
-              )
+              <TextInput.Icon
+                name={() => (
+                  <Icon
+                    name={state.iconPassword}
+                    size={24}
+                    color={color.greyLine}
+                  />
+                )}
+                onPress={() => _handleTogglePassword()}
+              />
             }
           />
-          <HelperText type="error" visible={state.errors.password.isError}>
+          <HelperText
+            type="error"
+            theme={{colors: {error: color.yellow}}}
+            visible={state.errors.password.isError}>
             {state.errors.password.message}
           </HelperText>
         </View>
       </View>
       <View style={styles.signUpButton}>
-        <View>
-          <BaseButton
-            mode="contained"
-            uppercase={false}
-            size="medium"
-            onPress={() => _handleSubmitRegister()}>
-            Register
-          </BaseButton>
-        </View>
+        <BaseButton
+          mode="contained"
+          uppercase={false}
+          size="medium"
+          onPress={() => _handleSubmitRegister()}>
+          Register
+        </BaseButton>
       </View>
     </View>
   );
@@ -188,8 +199,12 @@ const styles = StyleSheet.create({
   signUpTitleSubHeadingText: fontConfig.fontStylesheet.body1,
   signUpFormWrapper: {
     marginVertical: 24,
+    flex: 7,
   },
   signUpFormControl: {
     marginBottom: 5,
+  },
+  signUpButton: {
+    flex: 1,
   },
 });
