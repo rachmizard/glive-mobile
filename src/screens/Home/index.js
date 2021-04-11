@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {BaseTag} from '../../components';
+import {PostContainer} from '../../containers';
 import {tags} from './../../mocks';
 
 const HomeScreen = () => {
@@ -11,9 +12,9 @@ const HomeScreen = () => {
   const _handlePressTag = index => {
     setState({
       ...state,
-      ...(state.tags = tags.map(function(x) { 
+      ...(state.tags = tags.map(function (x) {
         x.active = false;
-        return x
+        return x;
       })),
     });
 
@@ -24,9 +25,12 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <BaseTag tags={state.tags} onPress={_handlePressTag} />
-    </View>
+    <>
+      <View style={styles.container}>
+        <BaseTag tags={state.tags} onPress={_handlePressTag} />
+        <PostContainer />
+      </View>
+    </>
   );
 };
 

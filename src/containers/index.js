@@ -4,6 +4,7 @@ import ExploreDivisionContainer from './ExploreDivision';
 import NotificationListContainer from './NotificationList';
 import ProfileCardContainer from './ProfileCard';
 import ProfileTabBarContainer from './ProfileTabBar';
+import PostContainer from './Post';
 
 export {
   GameRoomContainer,
@@ -12,4 +13,5 @@ export {
   NotificationListContainer,
   ProfileCardContainer,
   ProfileTabBarContainer,
+  PostContainer
 };

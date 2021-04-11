@@ -4,6 +4,7 @@ import yourDivisions from './yourDivisions';
 import exploreDivisions from './exploreDivisions';
 import notifications from './notifications';
 import medias from './medias';
+import posts from './posts';
 
 export {
   tags,
@@ -12,4 +13,5 @@ export {
   exploreDivisions,
   notifications,
   medias,
+  posts,
 };

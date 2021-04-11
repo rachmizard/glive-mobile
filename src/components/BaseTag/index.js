@@ -12,12 +12,14 @@ const BaseTag = ({tags, onPress}) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}>
         {tags.map((tag, key) => (
-          <Text
-            onPress={() => onPress(key)}
-            key={key}
-            style={styles.tag(tag.active, tags.length, key)}>
-            {tag.name}
-          </Text>
+          <React.Fragment key={key}>
+            <Text
+              onPress={() => onPress(key)}
+              key={key}
+              style={styles.tag(tag.active, tags.length, key)}>
+              {tag.name}
+            </Text>
+          </React.Fragment>
         ))}
       </ScrollView>
     </View>
