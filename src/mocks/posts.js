@@ -22,4 +22,24 @@ export default [
     content:
       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
   },
+  {
+    id: 3,
+    userPict: userPicture,
+    name: 'Kumal Gumpar',
+    userName: '@zayross',
+    lastHour: '1h',
+    contentImg: null,
+    content:
+      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+  },
+  {
+    id: 4,
+    userPict: userPicture,
+    name: 'Kumal Gumpar',
+    userName: '@zayross',
+    lastHour: '1h',
+    contentImg: Post1,
+    content:
+      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+  },
 ];

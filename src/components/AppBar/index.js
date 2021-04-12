@@ -23,7 +23,8 @@ const AppBar = ({
         activeOpacity={0.5}
         onPress={onPress}
         onLongPress={onLongPress}
-        disabled={!touchable}>
+        disabled={!touchable}
+        style={styles.touchable}>
         <View style={styles.appBarContent}>
           <View style={styles.appBarTitle}>
             <Icon name={titleIcon} size={24} color={color.text} />
@@ -46,12 +47,15 @@ const styles = StyleSheet.create({
   appBarWrapper: {
     marginTop: 1,
     height: 64,
+    paddingHorizontal: 16,
   },
   appBarContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 16,
+  },
+  touchable: {
+    flex: 1,
   },
   appBarTitle: {
     flexDirection: 'row',
@@ -63,7 +67,6 @@ const styles = StyleSheet.create({
     ...fontConfig.fontStylesheet.subtitle1,
   },
   appBadge: {
-    marginLeft: 164,
     color: color.black,
     backgroundColor: color.white,
     ...fontConfig.fontStylesheet.subtitle2,
