@@ -6,6 +6,7 @@ import {Button} from 'react-native-paper';
 import IconGoogle from './../../assets/images/icon-google.png';
 import IconDiscord from './../../assets/images/icon-discord.png';
 import IconSteam from './../../assets/images/icon-steam.png';
+import IconFacebook from './../../assets/images/icon-facebook.png';
 import {color, fontConfig} from '../../assets';
 
 const ButtonSocial = ({children, onPress, onLongPress, uppercase, social}) => {
@@ -25,6 +26,11 @@ const ButtonSocial = ({children, onPress, onLongPress, uppercase, social}) => {
     case 'steam':
       socialIcon = IconSteam;
       contentStyle = color.black;
+      labelStyle = color.white;
+      break;
+    case 'facebook':
+      socialIcon = IconFacebook;
+      contentStyle = '#395185';
       labelStyle = color.white;
       break;
   }
