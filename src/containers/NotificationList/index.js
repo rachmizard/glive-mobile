@@ -47,16 +47,17 @@ const NotificationListContainer = ({notifications}) => {
             <Text style={fontConfig.fontStylesheet.caption}>
               {notification.content}
             </Text>
-          </View>
-          <View style={styles.notificationAction}>
-            <Icon name="comment-outline" size={24} color={color.white} />
-            <Icon
-              style={{marginHorizontal: 32}}
-              name="sync"
-              size={24}
-              color={color.white}
-            />
-            <Icon name="arrow-up" size={24} color={color.white} />
+
+            <View style={styles.notificationAction}>
+              <Icon name="comment-outline" size={24} color={color.white} />
+              <Icon
+                style={{marginHorizontal: 32}}
+                name="sync"
+                size={24}
+                color={color.white}
+              />
+              <Icon name="arrow-up" size={24} color={color.white} />
+            </View>
           </View>
           <View style={styles.divider}>
             <Divider style={{backgroundColor: color.greyLine}} />
@@ -99,10 +100,12 @@ const styles = StyleSheet.create({
   notificationContent: {
     marginTop: 8,
     alignSelf: 'stretch',
+    marginRight: 40,
     justifyContent: 'center',
   },
   notificationAction: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 12,
   },
   divider: {

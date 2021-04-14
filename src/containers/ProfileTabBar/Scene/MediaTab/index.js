@@ -39,19 +39,19 @@ const MediaTabScene = props => {
               Exercitation veniam consequat sunt nostrud amet.
             </Caption>
             <Text style={styles.contentTagsText}>#tags #sample</Text>
-          </View>
-          <View style={styles.interactionControl}>
-            <View style={styles.interaction}>
-              <Icon name="comment-outline" size={24} color={color.white} />
-              <Text style={styles.interactionCounter}>359</Text>
-            </View>
-            <View style={styles.interaction}>
-              <Icon name="sync" size={24} color={color.white} />
-              <Text style={styles.interactionCounter}>11k</Text>
-            </View>
-            <View style={styles.interaction}>
-              <Icon name="arrow-up" size={24} color={color.white} />
-              <Text style={styles.interactionCounter}>53</Text>
+            <View style={styles.interactionControl}>
+              <View style={styles.interaction}>
+                <Icon name="comment-outline" size={24} color={color.white} />
+                <Text style={styles.interactionCounter}>359</Text>
+              </View>
+              <View style={styles.interaction}>
+                <Icon name="sync" size={24} color={color.white} />
+                <Text style={styles.interactionCounter}>11k</Text>
+              </View>
+              <View style={styles.interaction}>
+                <Icon name="arrow-up" size={24} color={color.white} />
+                <Text style={styles.interactionCounter}>53</Text>
+              </View>
             </View>
           </View>
         </View>
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
   mediaContent: {
     alignSelf: 'stretch',
     justifyContent: 'center',
+    marginRight: 40,
   },
   contentImg: {
     borderRadius: theme.roundness,
@@ -107,6 +108,7 @@ const styles = StyleSheet.create({
   },
   interactionControl: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     marginVertical: 8,
   },
   interaction: {
