@@ -40,8 +40,8 @@ const PostContainer = () => {
     Alert.alert('Retweet', `Pressed post id ${id}`);
   };
 
-  const _handlePressShare = ({id}) => {
-    Alert.alert('Share', `Pressed post id ${id}`);
+  const _handlePressUpvote = ({id}) => {
+    Alert.alert('Upvote', `Pressed post id ${id}`);
   };
 
   const _handleNavigatePostDetail = ({id}) => {
@@ -85,26 +85,30 @@ const PostContainer = () => {
                 {post.content}
               </Caption>
               <Text style={styles.contentTagsText}>#tags #sample</Text>
-            </View>
-            <View style={styles.interactionControl}>
-              <TouchableRipple onPress={() => _handlePressComment(post)}>
-                <View style={styles.interaction}>
-                  <Icon name="comment-outline" size={24} color={color.white} />
-                  <Text style={styles.interactionCounter}>359</Text>
-                </View>
-              </TouchableRipple>
-              <TouchableRipple onPress={() => _handlePressRetweet(post)}>
-                <View style={styles.interaction}>
-                  <Icon name="sync" size={24} color={color.white} />
-                  <Text style={styles.interactionCounter}>11k</Text>
-                </View>
-              </TouchableRipple>
-              <TouchableRipple onPress={() => _handlePressShare(post)}>
-                <View style={styles.interaction}>
-                  <Icon name="arrow-up" size={24} color={color.white} />
-                  <Text style={styles.interactionCounter}>53</Text>
-                </View>
-              </TouchableRipple>
+              <View style={styles.interactionControl}>
+                <TouchableRipple onPress={() => _handlePressComment(post)}>
+                  <View style={styles.interaction}>
+                    <Icon
+                      name="comment-outline"
+                      size={24}
+                      color={color.white}
+                    />
+                    <Text style={styles.interactionCounter}>359</Text>
+                  </View>
+                </TouchableRipple>
+                <TouchableRipple onPress={() => _handlePressRetweet(post)}>
+                  <View style={styles.interaction}>
+                    <Icon name="sync" size={24} color={color.white} />
+                    <Text style={styles.interactionCounter}>11k</Text>
+                  </View>
+                </TouchableRipple>
+                <TouchableRipple onPress={() => _handlePressUpvote(post)}>
+                  <View style={styles.interaction}>
+                    <Icon name="arrow-up" size={24} color={color.white} />
+                    <Text style={styles.interactionCounter}>53</Text>
+                  </View>
+                </TouchableRipple>
+              </View>
             </View>
           </View>
         ))}
@@ -143,6 +147,7 @@ const styles = StyleSheet.create({
     borderRadius: 8 * 2,
   },
   postContent: {
+    marginRight: 30,
     marginTop: 8,
     alignSelf: 'stretch',
     justifyContent: 'center',
@@ -157,6 +162,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     ...fontConfig.fontStylesheet.caption,
     color: color.white,
+    textAlign: 'justify',
   },
   contentTagsText: {
     ...fontConfig.fontStylesheet.caption,
@@ -164,6 +170,7 @@ const styles = StyleSheet.create({
   },
   interactionControl: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     marginVertical: 8,
   },
   interaction: {
