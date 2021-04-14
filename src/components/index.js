@@ -7,6 +7,7 @@ import BaseTextInput from './BaseTextInput';
 import AppBotomNavigation from './AppBotomNavigation';
 import AppBottomTabItem from './AppBottomTabItem';
 import CardOverlay from './CardOverlay';
+import BaseDialog from './BaseDialog';
 
 export {
   AppBar,
@@ -18,4 +19,5 @@ export {
   AppBotomNavigation,
   AppBottomTabItem,
   CardOverlay,
+  BaseDialog,
 };
