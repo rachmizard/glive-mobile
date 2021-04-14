@@ -1,10 +1,10 @@
 import React, {useRef, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Text, TextInput, Title} from 'react-native-paper';
+import {TextInput, Title} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
-import {CardOverlay} from '../../components';
+import {BaseTextInput, CardOverlay} from '../../components';
 
 const ExploreDivisionContainer = ({navigation, exploreDivisions}) => {
   const ref = useRef();
@@ -19,17 +19,16 @@ const ExploreDivisionContainer = ({navigation, exploreDivisions}) => {
 
   const SearchBar = () => (
     <View style={styles.searchBarWrapper}>
-      <TextInput
+      <BaseTextInput
         mode="outlined"
         placeholder="Search..."
-        theme={{
-          colors: {
-            primary: color.black,
-            background: color.white,
-            text: color.background,
-          },
-        }}
-        right={
+        placeHolderColor={color.black}
+        text={color.background}
+        textInputBackgroundColor={color.white}
+        textInputColor={color.background}
+        focusColor={color.black}
+        iconPosition="right"
+        icon={
           <TextInput.Icon
             name={() => <Icon name="magnify" size={24} color={color.black} />}
           />

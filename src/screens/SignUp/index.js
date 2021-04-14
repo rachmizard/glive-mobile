@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {HelperText, Text, TextInput} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
-import {BaseButton} from '../../components';
+import {BaseButton, BaseTextInput} from '../../components';
 
 const SignUpScreen = ({navigation}) => {
   const [state, setState] = useState({
@@ -90,86 +89,55 @@ const SignUpScreen = ({navigation}) => {
       </View>
       <View style={styles.signUpFormWrapper}>
         <View style={styles.signUpFormControl}>
-          <TextInput
+          <BaseTextInput
             mode="outlined"
             label="Username"
             onChangeText={onChangeUsername}
-            error={state.errors.username.isError}
-            theme={{
-              colors: {
-                placeholder: color.greyLine,
-                text: color.greyLine,
-                primary: color.blue,
-                error: color.blue,
-              },
-              roundness: 4,
-            }}
-          />
-          <HelperText
-            type="error"
-            theme={{colors: {error: color.yellow}}}
-            visible={state.errors.username.isError}>
-            {state.errors.username.message}
-          </HelperText>
+            isError={state.errors.username.isError}>
+            <HelperText
+              type="error"
+              theme={{colors: {error: color.yellow}}}
+              visible={state.errors.username.isError}>
+              {state.errors.username.message}
+            </HelperText>
+          </BaseTextInput>
         </View>
         <View style={styles.signUpFormControl}>
-          <TextInput
+          <BaseTextInput
             mode="outlined"
             label="Email"
             onChangeText={onChangeEmail}
-            error={state.errors.email.isError}
-            theme={{
-              colors: {
-                placeholder: color.greyLine,
-                text: color.greyLine,
-                primary: color.blue,
-                error: color.blue,
-              },
-              roundness: 4,
-            }}
-          />
-          <HelperText
-            type="error"
-            theme={{colors: {error: color.yellow}}}
-            visible={state.errors.email.isError}>
-            {state.errors.email.message}
-          </HelperText>
+            isError={state.errors.email.isError}>
+            <HelperText
+              type="error"
+              theme={{colors: {error: color.yellow}}}
+              visible={state.errors.email.isError}>
+              {state.errors.email.message}
+            </HelperText>
+          </BaseTextInput>
         </View>
         <View style={styles.signUpFormControl}>
-          <TextInput
+          <BaseTextInput
             mode="outlined"
             label="Password"
             secureTextEntry={!state.showPassword}
-            error={state.errors.password.isError}
+            isError={state.errors.password.isError}
             onChangeText={onChangePassword}
-            theme={{
-              colors: {
-                placeholder: color.greyLine,
-                text: color.greyLine,
-                primary: color.blue,
-                error: color.blue,
-              },
-              roundness: 4,
-            }}
-            right={
+            iconPosition="right"
+            icon={
               <TextInput.Icon
-                name={() => (
-                  <Icon
-                    name={state.iconPassword}
-                    size={24}
-                    color={color.greyLine}
-                  />
-                )}
+                name={state.iconPassword}
+                color={color.greyLine}
                 onPress={() => _handleTogglePassword()}
               />
-            }
-          />
-          <HelperText
-            type="error"
-            theme={{colors: {error: color.yellow}}}
-            visible={state.errors.password.isError}>
-            {state.errors.password.message}
-          </HelperText>
+            }>
+            <HelperText
+              type="error"
+              theme={{colors: {error: color.yellow}}}
+              visible={state.errors.password.isError}>
+              {state.errors.password.message}
+            </HelperText>
+          </BaseTextInput>
         </View>
       </View>
       <View style={styles.signUpButton}>
