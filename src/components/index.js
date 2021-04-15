@@ -8,6 +8,7 @@ import AppBotomNavigation from './AppBotomNavigation';
 import AppBottomTabItem from './AppBottomTabItem';
 import CardOverlay from './CardOverlay';
 import BaseDialog from './BaseDialog';
+import GameRoomItem from './GameRoomItem';
 
 export {
   AppBar,
@@ -20,4 +21,5 @@ export {
   AppBottomTabItem,
   CardOverlay,
   BaseDialog,
+  GameRoomItem,
 };

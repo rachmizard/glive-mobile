@@ -1,0 +1,52 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import {StyleSheet, Image, View} from 'react-native';
+import {Text} from 'react-native-paper';
+import {stringLimit} from './../../constants/helper';
+import {fontConfig} from './../../assets';
+
+const {fontStylesheet} = fontConfig;
+
+const GameRoomItem = ({item, size}) => {
+  return (
+    <View style={styles.gameRoomItem}>
+      <Image source={item.img} style={styles.gameRoomItemImg(size)} />
+      <View style={styles.gameRoomItemTitle}>
+        <Text style={styles.gameRoomItemTitleText}>
+          {stringLimit(item.name)}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+export default GameRoomItem;
+
+const styles = StyleSheet.create({
+  gameRoomItem: {
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  gameRoomItemImg: (size) => ({
+    width: size,
+    height: size,
+    borderRadius: size * 2,
+  }),
+  gameRoomItemTitle: {
+    marginTop: 8,
+    width: 64,
+  },
+  gameRoomItemTitleText: {
+    ...fontStylesheet.overline,
+    textAlign: 'center',
+  },
+});
+
+GameRoomItem.defaultProps = {
+  size: 64,
+};
+
+GameRoomItem.propTypes = {
+  item: PropTypes.object,
+  size: PropTypes.number,
+};
