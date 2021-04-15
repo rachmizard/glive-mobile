@@ -22,7 +22,7 @@ const AppBarHeader = ({navigation, previous, scene}) => {
 
   if (previous) {
     backAction = (
-      <Appbar.BackAction color={color.primary} onPress={navigation.goBack} />
+      <Appbar.BackAction color={color.yellow} onPress={navigation.goBack} />
     );
   }
 
