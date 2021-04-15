@@ -148,6 +148,16 @@ const SignUpScreen = ({navigation}) => {
           onPress={() => _handleSubmitRegister()}>
           Register
         </BaseButton>
+        <Text
+          onPress={() => navigation.navigate('SignIn')}
+          style={{
+            ...fontConfig.fontStylesheet.body2,
+            color: color.yellow,
+            marginTop: 24,
+            textAlign: 'center',
+          }}>
+          Already have account? <Text>Sign In Now</Text>
+        </Text>
       </View>
     </View>
   );
@@ -167,7 +177,6 @@ const styles = StyleSheet.create({
   signUpTitleSubHeadingText: fontConfig.fontStylesheet.body1,
   signUpFormWrapper: {
     marginVertical: 24,
-    flex: 7,
   },
   signUpFormControl: {
     marginBottom: 5,

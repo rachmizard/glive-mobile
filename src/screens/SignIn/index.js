@@ -116,11 +116,27 @@ const SignInScreen = ({navigation}) => {
             Continue With Google
           </ButtonSocial>
         </View>
-        <View style={{marginTop: 16, alignItems: 'center'}}>
+        <View
+          style={{
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
           <Text
             onPress={() => navigation.navigate('SignUp')}
-            style={fontConfig.fontStylesheet.subtitle1}>
-            Register
+            style={{
+              ...fontConfig.fontStylesheet.body2,
+              color: color.yellow,
+              marginTop: 24,
+            }}>
+            Don't have account? <Text>Register Now</Text>
+          </Text>
+          <Text
+            style={{
+              ...fontConfig.fontStylesheet.body2,
+              color: color.yellow,
+              marginTop: 16,
+            }}>
+            Forgot password? <Text>Rest Now</Text>
           </Text>
         </View>
       </View>
