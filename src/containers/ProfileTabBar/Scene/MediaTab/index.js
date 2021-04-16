@@ -1,19 +1,45 @@
 import React, {useState} from 'react';
-import {Image, ScrollView, StyleSheet, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  View,
+  RefreshControl,
+} from 'react-native';
 import {Caption, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {medias} from '../../../../mocks';
 import {color, fontConfig, theme} from './../../../../assets';
+import {kFormatter} from './../../../../constants/helper';
 
 const MediaTabScene = props => {
-  const [contents] = useState(medias);
+  const [contents, setContents] = useState(medias);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setContents(medias);
+    wait(1000).then(() => setRefreshing(false));
+  });
 
   const {fontStylesheet} = fontConfig;
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
       {contents.map((media, index) => (
         <View key={index} style={styles.mediaItem}>
+          {media.isReposted && (
+            <Text style={styles.textInfo}>Reposted By you</Text>
+          )}
           <View style={styles.mediaItemHeader}>
             <View style={{marginRight: 8}}>
               <Image source={media.userPict} style={styles.mediaUserImg} />
@@ -32,7 +58,9 @@ const MediaTabScene = props => {
             />
           </View>
           <View style={styles.mediaContent}>
-            <Image source={media.contentImg} style={styles.contentImg} />
+            {media.contentImg && (
+              <Image source={media.contentImg} style={styles.contentImg} />
+            )}
             <Caption style={styles.contentCaptionText}>
               Amet minim mollit non deserunt ullamco est sit aliqua dolor do
               amet sint. Velit officia consequat duis enim velit mollit.
@@ -41,16 +69,30 @@ const MediaTabScene = props => {
             <Text style={styles.contentTagsText}>#tags #sample</Text>
             <View style={styles.interactionControl}>
               <View style={styles.interaction}>
-                <Icon name="comment-outline" size={24} color={color.white} />
-                <Text style={styles.interactionCounter}>359</Text>
+                <Icon name="comment-outline" size={24} style={styles.icon()} />
+                <Text style={styles.interactionCounter()}>
+                  {kFormatter(media.totalComments)}
+                </Text>
               </View>
               <View style={styles.interaction}>
-                <Icon name="sync" size={24} color={color.white} />
-                <Text style={styles.interactionCounter}>11k</Text>
+                <Icon
+                  style={styles.icon(media.isRetweeted)}
+                  name="sync"
+                  size={24}
+                />
+                <Text style={styles.interactionCounter(media.isRetweeted)}>
+                  {kFormatter(media.totalRetweeted)}
+                </Text>
               </View>
               <View style={styles.interaction}>
-                <Icon name="arrow-up" size={24} color={color.white} />
-                <Text style={styles.interactionCounter}>53</Text>
+                <Icon
+                  name="arrow-up"
+                  size={24}
+                  style={styles.icon(media.isRetweeted)}
+                />
+                <Text style={styles.interactionCounter(media.isRetweeted)}>
+                  {kFormatter(media.totalUpvoted)}
+                </Text>
               </View>
             </View>
           </View>
@@ -64,6 +106,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 8,
+  },
+  textInfo: {
+    color: color.greyLine,
+    ...fontConfig.fontStylesheet.subtitle2,
+    marginBottom: 4,
   },
   mediaItem: {
     marginTop: 8,
@@ -101,6 +148,7 @@ const styles = StyleSheet.create({
   contentCaptionText: {
     ...fontConfig.fontStylesheet.caption,
     color: color.white,
+    paddingTop: 8,
   },
   contentTagsText: {
     ...fontConfig.fontStylesheet.caption,
@@ -117,9 +165,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
-  interactionCounter: {
+  interactionCounter: (bool = false) => ({
     ...fontConfig.fontStylesheet.caption,
-  },
+    color: bool ? color.yellow : color.white,
+  }),
+  icon: (bool = false) => ({
+    color: bool ? color.yellow : color.white,
+  }),
 });
 
 export default MediaTabScene;

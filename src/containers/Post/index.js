@@ -11,6 +11,7 @@ import {Caption, Text, TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {posts} from './../../mocks';
 import {color, fontConfig, theme} from './../../assets';
+import {kFormatter} from '../../constants/helper';
 
 const {fontStylesheet} = fontConfig;
 
@@ -84,28 +85,42 @@ const PostContainer = () => {
                 style={styles.contentCaptionText}>
                 {post.content}
               </Caption>
-              <Text style={styles.contentTagsText}>#tags #sample</Text>
+              <Text style={styles.contentTagsText}>{post.tags.join(' ')}</Text>
               <View style={styles.interactionControl}>
                 <TouchableRipple onPress={() => _handlePressComment(post)}>
                   <View style={styles.interaction}>
                     <Icon
                       name="comment-outline"
                       size={24}
-                      color={color.white}
+                      style={styles.iconInteraction()}
                     />
-                    <Text style={styles.interactionCounter}>359</Text>
+                    <Text style={styles.interactionCounter()}>
+                      {kFormatter(post.totalComments)}
+                    </Text>
                   </View>
                 </TouchableRipple>
                 <TouchableRipple onPress={() => _handlePressRetweet(post)}>
                   <View style={styles.interaction}>
-                    <Icon name="sync" size={24} color={color.white} />
-                    <Text style={styles.interactionCounter}>11k</Text>
+                    <Icon
+                      name="sync"
+                      size={24}
+                      style={styles.iconInteraction(post.isRetweeted)}
+                    />
+                    <Text style={styles.interactionCounter(post.isRetweeted)}>
+                      {kFormatter(post.totalRetweeted)}
+                    </Text>
                   </View>
                 </TouchableRipple>
                 <TouchableRipple onPress={() => _handlePressUpvote(post)}>
                   <View style={styles.interaction}>
-                    <Icon name="arrow-up" size={24} color={color.white} />
-                    <Text style={styles.interactionCounter}>53</Text>
+                    <Icon
+                      name="arrow-up"
+                      size={24}
+                      style={styles.iconInteraction(post.isUpvote)}
+                    />
+                    <Text style={styles.interactionCounter(post.isUpvote)}>
+                      {kFormatter(post.totalUpvoted)}
+                    </Text>
                   </View>
                 </TouchableRipple>
               </View>
@@ -179,7 +194,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
-  interactionCounter: {
+  iconInteraction: (bool = false) => ({
+    color: bool ? color.yellow : color.white,
+  }),
+  interactionCounter: (bool = false) => ({
     ...fontStylesheet.caption,
-  },
+    color: bool ? color.yellow : color.white,
+  }),
 });

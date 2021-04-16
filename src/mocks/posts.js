@@ -11,6 +11,12 @@ export default [
     contentImg: null,
     content:
       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+    totalComments: 359,
+    totalRetweeted: 11300,
+    totalUpvoted: 59000,
+    tags: ['#tags', '#sample'],
+    isRetweeted: false,
+    isUpvote: false,
   },
   {
     id: 2,
@@ -21,6 +27,12 @@ export default [
     contentImg: Post1,
     content:
       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+    totalComments: 359,
+    totalRetweeted: 11300,
+    totalUpvoted: 59000,
+    tags: ['#tags', '#sample'],
+    isRetweeted: false,
+    isUpvote: true,
   },
   {
     id: 3,
@@ -31,6 +43,12 @@ export default [
     contentImg: null,
     content:
       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+    totalComments: 359,
+    totalRetweeted: 11300,
+    totalUpvoted: 59000,
+    tags: ['#tags', '#sample'],
+    isRetweeted: true,
+    isUpvote: true,
   },
   {
     id: 4,
@@ -41,5 +59,11 @@ export default [
     contentImg: Post1,
     content:
       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+    totalComments: 359,
+    totalRetweeted: 11300,
+    totalUpvoted: 59000,
+    tags: ['#tags', '#sample'],
+    isRetweeted: false,
+    isUpvote: false,
   },
 ];
