@@ -1,4 +1,5 @@
 import AppBar from './AppBar';
+import AppBarAction from './AppBarAction';
 import AppBarHeader from './AppBarHeader';
 import ButtonSocial from './ButtonSocial';
 import BaseButton from './BaseButton';
@@ -14,6 +15,7 @@ import ListRoom from './ListRoom';
 
 export {
   AppBar,
+  AppBarAction,
   AppBarHeader,
   ButtonSocial,
   BaseButton,

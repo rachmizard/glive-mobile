@@ -1,8 +1,8 @@
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Appbar} from 'react-native-paper';
+import AppBarAction from '../AppBarAction';
 import {color, fontConfig} from './../../assets';
-import IconDirectMessage from './../../assets/images/icon-send.png';
 
 const headerCentered = title => {
   switch (title) {
@@ -28,34 +28,18 @@ const AppBarHeader = ({navigation, previous, scene}) => {
       : options.title !== undefined
       ? options.title
       : scene.route.name;
-  let backAction = null;
-
-  if (previous) {
-    backAction = (
-      <Appbar.BackAction color={color.yellow} onPress={navigation.goBack} />
-    );
-  }
-
-  const _handleRedirectMessage = () => {
-    console.log('Hello');
-  };
 
   return (
     <Appbar.Header style={styles.appBarHeader}>
-      {backAction}
+      {previous && (
+        <Appbar.BackAction color={color.yellow} onPress={navigation.goBack} />
+      )}
       <Appbar.Content
         style={styles.appBarContent(headerCentered(title))}
         title={title}
         titleStyle={fontConfig.fontStylesheet.subtitle1}
       />
-      {title === 'Home' && (
-        <Appbar.Action
-          icon={() => (
-            <Image source={IconDirectMessage} style={{width: 24, height: 24}} />
-          )}
-          onPress={_handleRedirectMessage}
-        />
-      )}
+      <AppBarAction title={title} navigation={navigation} />
     </Appbar.Header>
   );
 };
