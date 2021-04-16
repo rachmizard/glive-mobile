@@ -1,22 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Image, View} from 'react-native';
+import {StyleSheet, Image, View, TouchableOpacity} from 'react-native';
 import {Text} from 'react-native-paper';
 import {stringLimit} from './../../constants/helper';
 import {fontConfig} from './../../assets';
 
 const {fontStylesheet} = fontConfig;
 
-const GameRoomItem = ({item, size}) => {
+const GameRoomItem = ({item, size, onPress}) => {
   return (
-    <View style={styles.gameRoomItem}>
-      <Image source={item.img} style={styles.gameRoomItemImg(size)} />
-      <View style={styles.gameRoomItemTitle}>
-        <Text style={styles.gameRoomItemTitleText}>
-          {stringLimit(item.name)}
-        </Text>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
+      <View style={styles.gameRoomItem}>
+        <Image source={item.img} style={styles.gameRoomItemImg(size)} />
+        <View style={styles.gameRoomItemTitle}>
+          <Text style={styles.gameRoomItemTitleText}>
+            {stringLimit(item.name)}
+          </Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 16,
   },
-  gameRoomItemImg: (size) => ({
+  gameRoomItemImg: size => ({
     width: size,
     height: size,
     borderRadius: size * 2,
@@ -49,4 +51,5 @@ GameRoomItem.defaultProps = {
 GameRoomItem.propTypes = {
   item: PropTypes.object,
   size: PropTypes.number,
+  onPress: PropTypes.func,
 };

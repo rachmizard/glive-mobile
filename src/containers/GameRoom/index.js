@@ -24,6 +24,10 @@ const GameRoomContainer = ({gameRooms, isLoading, navigation}) => {
     />
   );
 
+  const _handleNavigateGameRoom = () => {
+    navigation.navigate('GameRoomDetail');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleWrapper}>
@@ -38,7 +42,11 @@ const GameRoomContainer = ({gameRooms, isLoading, navigation}) => {
           horizontal
           showsHorizontalScrollIndicator={false}>
           {gameRooms.map((gameRoom, index) => (
-            <GameRoomItem key={index} item={gameRoom} />
+            <GameRoomItem
+              key={index}
+              item={gameRoom}
+              onPress={_handleNavigateGameRoom}
+            />
           ))}
         </ScrollView>
       )}

@@ -6,6 +6,7 @@ import SuccessSignUpScreen from './SuccessSignUp';
 import ActivityScreen from './Activity';
 import NotificationScreen from './Notification';
 import ProfileScreen from './Profile';
+import GameRoomDetailScreen from './GameRoomDetail';
 
 export {
   SplashScreen,
@@ -16,4 +17,5 @@ export {
   ActivityScreen,
   NotificationScreen,
   ProfileScreen,
+  GameRoomDetailScreen,
 };
