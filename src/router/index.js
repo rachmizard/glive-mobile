@@ -2,13 +2,15 @@ import React from 'react';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {
-  ProfileScreen,
-  SplashScreen,
-  NotificationScreen,
-} from '../screens';
+import {SplashScreen} from '../screens';
 import {AppBotomNavigation} from '../components';
-import {ActivityStack, AuthStack, HomeStack} from './Stacks';
+import {
+  ActivityStack,
+  AuthStack,
+  HomeStack,
+  NotificationStack,
+  ProfileStack,
+} from './Stacks';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,8 +25,8 @@ const MainScreen = () => {
       <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="Activity" component={ActivityStack} />
       <Tab.Screen name="Add" component={AddContentScreen} />
-      <Tab.Screen name="Notification" component={NotificationScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Notification" component={NotificationStack} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
 };
