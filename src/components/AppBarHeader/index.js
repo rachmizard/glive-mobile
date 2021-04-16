@@ -4,6 +4,22 @@ import {Appbar} from 'react-native-paper';
 import {color, fontConfig} from './../../assets';
 import IconDirectMessage from './../../assets/images/icon-send.png';
 
+const headerCentered = title => {
+  switch (title) {
+    case 'Sign In':
+      return true;
+
+    case 'Sign Up':
+      return true;
+
+    case 'Gameroom':
+      return true;
+
+    default:
+      return false;
+  }
+};
+
 const AppBarHeader = ({navigation, previous, scene}) => {
   const {options} = scene.descriptor;
   const title =
@@ -12,13 +28,7 @@ const AppBarHeader = ({navigation, previous, scene}) => {
       : options.title !== undefined
       ? options.title
       : scene.route.name;
-
-  let isTitleCenter = false;
   let backAction = null;
-
-  if (title === 'Sign In' || title === 'Sign Up') {
-    isTitleCenter = true;
-  }
 
   if (previous) {
     backAction = (
@@ -34,7 +44,7 @@ const AppBarHeader = ({navigation, previous, scene}) => {
     <Appbar.Header style={styles.appBarHeader}>
       {backAction}
       <Appbar.Content
-        style={styles.appBarContent(isTitleCenter)}
+        style={styles.appBarContent(headerCentered(title))}
         title={title}
         titleStyle={fontConfig.fontStylesheet.subtitle1}
       />

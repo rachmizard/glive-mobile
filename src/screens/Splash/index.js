@@ -6,7 +6,7 @@ import {fontConfig} from '../../assets';
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.replace('SignIn');
+      navigation.replace('Auth', {screen: 'SignIn'});
     }, 2000);
     return () => {
       clearTimeout(timeout());

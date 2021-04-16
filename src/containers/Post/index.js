@@ -12,13 +12,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {posts} from './../../mocks';
 import {color, fontConfig, theme} from './../../assets';
 
+const {fontStylesheet} = fontConfig;
+
 const PostContainer = () => {
   const [postContents, setPostContents] = useState(posts);
   const [refreshing, setRefreshing] = useState(false);
 
   const DEFAULT_TIMEOUT = 1000;
-
-  const {fontStylesheet} = fontConfig;
 
   const {container} = styles;
 
@@ -160,12 +160,12 @@ const styles = StyleSheet.create({
   },
   contentCaptionText: {
     marginTop: 12,
-    ...fontConfig.fontStylesheet.caption,
+    ...fontStylesheet.caption,
     color: color.white,
     textAlign: 'justify',
   },
   contentTagsText: {
-    ...fontConfig.fontStylesheet.caption,
+    ...fontStylesheet.caption,
     color: color.yellow,
   },
   interactionControl: {
@@ -180,6 +180,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   interactionCounter: {
-    ...fontConfig.fontStylesheet.caption,
+    ...fontStylesheet.caption,
   },
 });

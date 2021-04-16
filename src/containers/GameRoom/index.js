@@ -1,16 +1,9 @@
 import React, {useEffect} from 'react';
 import {useRef} from 'react';
-import {
-  ActivityIndicator,
-  Image,
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native';
-import {Title, Text} from 'react-native-paper';
+import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
+import {Title} from 'react-native-paper';
+import GameRoomItem from '../../components/GameRoomItem';
 import {color, fontConfig} from './../../assets';
-
-import {stringLimit} from './../../constants/helper';
 
 const GameRoomContainer = ({gameRooms, isLoading, navigation}) => {
   const ref = useRef();
@@ -31,35 +24,32 @@ const GameRoomContainer = ({gameRooms, isLoading, navigation}) => {
     />
   );
 
-  let renderView = isLoading ? <LoadingBar /> : null;
-
-  if (!isLoading) {
-    renderView = (
-      <ScrollView
-        ref={ref}
-        contentContainerStyle={styles.gameRoomWrapper}
-        horizontal
-        showsHorizontalScrollIndicator={false}>
-        {gameRooms.map((gameRoom, index) => (
-          <View key={index} style={styles.gameRoomItem}>
-            <Image source={gameRoom.img} style={styles.gameRoomItemImg} />
-            <View style={styles.gameRoomItemTitle}>
-              <Text style={styles.gameRoomItemTitleText}>
-                {stringLimit(gameRoom.name)}
-              </Text>
-            </View>
-          </View>
-        ))}
-      </ScrollView>
-    );
-  }
+  const _handleNavigateGameRoom = gameRoom => {
+    navigation.navigate('GameRoomDetail', {params: gameRoom});
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.titleWrapper}>
         <Title style={fontConfig.fontStylesheet.h6}>Gameroom</Title>
       </View>
-      {renderView}
+      {isLoading ? (
+        <LoadingBar />
+      ) : (
+        <ScrollView
+          ref={ref}
+          contentContainerStyle={styles.gameRoomWrapper}
+          horizontal
+          showsHorizontalScrollIndicator={false}>
+          {gameRooms.map((gameRoom, index) => (
+            <GameRoomItem
+              key={index}
+              item={gameRoom}
+              onPress={() => _handleNavigateGameRoom(gameRoom)}
+            />
+          ))}
+        </ScrollView>
+      )}
     </View>
   );
 };
@@ -78,22 +68,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 100,
     paddingHorizontal: 8,
-  },
-  gameRoomItem: {
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  gameRoomItemImg: {
-    width: 64,
-    height: 64,
-    borderRadius: 64 * 2,
-  },
-  gameRoomItemTitle: {
-    marginTop: 8,
-    width: 64,
-  },
-  gameRoomItemTitleText: {
-    ...fontConfig.fontStylesheet.overline,
-    textAlign: 'center',
   },
 });

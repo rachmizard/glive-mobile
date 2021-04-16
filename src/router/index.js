@@ -3,37 +3,25 @@ import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
-  HomeScreen,
   ProfileScreen,
-  SignInScreen,
-  SignUpScreen,
   SplashScreen,
-  SuccessSignUpScreen,
-  ActivityScreen,
   NotificationScreen,
 } from '../screens';
-import AppBarHeader from '../components/AppBarHeader';
 import {AppBotomNavigation} from '../components';
+import {ActivityStack, AuthStack, HomeStack} from './Stacks';
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const AddContentScreen = () => {
   return null;
 };
 
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
 const MainScreen = () => {
   return (
-    <Tab.Navigator
-      tabBarOptions={{
-        keyboardHidesTabBar: false,
-        style: {
-          position: 'absolute',
-        },
-      }}
-      tabBar={props => <AppBotomNavigation {...props} />}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Activity" component={ActivityScreen} />
+    <Tab.Navigator tabBar={props => <AppBotomNavigation {...props} />}>
+      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Activity" component={ActivityStack} />
       <Tab.Screen name="Add" component={AddContentScreen} />
       <Tab.Screen name="Notification" component={NotificationScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -44,30 +32,18 @@ const MainScreen = () => {
 const RootRouter = () => {
   return (
     <Stack.Navigator
-      screenOptions={{
-        header: props => <AppBarHeader {...props} />,
-        ...TransitionPresets.FadeFromBottomAndroid,
-      }}
-      initialRouteName="Splash">
+      initialRouteName="Splash"
+      headerMode="none"
+      screenOptions={{...TransitionPresets.FadeFromBottomAndroid}}>
       <Stack.Screen
         name="Splash"
         component={SplashScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="SignIn"
-        component={SignInScreen}
-        options={{headerTitle: 'Sign In'}}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUpScreen}
-        options={{headerTitle: 'Sign Up'}}
-      />
-      <Stack.Screen
-        name="SuccessSignUp"
-        component={SuccessSignUpScreen}
-        options={{headerTitle: 'Sign Up'}}
+        name="Auth"
+        component={AuthStack}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="MainScreen"

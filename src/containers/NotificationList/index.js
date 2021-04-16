@@ -4,11 +4,13 @@ import {Divider, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
 
+const {fontStylesheet} = fontConfig;
+
 const NotificationListContainer = ({notifications}) => {
   return (
     <View style={styles.container}>
       {notifications.map((notification, index) => (
-        <View key={notification.id} style={styles.notificationItem}>
+        <View key={index} style={styles.notificationItem}>
           <View style={styles.notificationItemHeader}>
             <View style={{marginRight: 8}}>
               <Image
@@ -17,7 +19,7 @@ const NotificationListContainer = ({notifications}) => {
               />
             </View>
             <View style={styles.notificationUserIdentity}>
-              <Text style={fontConfig.fontStylesheet.subtitle1}>
+              <Text style={fontStylesheet.subtitle1}>
                 {notification.userName} · {notification.lastHour}
               </Text>
               <Text>
@@ -26,7 +28,7 @@ const NotificationListContainer = ({notifications}) => {
                 {notification.mentions.length ? (
                   <Text
                     style={{
-                      ...fontConfig.fontStylesheet.subtitle2,
+                      ...fontStylesheet.subtitle2,
                       color: color.primaryLight,
                     }}>
                     {notification.mentions && notification.mentions.join(', ')}
@@ -44,9 +46,7 @@ const NotificationListContainer = ({notifications}) => {
             />
           </View>
           <View style={styles.notificationContent}>
-            <Text style={fontConfig.fontStylesheet.caption}>
-              {notification.content}
-            </Text>
+            <Text style={fontStylesheet.caption}>{notification.content}</Text>
 
             <View style={styles.notificationAction}>
               <Icon name="comment-outline" size={24} color={color.white} />
