@@ -5,6 +5,7 @@ import NotificationListContainer from './NotificationList';
 import ProfileCardContainer from './ProfileCard';
 import ProfileTabBarContainer from './ProfileTabBar';
 import PostContainer from './Post';
+import AvailableRoomContainer from './AvailableRoom';
 
 export {
   GameRoomContainer,
@@ -13,5 +14,6 @@ export {
   NotificationListContainer,
   ProfileCardContainer,
   ProfileTabBarContainer,
-  PostContainer
+  PostContainer,
+  AvailableRoomContainer,
 };

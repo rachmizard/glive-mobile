@@ -24,8 +24,8 @@ const GameRoomContainer = ({gameRooms, isLoading, navigation}) => {
     />
   );
 
-  const _handleNavigateGameRoom = () => {
-    navigation.navigate('GameRoomDetail');
+  const _handleNavigateGameRoom = gameRoom => {
+    navigation.navigate('GameRoomDetail', {params: gameRoom});
   };
 
   return (
@@ -45,7 +45,7 @@ const GameRoomContainer = ({gameRooms, isLoading, navigation}) => {
             <GameRoomItem
               key={index}
               item={gameRoom}
-              onPress={_handleNavigateGameRoom}
+              onPress={() => _handleNavigateGameRoom(gameRoom)}
             />
           ))}
         </ScrollView>
