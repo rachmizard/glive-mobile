@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {NotificationScreen} from '../../../screens';
+import {FollowerRequestScreen, NotificationScreen} from '../../../screens';
 import {AppBarHeader} from '../../../components';
 
 const Stack = createStackNavigator();
@@ -11,6 +11,11 @@ const NotificationStack = () => (
       header: props => <AppBarHeader {...props} />,
     }}>
     <Stack.Screen name="Notification" component={NotificationScreen} />
+    <Stack.Screen
+      name="FollowerRequest"
+      component={FollowerRequestScreen}
+      options={{headerTitle: 'Friend Requests'}}
+    />
   </Stack.Navigator>
 );
 

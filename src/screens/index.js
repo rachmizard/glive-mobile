@@ -8,6 +8,7 @@ import NotificationScreen from './Notification';
 import ProfileScreen from './Profile';
 import GameRoomDetailScreen from './GameRoomDetail';
 import DivisionScreen from './Division';
+import FollowerRequestScreen from './FollowerRequest';
 
 export {
   SplashScreen,
@@ -19,5 +20,6 @@ export {
   NotificationScreen,
   ProfileScreen,
   GameRoomDetailScreen,
-  DivisionScreen
+  DivisionScreen,
+  FollowerRequestScreen,
 };

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import AppBar from '../../components/AppBar';
 import NotificationListContainer from '../../containers/NotificationList';
-import { notifications } from '../../mocks';
+import {notifications} from '../../mocks';
 
-const NotificationScreen = () => {
+const NotificationScreen = ({navigation}) => {
   const [state] = useState({
-    notifications: notifications
-  })
+    notifications: notifications,
+  });
 
   return (
     <View style={styles.container}>
@@ -17,6 +17,7 @@ const NotificationScreen = () => {
         touchable={true}
         withBadge
         badgeCounter={12}
+        onPress={() => navigation.navigate('FollowerRequest')}
       />
       <NotificationListContainer notifications={state.notifications} />
     </View>

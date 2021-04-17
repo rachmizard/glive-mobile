@@ -7,6 +7,7 @@ import medias from './medias';
 import posts from './posts';
 import chats from './chats';
 import channels from './channels';
+import followerRequests from './followerRequests';
 
 export {
   tags,
@@ -18,4 +19,5 @@ export {
   posts,
   chats,
   channels,
+  followerRequests,
 };

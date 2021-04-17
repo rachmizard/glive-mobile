@@ -16,19 +16,21 @@ const AppBar = ({
   badgeCounter,
 }) => {
   return (
-    <Appbar
-      theme={{colors: {primary: color.surface}}}
-      style={styles.appBarWrapper}>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        onPress={onPress}
-        onLongPress={onLongPress}
-        disabled={!touchable}
-        style={styles.touchable}>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={onPress}
+      onLongPress={onLongPress}
+      disabled={!touchable}
+      style={styles.touchable}>
+      <Appbar
+        theme={{colors: {primary: color.surface}}}
+        style={styles.appBarWrapper}>
         <View style={styles.appBarContent}>
           <View style={styles.appBarTitle}>
             <Icon name={titleIcon} size={24} color={color.text} />
-            <Text style={styles.appBarText}>{title}</Text>
+            <Text style={{...styles.appBarText, ...{marginLeft: 8}}}>
+              {title}
+            </Text>
           </View>
           {withBadge && (
             <Badge style={styles.appBadge} size={28}>
@@ -36,8 +38,8 @@ const AppBar = ({
             </Badge>
           )}
         </View>
-      </TouchableOpacity>
-    </Appbar>
+      </Appbar>
+    </TouchableOpacity>
   );
 };
 
@@ -53,15 +55,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  touchable: {
     flex: 1,
   },
+  touchable: {},
   appBarTitle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: 164,
   },
   appBarText: {
     ...fontConfig.fontStylesheet.subtitle1,

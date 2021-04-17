@@ -8,6 +8,7 @@ import PostContainer from './Post';
 import AvailableRoomContainer from './AvailableRoom';
 import DivisionInfoContainer from './DivisionInfo';
 import DivisionTabBarContainer from './DivisionTabBar';
+import FollowerRequestItemContainer from './FollowerRequestItem';
 
 export {
   GameRoomContainer,
@@ -20,4 +21,5 @@ export {
   AvailableRoomContainer,
   DivisionInfoContainer,
   DivisionTabBarContainer,
+  FollowerRequestItemContainer,
 };
