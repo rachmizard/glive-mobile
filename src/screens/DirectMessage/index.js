@@ -7,20 +7,30 @@ import {ChatDirectMessageListContainer} from '../../containers';
 import {chatsDm} from '../../mocks';
 
 export default class DirectMessageScreen extends Component {
-  state = {
-    chats: [],
-  };
-
   constructor(props) {
     super(props);
+    this.state = {
+      chats: [],
+      chatsFiltered: [],
+    };
   }
 
   componentDidMount() {
-    this.setState({...this.state, chats: chatsDm});
+    this.setState({chats: chatsDm, chatsFiltered: chatsDm});
   }
 
   _handleRefreshChats() {
-    this.setState({...this.state, chats: chatsDm});
+    this.setState({chats: chatsDm});
+  }
+
+  _handleFilterChats(searchValue) {
+    this.setState({
+      chatsFiltered: this.state.chats.filter(
+        i =>
+          i.userFullName.toLowerCase().includes(searchValue.toLowerCase()) ||
+          i.userName.toLowerCase().includes(searchValue.toLowerCase()),
+      ),
+    });
   }
 
   render() {
@@ -38,6 +48,9 @@ export default class DirectMessageScreen extends Component {
             focusColor={color.black}
             iconPosition="right"
             roundness={8}
+            onChangeText={text => {
+              this._handleFilterChats(text);
+            }}
             icon={
               <TextInput.Icon
                 name="magnify"
@@ -50,7 +63,7 @@ export default class DirectMessageScreen extends Component {
         </View>
         <ChatDirectMessageListContainer
           onRefreshChat={() => this._handleRefreshChats()}
-          chats={this.state.chats}
+          chats={this.state.chatsFiltered}
         />
       </View>
     );
