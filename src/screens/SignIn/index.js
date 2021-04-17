@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {HelperText, Text, TextInput} from 'react-native-paper';
 import {color, fontConfig} from '../../assets';
 import {BaseButton, BaseTextInput, ButtonSocial} from '../../components';
@@ -50,97 +50,99 @@ const SignInScreen = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.signInTitleWrapper}>
-        <Text style={styles.signInTitleHeadingText}>Welcome to GLiVE</Text>
-        <Text style={styles.signInTitleSubHeadingText}>
-          Social club for gamers and game developers
-        </Text>
-      </View>
-      <View style={styles.signInFormWrapper}>
-        <View style={styles.signInFormControl}>
-          <BaseTextInput
-            mode="outlined"
-            label="Email"
-            autoCompleteType="off"
-            onChangeText={onChangeEmail}
-            isError={state.errors.email.isError}>
-            <HelperText
-              type="error"
-              theme={{colors: {error: color.yellow}}}
-              visible={state.errors.email.isError}>
-              {state.errors.email.message}
-            </HelperText>
-          </BaseTextInput>
-        </View>
-        <View style={styles.signInFormControl}>
-          <BaseTextInput
-            autoCompleteType="off"
-            mode="outlined"
-            label="Password"
-            secureTextEntry={!state.showPassword}
-            onChangeText={onChangePassword}
-            isError={state.errors.password.isError}
-            iconPosition="right"
-            icon={
-              <TextInput.Icon
-                name={state.iconPassword}
-                color={color.greyLine}
-                onPress={() => _handleTogglePassword()}
-              />
-            }>
-            <HelperText
-              type="error"
-              theme={{colors: {error: color.yellow}}}
-              visible={state.errors.password.isError}>
-              {state.errors.password.message}
-            </HelperText>
-          </BaseTextInput>
-        </View>
-      </View>
-      <View style={styles.signInButton}>
-        <View>
-          <BaseButton
-            mode="contained"
-            uppercase={false}
-            size="medium"
-            onPress={() => _handleRedirectHome()}>
-            Login
-          </BaseButton>
-        </View>
-        <View style={{marginTop: 16}}>
-          <ButtonSocial
-            social="google"
-            uppercase={false}
-            onPress={() => console.log('Hello')}>
-            Continue With Google
-          </ButtonSocial>
-        </View>
-        <View
-          style={{
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}>
-          <Text
-            onPress={() => navigation.navigate('SignUp')}
-            style={{
-              ...fontConfig.fontStylesheet.body2,
-              color: color.yellow,
-              marginTop: 24,
-            }}>
-            Don't have account? <Text>Register Now</Text>
-          </Text>
-          <Text
-            style={{
-              ...fontConfig.fontStylesheet.body2,
-              color: color.yellow,
-              marginTop: 16,
-            }}>
-            Forgot password? <Text>Rest Now</Text>
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.signInTitleWrapper}>
+          <Text style={styles.signInTitleHeadingText}>Welcome to GLiVE</Text>
+          <Text style={styles.signInTitleSubHeadingText}>
+            Social club for gamers and game developers
           </Text>
         </View>
+        <View style={styles.signInFormWrapper}>
+          <View style={styles.signInFormControl}>
+            <BaseTextInput
+              mode="outlined"
+              label="Email"
+              autoCompleteType="off"
+              onChangeText={onChangeEmail}
+              isError={state.errors.email.isError}>
+              <HelperText
+                type="error"
+                theme={{colors: {error: color.yellow}}}
+                visible={state.errors.email.isError}>
+                {state.errors.email.message}
+              </HelperText>
+            </BaseTextInput>
+          </View>
+          <View style={styles.signInFormControl}>
+            <BaseTextInput
+              autoCompleteType="off"
+              mode="outlined"
+              label="Password"
+              secureTextEntry={!state.showPassword}
+              onChangeText={onChangePassword}
+              isError={state.errors.password.isError}
+              iconPosition="right"
+              icon={
+                <TextInput.Icon
+                  name={state.iconPassword}
+                  color={color.greyLine}
+                  onPress={() => _handleTogglePassword()}
+                />
+              }>
+              <HelperText
+                type="error"
+                theme={{colors: {error: color.yellow}}}
+                visible={state.errors.password.isError}>
+                {state.errors.password.message}
+              </HelperText>
+            </BaseTextInput>
+          </View>
+        </View>
+        <View style={styles.signInButton}>
+          <View>
+            <BaseButton
+              mode="contained"
+              uppercase={false}
+              size="medium"
+              onPress={() => _handleRedirectHome()}>
+              Login
+            </BaseButton>
+          </View>
+          <View style={{marginTop: 16}}>
+            <ButtonSocial
+              social="google"
+              uppercase={false}
+              onPress={() => console.log('Hello')}>
+              Continue With Google
+            </ButtonSocial>
+          </View>
+          <View
+            style={{
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}>
+            <Text
+              onPress={() => navigation.navigate('SignUp')}
+              style={{
+                ...fontConfig.fontStylesheet.body2,
+                color: color.yellow,
+                marginTop: 24,
+              }}>
+              Don't have account? <Text>Register Now</Text>
+            </Text>
+            <Text
+              style={{
+                ...fontConfig.fontStylesheet.body2,
+                color: color.yellow,
+                marginTop: 16,
+              }}>
+              Forgot password? <Text>Rest Now</Text>
+            </Text>
+          </View>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

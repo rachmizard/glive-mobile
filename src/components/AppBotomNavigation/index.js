@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingHorizontal: 30,
     paddingVertical: 10,
-    width: Dimensions.get('screen').width,
     height: 58,
   },
 });

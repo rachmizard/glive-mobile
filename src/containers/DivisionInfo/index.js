@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import {Caption, Text, Title} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
@@ -58,7 +58,6 @@ export default DivisionInfoContainer;
 
 const styles = StyleSheet.create({
   divisionBg: {
-    width: Dimensions.get('screen').width,
     height: 129,
     resizeMode: 'cover',
   },

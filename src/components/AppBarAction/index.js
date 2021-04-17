@@ -3,7 +3,7 @@ import {Image, StyleSheet} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import IconDirectMessage from './../../assets/images/icon-send.png';
 
-const AppBarAction = ({title, navigation, onPress}) => {
+const AppBarAction = ({title, navigation}) => {
   let renderIcon = null;
 
   switch (title) {
@@ -12,7 +12,7 @@ const AppBarAction = ({title, navigation, onPress}) => {
         icon: () => (
           <Image source={IconDirectMessage} style={{width: 24, height: 24}} />
         ),
-        onPress: () => navigation.navigate('Home')
+        onPress: () => navigation.navigate('DirectMessage'),
       };
       break;
 

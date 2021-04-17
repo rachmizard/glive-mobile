@@ -20,14 +20,21 @@ const GameRoomDetailScreen = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.gameRoomImageWrapper}>
-        <GameRoomImage name={params.name} image={params.img} size={64} />
-      </View>
-      <View style={styles.availableRoomWrapper}>
-        <AvailableRoomContainer rooms={rooms} />
-      </View>
-      <View style={styles.joinGameRoomBtn}>
-        <BaseButton uppercase={false}>Join Gameroom</BaseButton>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'space-evenly',
+        }}>
+        <View style={styles.gameRoomImageWrapper}>
+          <GameRoomImage name={params.name} image={params.img} size={64} />
+        </View>
+        <View style={styles.availableRoomWrapper}>
+          <AvailableRoomContainer rooms={rooms} />
+        </View>
+        <View style={styles.joinGameRoomBtn}>
+          <BaseButton uppercase={false}>Join Gameroom</BaseButton>
+        </View>
       </View>
     </View>
   );
@@ -45,11 +52,9 @@ const styles = StyleSheet.create({
   },
   gameRoomImageWrapper: {
     marginTop: 16,
-    flex: 1,
   },
   availableRoomWrapper: {
     marginTop: 28,
-    flex: 2,
   },
   joinGameRoomBtn: {
     marginBottom: 16,
