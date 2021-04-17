@@ -12,6 +12,10 @@ import BaseDialog from './BaseDialog';
 import GameRoomItem from './GameRoomItem';
 import GameRoomImage from './GameRoomImage';
 import ListRoom from './ListRoom';
+import ChatUser from './ChatUser';
+import ChatBubble from './ChatBubble';
+import Channel from './Channel';
+import ChannelSpeaker from './ChannelSpeaker';
 
 export {
   AppBar,
@@ -28,4 +32,8 @@ export {
   GameRoomItem,
   GameRoomImage,
   ListRoom,
+  ChatUser,
+  ChatBubble,
+  Channel,
+  ChannelSpeaker,
 };

@@ -44,7 +44,8 @@ const CardOverlay = ({
     <TouchableOpacity
       disabled={touchable}
       onPress={onPress}
-      onLongPress={onLongPress}>
+      onLongPress={onLongPress}
+      activeOpacity={0.7}>
       <View style={styles.card}>
         <RenderLinearGradient />
         <View style={styles.cardContent}>

@@ -17,29 +17,29 @@ const ExploreDivisionContainer = ({navigation, exploreDivisions}) => {
     return () => unsubscribe();
   });
 
-  const SearchBar = () => (
-    <View style={styles.searchBarWrapper}>
-      <BaseTextInput
-        mode="outlined"
-        placeholder="Search..."
-        placeHolderColor={color.black}
-        text={color.background}
-        textInputBackgroundColor={color.white}
-        textInputColor={color.background}
-        focusColor={color.black}
-        iconPosition="right"
-        icon={
-          <TextInput.Icon
-            name={() => <Icon name="magnify" size={24} color={color.black} />}
-          />
-        }
-      />
-    </View>
-  );
+  const _handleNavigateDivision = explore => {
+    navigation.navigate('Division', {division: explore});
+  };
 
   return (
     <View style={styles.container}>
-      <SearchBar />
+      <View style={styles.searchBarWrapper}>
+        <BaseTextInput
+          mode="outlined"
+          placeholder="Search..."
+          placeHolderColor={color.black}
+          text={color.background}
+          textInputBackgroundColor={color.white}
+          textInputColor={color.background}
+          focusColor={color.black}
+          iconPosition="right"
+          icon={
+            <TextInput.Icon
+              name={() => <Icon name="magnify" size={24} color={color.black} />}
+            />
+          }
+        />
+      </View>
       <View style={styles.exploreWrapper}>
         <View style={styles.exploreTitle}>
           <Title style={fontConfig.fontStylesheet.h6}>Explore Division</Title>
@@ -54,9 +54,11 @@ const ExploreDivisionContainer = ({navigation, exploreDivisions}) => {
               key={index}
               img={explore.img}
               title={explore.title}
+              totalUser={explore.totalUser}
               tagText={explore.tagText}
               touchable={false}
               overlay={true}
+              onPress={() => _handleNavigateDivision(explore)}
             />
           ))}
         </ScrollView>

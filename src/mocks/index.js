@@ -5,6 +5,8 @@ import exploreDivisions from './exploreDivisions';
 import notifications from './notifications';
 import medias from './medias';
 import posts from './posts';
+import chats from './chats';
+import channels from './channels';
 
 export {
   tags,
@@ -14,4 +16,6 @@ export {
   notifications,
   medias,
   posts,
+  chats,
+  channels,
 };

@@ -6,6 +6,8 @@ import ProfileCardContainer from './ProfileCard';
 import ProfileTabBarContainer from './ProfileTabBar';
 import PostContainer from './Post';
 import AvailableRoomContainer from './AvailableRoom';
+import DivisionInfoContainer from './DivisionInfo';
+import DivisionTabBarContainer from './DivisionTabBar';
 
 export {
   GameRoomContainer,
@@ -16,4 +18,6 @@ export {
   ProfileTabBarContainer,
   PostContainer,
   AvailableRoomContainer,
+  DivisionInfoContainer,
+  DivisionTabBarContainer,
 };
