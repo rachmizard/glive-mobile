@@ -23,6 +23,7 @@ const BaseTextInput = ({
   icon,
   disabled,
   value,
+  height,
 }) => {
   const themeTextInput = {
     colors: {
@@ -37,6 +38,7 @@ const BaseTextInput = ({
   };
 
   let IconText = null;
+  let styles = [];
 
   if (iconPosition === 'left') {
     IconText = {
@@ -46,6 +48,9 @@ const BaseTextInput = ({
     IconText = {
       right: icon,
     };
+  }
+  if (height) {
+    styles.push({height: height});
   }
 
   return (
@@ -62,6 +67,7 @@ const BaseTextInput = ({
         error={isError}
         theme={themeTextInput}
         value={value}
+        style={styles}
         {...IconText}
       />
       {children}
@@ -105,4 +111,5 @@ BaseTextInput.propTypes = {
   icon: PropTypes.node,
   disabled: PropTypes.bool,
   value: PropTypes.string,
+  height: PropTypes.number,
 };
