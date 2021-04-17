@@ -16,6 +16,7 @@ const FollowerRequestItemContainer = ({data, onPressAccept, onPressReject}) => {
           color={color.white}
           size={28}
           onPress={onPressAccept}
+          style={{marginRight: -10}}
         />
         <IconButton
           icon="close-circle-outline"
