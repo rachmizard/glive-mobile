@@ -1,6 +1,7 @@
 import AppBar from './AppBar';
 import AppBarAction from './AppBarAction';
 import AppBarHeader from './AppBarHeader';
+import AppTabScene from './AppTabScene';
 import ButtonSocial from './ButtonSocial';
 import BaseButton from './BaseButton';
 import BaseTag from './BaseTag';
@@ -21,6 +22,7 @@ export {
   AppBar,
   AppBarAction,
   AppBarHeader,
+  AppTabScene,
   ButtonSocial,
   BaseButton,
   BaseTextInput,

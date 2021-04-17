@@ -35,7 +35,7 @@ const AppBarHeader = ({navigation, previous, scene}) => {
         <Appbar.BackAction color={color.yellow} onPress={navigation.goBack} />
       )}
       <Appbar.Content
-        style={styles.appBarContent(headerCentered(title))}
+        style={styles.appBarContent(headerCentered(title), previous)}
         title={title}
         titleStyle={fontConfig.fontStylesheet.subtitle1}
       />
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   appBarHeader: {
     backgroundColor: color.surface,
   },
-  appBarContent: isTitleCenter => ({
-    alignItems: isTitleCenter ? 'center' : 'flex-start',
+  appBarContent: (isTitleCenter, isPrevious) => ({
+    alignItems: isTitleCenter || isPrevious ? 'center' : 'flex-start',
   }),
 });
