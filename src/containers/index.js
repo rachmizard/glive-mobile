@@ -9,6 +9,7 @@ import AvailableRoomContainer from './AvailableRoom';
 import DivisionInfoContainer from './DivisionInfo';
 import DivisionTabBarContainer from './DivisionTabBar';
 import FollowerRequestItemContainer from './FollowerRequestItem';
+import ChatDirectMessageListContainer from './ChatDirectMessageList';
 
 export {
   GameRoomContainer,
@@ -22,4 +23,5 @@ export {
   DivisionInfoContainer,
   DivisionTabBarContainer,
   FollowerRequestItemContainer,
+  ChatDirectMessageListContainer,
 };

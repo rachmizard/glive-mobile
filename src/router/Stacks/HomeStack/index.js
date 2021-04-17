@@ -11,7 +11,11 @@ const HomeStack = () => (
       header: props => <AppBarHeader {...props} />,
     }}>
     <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="DirectMessage" component={DirectMessageScreen} />
+    <Stack.Screen
+      name="DirectMessage"
+      component={DirectMessageScreen}
+      options={{headerTitle: 'Direct Message'}}
+    />
   </Stack.Navigator>
 );
 

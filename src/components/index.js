@@ -17,6 +17,7 @@ import ChatUser from './ChatUser';
 import ChatBubble from './ChatBubble';
 import Channel from './Channel';
 import ChannelSpeaker from './ChannelSpeaker';
+import ChatItem from './ChatItem';
 
 export {
   AppBar,
@@ -38,4 +39,5 @@ export {
   ChatBubble,
   Channel,
   ChannelSpeaker,
+  ChatItem,
 };
