@@ -28,6 +28,7 @@ export default class DirectMessageScreen extends Component {
       <View style={styles.container}>
         <View style={styles.searchDmWrapper}>
           <BaseTextInput
+            height={36}
             mode="outlined"
             placeholder="Search..."
             placeHolderColor={color.black}
@@ -36,10 +37,12 @@ export default class DirectMessageScreen extends Component {
             textInputColor={color.background}
             focusColor={color.black}
             iconPosition="right"
+            roundness={8}
             icon={
               <TextInput.Icon
                 name="magnify"
                 size={24}
+                style={{alignItems: 'center'}}
                 color={color.background}
               />
             }
