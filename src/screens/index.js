@@ -10,6 +10,7 @@ import GameRoomDetailScreen from './GameRoomDetail';
 import DivisionScreen from './Division';
 import FollowerRequestScreen from './FollowerRequest';
 import DirectMessageScreen from './DirectMessage';
+import ChatScreen from './Chat';
 
 export {
   SplashScreen,
@@ -24,4 +25,5 @@ export {
   DivisionScreen,
   FollowerRequestScreen,
   DirectMessageScreen,
+  ChatScreen,
 };

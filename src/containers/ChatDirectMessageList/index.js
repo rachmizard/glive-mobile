@@ -4,7 +4,7 @@ import {Divider} from 'react-native-paper';
 import {color} from '../../assets';
 import {ChatItem} from '../../components';
 
-const ChatDirectMessageListContainer = ({chats, onRefreshChat}) => {
+const ChatDirectMessageListContainer = ({navigation, chats, onRefreshChat}) => {
   const [refreshing, setRefreshing] = React.useState(false);
 
   const wait = timeout => {
@@ -19,6 +19,10 @@ const ChatDirectMessageListContainer = ({chats, onRefreshChat}) => {
     });
   });
 
+  const _handleNavigateChatScreen = userId => {
+    navigation.navigate('Chat', {userId: userId});
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -28,7 +32,7 @@ const ChatDirectMessageListContainer = ({chats, onRefreshChat}) => {
         data={chats}
         renderItem={({item}) => (
           <ChatItem
-            onPress={() => console.log('Navigate to chat user')}
+            onPress={() => _handleNavigateChatScreen(item.userId)}
             chat={item}
           />
         )}

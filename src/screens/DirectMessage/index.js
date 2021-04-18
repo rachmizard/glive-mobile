@@ -62,6 +62,7 @@ export default class DirectMessageScreen extends Component {
           />
         </View>
         <ChatDirectMessageListContainer
+          navigation={this.props.navigation}
           onRefreshChat={() => this._handleRefreshChats()}
           chats={this.state.chatsFiltered}
         />

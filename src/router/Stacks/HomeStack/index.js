@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import {DirectMessageScreen, HomeScreen} from '../../../screens';
+import {ChatScreen, DirectMessageScreen, HomeScreen} from '../../../screens';
 import {AppBarHeader} from '../../../components';
 
 const Stack = createStackNavigator();
@@ -17,6 +17,7 @@ const HomeStack = () => (
       component={DirectMessageScreen}
       options={{headerTitle: 'Direct Message'}}
     />
+    <Stack.Screen name="Chat" component={ChatScreen} />
   </Stack.Navigator>
 );
 

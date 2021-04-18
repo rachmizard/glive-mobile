@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   chatUserWrapper: {
     flex: 1,
     flexDirection: 'row',
+    marginBottom: 8,
   },
   chatUserImg: {
     width: 36,
