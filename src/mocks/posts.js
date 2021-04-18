@@ -1,5 +1,5 @@
 import userPicture from './../assets/images/user-picture.png';
-import {Post1} from '../assets/images/posts';
+import {Post1, Post2} from '../assets/images/posts';
 
 export default [
   {
@@ -9,6 +9,7 @@ export default [
     userName: '@zayross',
     lastHour: '1h',
     contentImg: null,
+    contentImgs: [Post1],
     content:
       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
     totalComments: 359,
@@ -26,6 +27,7 @@ export default [
     userName: '@zayross',
     lastHour: '1h',
     contentImg: Post1,
+    contentImgs: [Post2, Post1],
     content:
       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
     totalComments: 359,
@@ -43,6 +45,7 @@ export default [
     userName: '@zayross',
     lastHour: '1h',
     contentImg: null,
+    contentImgs: [Post2],
     content:
       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
     totalComments: 359,
@@ -59,7 +62,8 @@ export default [
     name: 'Kumal Gumpar',
     userName: '@zayross',
     lastHour: '1h',
-    contentImg: Post1,
+    contentImg: null,
+    contentImgs: [Post1, Post2],
     content:
       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
     totalComments: 359,

@@ -6,6 +6,7 @@ import ButtonSocial from './ButtonSocial';
 import BaseButton from './BaseButton';
 import BaseTag from './BaseTag';
 import BaseTextInput from './BaseTextInput';
+import BaseSliderImage from './BaseSliderImage';
 import AppBotomNavigation from './AppBotomNavigation';
 import AppBottomTabItem from './AppBottomTabItem';
 import CardOverlay from './CardOverlay';
@@ -44,4 +45,5 @@ export {
   ChatItem,
   Post,
   PostAction,
+  BaseSliderImage,
 };

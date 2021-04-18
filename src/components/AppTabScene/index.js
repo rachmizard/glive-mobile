@@ -4,7 +4,7 @@ import {useWindowDimensions} from 'react-native';
 import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
 import {color, fontConfig} from './../../assets';
 
-const AppTabScene = ({lazy = true, routes, scenes}) => {
+const AppTabScene = ({lazy = true, routes, swipeEnabled = true, scenes}) => {
   const {fontStylesheet} = fontConfig;
 
   const [index, setIndex] = React.useState(0);
@@ -24,6 +24,7 @@ const AppTabScene = ({lazy = true, routes, scenes}) => {
 
   return (
     <TabView
+      swipeEnabled={swipeEnabled}
       lazy={lazy}
       sceneContainerStyle={{backgroundColor: color.surface}}
       navigationState={{index, routes}}
@@ -41,4 +42,5 @@ AppTabScene.propTypes = {
   lazy: PropTypes.bool,
   routes: PropTypes.arrayOf(Object),
   scenes: PropTypes.object,
+  swipeEnabled: PropTypes.bool,
 };
