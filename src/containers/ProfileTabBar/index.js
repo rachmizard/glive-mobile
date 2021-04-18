@@ -5,7 +5,7 @@ import {PostTabScene, MediaTabScene, UpvoteTabScene} from './Scene';
 
 const ProfileTabBarContainer = () => {
   const [routes] = React.useState([
-    {key: 'first', title: 'Posts & Reply'},
+    {key: 'first', title: 'All'},
     {key: 'second', title: 'Media'},
     {key: 'third', title: 'Upvote'},
   ]);

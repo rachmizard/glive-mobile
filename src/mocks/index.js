@@ -9,6 +9,8 @@ import chats from './chats';
 import channels from './channels';
 import followerRequests from './followerRequests';
 import chatsDm from './chatsDm';
+import postsAndReplies from './postsAndReplies';
+import postsDivision from './postsDivision';
 
 export {
   tags,
@@ -22,4 +24,6 @@ export {
   channels,
   followerRequests,
   chatsDm,
+  postsAndReplies,
+  postsDivision,
 };

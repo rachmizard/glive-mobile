@@ -12,14 +12,6 @@ const HomeScreen = () => {
   const _handlePressTag = index => {
     setState({
       ...state,
-      ...(state.tags = tags.map(function (x) {
-        x.active = false;
-        return x;
-      })),
-    });
-
-    setState({
-      ...state,
       ...(state.tags[index].active = !state.tags[index].active),
     });
   };

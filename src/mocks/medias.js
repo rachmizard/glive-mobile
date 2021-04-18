@@ -12,7 +12,10 @@ export default [
     isRetweeted: false,
     isUpvote: false,
     contentImg: Media1,
+    content:
+      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
     isReposted: false,
+    tags: ['#hero', '#down'],
     totalComments: 359,
     totalRetweeted: 11300,
     totalUpvoted: 59000,
@@ -26,6 +29,9 @@ export default [
     isRetweeted: true,
     isUpvote: true,
     contentImg: null,
+    content:
+      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+    tags: ['#tags', '#sample'],
     isReposted: true,
     totalComments: 359,
     totalRetweeted: 11000,

@@ -17,6 +17,7 @@ export default [
     tags: ['#tags', '#sample'],
     isRetweeted: false,
     isUpvote: false,
+    isReposted: false,
   },
   {
     id: 2,
@@ -33,6 +34,7 @@ export default [
     tags: ['#tags', '#sample'],
     isRetweeted: false,
     isUpvote: true,
+    isReposted: false,
   },
   {
     id: 3,
@@ -49,6 +51,7 @@ export default [
     tags: ['#tags', '#sample'],
     isRetweeted: true,
     isUpvote: true,
+    isReposted: false,
   },
   {
     id: 4,
@@ -65,5 +68,6 @@ export default [
     tags: ['#tags', '#sample'],
     isRetweeted: false,
     isUpvote: false,
+    isReposted: false,
   },
 ];

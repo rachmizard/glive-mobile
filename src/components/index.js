@@ -18,6 +18,8 @@ import ChatBubble from './ChatBubble';
 import Channel from './Channel';
 import ChannelSpeaker from './ChannelSpeaker';
 import ChatItem from './ChatItem';
+import Post from './Post';
+import PostAction from './PostAction';
 
 export {
   AppBar,
@@ -40,4 +42,6 @@ export {
   Channel,
   ChannelSpeaker,
   ChatItem,
+  Post,
+  PostAction,
 };
