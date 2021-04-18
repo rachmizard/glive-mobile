@@ -15,6 +15,7 @@ const ListRoom = ({name, checked, onPress}) => {
         <RadioButton
           onPress={onPress}
           value="first"
+          uncheckedColor={color.white}
           status={checked ? 'checked' : 'unchecked'}
         />
       </View>
