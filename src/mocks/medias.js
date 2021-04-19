@@ -1,6 +1,7 @@
 import UserProfile from './../assets/images/user-profile-pict.png';
 import UserPicture from './../assets/images/user-picture.png';
 import {Media1} from '../assets/images/media';
+import {Post1} from '../assets/images/posts';
 
 export default [
   {
@@ -12,6 +13,7 @@ export default [
     isRetweeted: false,
     isUpvote: false,
     contentImg: Media1,
+    contentImgs: [Media1, Post1],
     content:
       'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
     isReposted: false,

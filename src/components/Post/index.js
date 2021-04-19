@@ -4,6 +4,7 @@ import {StyleSheet, Image, View} from 'react-native';
 import {Text, Caption} from 'react-native-paper';
 import {color, fontConfig, theme} from './../../assets';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import BaseSliderImage from '../BaseSliderImage';
 
 const {fontStylesheet} = fontConfig;
 
@@ -13,28 +14,38 @@ const Post = ({post, onPressDetailPost, renderAction}) => {
     name,
     lastHour,
     userName,
-    contentImg,
+    contentImgs,
     content,
     tags,
     isReposted,
   } = post;
 
   return (
-    <View style={styles.postItem}>
-      {isReposted && <Text style={styles.textInfo}>Reposted By you</Text>}
-      <PostHeader
-        name={name}
-        userPict={userPict}
-        lastHour={lastHour}
-        userName={userName}
-      />
-      <PostContent
-        contentImg={contentImg}
-        content={content}
-        onPressDetailPost={onPressDetailPost}
-        renderAction={renderAction}
-        tags={tags}
-      />
+    <View style={styles.container}>
+      <View style={styles.postWrapper}>
+        {isReposted && <Text style={styles.textInfo}>Reposted By you</Text>}
+        <PostHeader
+          name={name}
+          userPict={userPict}
+          lastHour={lastHour}
+          userName={userName}
+        />
+        <PostContent
+          contentImgs={contentImgs}
+          content={content}
+          onPressDetailPost={onPressDetailPost}
+          renderAction={renderAction}
+          tags={tags}
+        />
+      </View>
+      <View>
+        <Icon
+          color={color.black}
+          size={16}
+          style={styles.dotsVertical}
+          name="dots-vertical"
+        />
+      </View>
     </View>
   );
 };
@@ -52,26 +63,18 @@ const PostHeader = ({name, userPict, lastHour, userName}) => (
       </Text>
       <Text style={fontStylesheet.caption}>{userName}</Text>
     </View>
-    <Icon
-      color={color.black}
-      size={16}
-      style={styles.dotsVertical}
-      name="dots-vertical"
-    />
   </View>
 );
 
 const PostContent = ({
-  contentImg,
+  contentImgs,
   content,
   onPressDetailPost,
   renderAction,
   tags,
 }) => (
   <View style={styles.postContent}>
-    {contentImg ? (
-      <Image source={contentImg} style={styles.contentImg} />
-    ) : null}
+    {contentImgs ? <BaseSliderImage images={contentImgs} /> : null}
     <Caption onPress={onPressDetailPost} style={styles.contentCaptionText}>
       {content}
     </Caption>
@@ -81,13 +84,19 @@ const PostContent = ({
 );
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 8,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   textInfo: {
     color: color.greyLine,
     ...fontStylesheet.subtitle2,
     marginBottom: 4,
   },
-  postItem: {
-    marginTop: 8,
+  postWrapper: {
+    flex: 1,
   },
   postHeader: {
     flexDirection: 'row',
@@ -109,14 +118,8 @@ const styles = StyleSheet.create({
     borderRadius: 8 * 2,
   },
   postContent: {
-    marginRight: 30,
+    flex: 1,
     marginTop: 8,
-    justifyContent: 'center',
-  },
-  contentImg: {
-    borderRadius: theme.roundness,
-    height: 326,
-    width: 326,
   },
   contentCaptionText: {
     marginTop: 12,
