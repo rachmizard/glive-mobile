@@ -16,7 +16,4 @@ export default {
     ...color,
   },
   fonts: configureFonts(fontConfig.fontDefault),
-  animation: {
-    scale: 1.8,
-  },
 };

@@ -2,6 +2,7 @@ import SplashScreen from './Splash';
 import HomeScreen from './Home';
 import SignInScreen from './SignIn';
 import SignUpScreen from './SignUp';
+import ResetPasswordScreen from './ResetPassword';
 import SuccessSignUpScreen from './SuccessSignUp';
 import ActivityScreen from './Activity';
 import NotificationScreen from './Notification';
@@ -17,6 +18,7 @@ export {
   HomeScreen,
   SignInScreen,
   SignUpScreen,
+  ResetPasswordScreen,
   SuccessSignUpScreen,
   ActivityScreen,
   NotificationScreen,

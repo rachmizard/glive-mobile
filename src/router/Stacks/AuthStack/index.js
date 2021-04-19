@@ -1,6 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
+  ResetPasswordScreen,
   SignInScreen,
   SignUpScreen,
   SuccessSignUpScreen,
@@ -28,6 +29,11 @@ const AuthStack = () => (
       name="SuccessSignUp"
       component={SuccessSignUpScreen}
       options={{headerTitle: 'Sign Up'}}
+    />
+    <Stack.Screen
+      name="ResetPassword"
+      component={ResetPasswordScreen}
+      options={{headerTitle: 'Reset Password'}}
     />
   </Stack.Navigator>
 );

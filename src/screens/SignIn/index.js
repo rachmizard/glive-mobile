@@ -132,12 +132,13 @@ const SignInScreen = ({navigation}) => {
               Don't have account? <Text>Register Now</Text>
             </Text>
             <Text
+              onPress={() => navigation.navigate('ResetPassword')}
               style={{
                 ...fontConfig.fontStylesheet.body2,
                 color: color.yellow,
                 marginTop: 16,
               }}>
-              Forgot password? <Text>Rest Now</Text>
+              Forgot password? <Text>Reset Now</Text>
             </Text>
           </View>
         </View>
