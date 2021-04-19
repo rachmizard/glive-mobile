@@ -13,7 +13,7 @@ export default [
       {
         chatId: 1,
         userImg: userPicture,
-        userName: '@zayross',
+        userName: '@emmastone',
         lastChat: '1h',
         chatText: 'What do you guys think of mmorpg?',
       },

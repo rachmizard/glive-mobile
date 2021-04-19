@@ -21,7 +21,9 @@ const AddContentScreen = () => {
 
 const MainScreen = () => {
   return (
-    <Tab.Navigator tabBar={props => <AppBotomNavigation {...props} />}>
+    <Tab.Navigator
+      tabBarOptions={{keyboardHidesTabBar: true}}
+      tabBar={props => <AppBotomNavigation {...props} />}>
       <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="Activity" component={ActivityStack} />
       <Tab.Screen name="Add" component={AddContentScreen} />
