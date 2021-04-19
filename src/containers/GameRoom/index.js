@@ -5,7 +5,12 @@ import {Title} from 'react-native-paper';
 import GameRoomItem from '../../components/GameRoomItem';
 import {color, fontConfig} from './../../assets';
 
-const GameRoomContainer = ({gameRooms, isLoading, navigation}) => {
+const GameRoomContainer = ({
+  onNavigateGameRoom,
+  gameRooms,
+  isLoading,
+  navigation,
+}) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -24,10 +29,6 @@ const GameRoomContainer = ({gameRooms, isLoading, navigation}) => {
     />
   );
 
-  const _handleNavigateGameRoom = gameRoom => {
-    navigation.navigate('GameRoomDetail', {params: gameRoom});
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.titleWrapper}>
@@ -45,7 +46,7 @@ const GameRoomContainer = ({gameRooms, isLoading, navigation}) => {
             <GameRoomItem
               key={index}
               item={gameRoom}
-              onPress={() => _handleNavigateGameRoom(gameRoom)}
+              onPress={() => onNavigateGameRoom(gameRoom)}
             />
           ))}
         </ScrollView>

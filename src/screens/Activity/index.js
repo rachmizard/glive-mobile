@@ -74,6 +74,7 @@ export default class ActivityScreen extends Component {
           />
         }>
         <GameRoomContainer
+          onNavigateGameRoom={this._handleNavigateGameRoom}
           navigation={navigation}
           isLoading={this.state.isLoadingGameRoom}
           gameRooms={this.state.gameRooms}
