@@ -33,5 +33,6 @@ export default [
     userName: '@jimmy',
     lastChat: '1h',
     lastChatText: "Let's play together!",
+    chats: [],
   },
 ];

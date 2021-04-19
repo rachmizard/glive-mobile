@@ -82,9 +82,10 @@ export default class ChatScreen extends Component {
                 refreshing={this.state.refreshing}
               />
             }>
-            {this.state.chats.map((item, key) => (
-              <ChatUser key={key} chat={item} />
-            ))}
+            {this.state.chats &&
+              this.state.chats.map((item, key) => (
+                <ChatUser key={key} chat={item} />
+              ))}
           </ScrollView>
         </View>
         <View style={styles.textInputWrapper}>
