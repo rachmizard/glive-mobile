@@ -12,11 +12,28 @@ export default class DirectMessageScreen extends Component {
     this.state = {
       chats: [],
       chatsFiltered: [],
+      refreshing: false,
     };
+
+    this.onRefresh = this.onRefresh.bind(this);
+    this._handleNavigateChatScreen = this._handleNavigateChatScreen.bind(this);
+    this._handleRefreshChats = this._handleRefreshChats.bind(this);
   }
 
   componentDidMount() {
     this.setState({chats: chatsDm, chatsFiltered: chatsDm});
+  }
+
+  wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
+  onRefresh() {
+    this.setState({refreshing: true});
+    wait(1000).then(() => {
+      this._handleRefreshChats();
+      this.setState({refreshing: false});
+    });
   }
 
   _handleRefreshChats() {
@@ -32,6 +49,10 @@ export default class DirectMessageScreen extends Component {
       ),
     });
   }
+
+  _handleNavigateChatScreen = userId => {
+    this.props.navigation.navigate('Chat', {userId: userId});
+  };
 
   render() {
     return (
@@ -62,8 +83,9 @@ export default class DirectMessageScreen extends Component {
           />
         </View>
         <ChatDirectMessageListContainer
-          navigation={this.props.navigation}
-          onRefreshChat={() => this._handleRefreshChats()}
+          refreshing={this.state.refreshing}
+          onNavigateChat={this._handleNavigateChatScreen}
+          onRefreshChat={this._handleRefreshChats}
           chats={this.state.chatsFiltered}
         />
       </View>
