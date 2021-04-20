@@ -31,7 +31,9 @@ const AppBotomNavigation = ({state, descriptors, navigation}) => {
   }
 
   const renderBottomNav = () => {
-    if (Platform.OS === 'android' && !showKeyboard) return null;
+    if (Platform.OS === 'android' && !showKeyboard) {
+      return null;
+    }
     return (
       <View style={styles.container}>
         {state.routes.map((route, index) => {

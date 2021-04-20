@@ -49,7 +49,9 @@ export default class ChatScreen extends Component {
   }
 
   _handleSendMessage() {
-    if (!this.state.chatText) return;
+    if (!this.state.chatText) {
+      return;
+    }
     const payload = {
       ...this.state.user,
       chatText: this.state.chatText,
