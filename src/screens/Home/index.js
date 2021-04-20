@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {BaseTag} from '../../components';
+import {BaseTag, GameRoomControl} from '../../components';
 import {PostContainer} from '../../containers';
 import {tags} from './../../mocks';
 
@@ -21,6 +21,7 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <BaseTag tags={state.tags} onPress={_handlePressTag} />
         <PostContainer />
+        <GameRoomControl />
       </View>
     </>
   );
