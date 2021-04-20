@@ -1,29 +1,41 @@
-import React, {useEffect, useState} from 'react';
+import React, {Component} from 'react';
+
 import {StyleSheet, View} from 'react-native';
 import DivisionInfoContainer from '../../containers/DivisionInfo';
 import DivisionTabBarContainer from '../../containers/DivisionTabBar';
 
-const DivisionScreen = ({navigation, route}) => {
-  const [state, setState] = useState({
+export default class DivisionScreen extends Component {
+  state = {
     division: {},
-  });
+  };
 
-  useEffect(() => {
-    if (route.params?.division) {
+  componentDidMount() {
+    const {navigation, route} = this.props;
+    this._unsubscribe = navigation.addListener('focus', () => {
+      this.fetchDivision();
       navigation.setOptions({title: route.params.division.title});
-      setState({...state, division: route.params.division});
-    }
-  }, [navigation]);
+    });
+  }
 
-  return (
-    <View style={styles.container}>
-      <DivisionInfoContainer data={state.division} />
-      <DivisionTabBarContainer />
-    </View>
-  );
-};
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
 
-export default DivisionScreen;
+  fetchDivision() {
+    const {route} = this.props;
+    this.setState({division: route.params.division});
+  }
+
+  render() {
+    const {division} = this.state;
+    return (
+      <View style={styles.container}>
+        <DivisionInfoContainer data={division} />
+        <DivisionTabBarContainer />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

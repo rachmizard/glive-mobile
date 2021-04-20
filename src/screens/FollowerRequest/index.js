@@ -12,7 +12,13 @@ export default class FollowerRequestScreen extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.fetchFollowerRequest();
+  }
+
+  fetchFollowerRequest() {
+    this.setState({...this.state.requests, requests: followerRequests});
+  }
 
   onRefresh() {
     this.setState({...this.state, refreshing: true});
@@ -31,8 +37,6 @@ export default class FollowerRequestScreen extends Component {
   }
 
   render() {
-    this.setState({...this.state.requests, requests: followerRequests});
-
     return (
       <View style={styles.container}>
         <FlatList
