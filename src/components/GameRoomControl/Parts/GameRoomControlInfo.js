@@ -1,18 +1,18 @@
 import React from 'react';
 import {Image, TouchableOpacity, StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
-import {color} from '../../../assets';
+import {color, fontConfig} from '../../../assets';
 
 const GameRoomControlInfo = ({logoImg, gameName, gameServerInfo}) => {
   return (
     <TouchableOpacity
       activeOpacity={0.5}
       onPress={() => console.log('Clicked')}>
-      <View style={{flexDirection: 'row'}}>
+      <View style={styles.wrapper}>
         <Image source={logoImg} style={styles.gameLogoImg} />
         <View style={{marginLeft: 8}}>
-          <Text style={{color: color.yellow}}>{gameName}</Text>
-          <Text>{gameServerInfo}</Text>
+          <Text style={styles.textHeading}>{gameName}</Text>
+          <Text style={styles.textSubheading}>{gameServerInfo}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -22,9 +22,21 @@ const GameRoomControlInfo = ({logoImg, gameName, gameServerInfo}) => {
 export default GameRoomControlInfo;
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   gameLogoImg: {
     width: 36,
     height: 36,
     borderRadius: 36 * 2,
+  },
+  textHeading: {
+    ...fontConfig.fontStylesheet.subtitle2,
+    color: color.yellow,
+  },
+  textSubheading: {
+    ...fontConfig.fontStylesheet.caption,
+    color: color.white,
   },
 });

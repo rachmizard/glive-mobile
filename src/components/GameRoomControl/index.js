@@ -4,8 +4,7 @@ import {Animated} from 'react-native';
 import {StyleSheet, View} from 'react-native';
 import {color} from '../../assets';
 import {MonsterHunterWorld} from './../../assets/images/gameroom';
-import GameRoomControlAction from './Parts/GameRoomControlAction';
-import GameRoomControlInfo from './Parts/GameRoomControlInfo';
+import {GameRoomControlInfo, GameRoomControlAction} from './Parts';
 
 const GameRoomControl = () => {
   const [state, setState] = useState({
