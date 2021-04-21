@@ -26,33 +26,11 @@ const GameRoomControl = () => {
       }),
     ]).start();
 
-  const _slideDown = () =>
-    Animated.sequence([
-      Animated.timing(animated, {
-        toValue: 255,
-        duration: duration,
-        useNativeDriver: true,
-      }),
-    ]).start();
-
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      _slideUp();
-    });
-
-    return unsubscribe;
-  });
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', () => {
-      _slideDown();
-    });
-
-    return unsubscribe;
-  });
+    _slideUp();
+  }, [navigation]);
 
   const _toggleMicHandler = () => {
-    _slideDown();
     setState({...state, isMute: !state.isMute});
   };
 
@@ -89,7 +67,7 @@ const styles = StyleSheet.create({
   gameRoomControlWrapper: {
     flexDirection: 'column',
     justifyContent: 'center',
-    marginBottom: 3,
+    marginBottom: 1,
     backgroundColor: color.surface,
     height: 56,
   },

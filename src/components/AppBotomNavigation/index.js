@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Platform, Keyboard} from 'react-native';
 import {color} from '../../assets';
 import AppBottomTabItem from '../AppBottomTabItem';
+import GameRoomControl from '../GameRoomControl';
 
 const AppBotomNavigation = ({state, descriptors, navigation}) => {
   const [showKeyboard, setShowKeyboard] = useState(true);
@@ -31,52 +32,55 @@ const AppBotomNavigation = ({state, descriptors, navigation}) => {
   }
 
   const renderBottomNav = () => {
-    if (Platform.OS === 'android' && !showKeyboard) {
-      return null;
-    }
+    if (Platform.OS === 'android' && !showKeyboard) return null;
     return (
-      <View style={styles.container}>
-        {state.routes.map((route, index) => {
-          const {options} = descriptors[route.key];
-          const label =
-            options.tabBarLabel !== undefined
-              ? options.tabBarLabel
-              : options.title !== undefined
-              ? options.title
-              : route.name;
+      <View style={{flexDirection: 'column'}}>
+        <View>
+          <GameRoomControl />
+        </View>
+        <View style={styles.appBotomNavWrapper}>
+          {state.routes.map((route, index) => {
+            const {options} = descriptors[route.key];
+            const label =
+              options.tabBarLabel !== undefined
+                ? options.tabBarLabel
+                : options.title !== undefined
+                ? options.title
+                : route.name;
 
-          const isFocused = state.index === index;
+            const isFocused = state.index === index;
 
-          const onPress = () => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            });
+            const onPress = () => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+                canPreventDefault: true,
+              });
 
-            if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name);
-            }
-          };
+              if (!isFocused && !event.defaultPrevented) {
+                navigation.navigate(route.name);
+              }
+            };
 
-          const onLongPress = () => {
-            navigation.emit({
-              type: 'tabLongPress',
-              target: route.key,
-            });
-          };
+            const onLongPress = () => {
+              navigation.emit({
+                type: 'tabLongPress',
+                target: route.key,
+              });
+            };
 
-          return (
-            <AppBottomTabItem
-              key={index}
-              options={options}
-              onPress={onPress}
-              onLongPress={onLongPress}
-              isFocused={isFocused}
-              label={label}
-            />
-          );
-        })}
+            return (
+              <AppBottomTabItem
+                key={index}
+                options={options}
+                onPress={onPress}
+                onLongPress={onLongPress}
+                isFocused={isFocused}
+                label={label}
+              />
+            );
+          })}
+        </View>
       </View>
     );
   };
@@ -87,7 +91,7 @@ const AppBotomNavigation = ({state, descriptors, navigation}) => {
 export default AppBotomNavigation;
 
 const styles = StyleSheet.create({
-  container: {
+  appBotomNavWrapper: {
     flexDirection: 'row',
     backgroundColor: color.surface,
     justifyContent: 'space-around',

@@ -3,11 +3,9 @@ import {Image, TouchableOpacity, StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {color, fontConfig} from '../../../assets';
 
-const GameRoomControlInfo = ({logoImg, gameName, gameServerInfo}) => {
+const GameRoomControlInfo = ({onPress, logoImg, gameName, gameServerInfo}) => {
   return (
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={() => console.log('Clicked')}>
+    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
       <View style={styles.wrapper}>
         <Image source={logoImg} style={styles.gameLogoImg} />
         <View style={{marginLeft: 8}}>

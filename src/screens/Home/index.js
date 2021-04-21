@@ -21,7 +21,6 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <BaseTag tags={state.tags} onPress={_handlePressTag} />
         <PostContainer />
-        <GameRoomControl />
       </View>
     </>
   );
