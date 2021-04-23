@@ -1,14 +1,24 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {
+  Image,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {Divider, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color, fontConfig} from '../../assets';
 
 const {fontStylesheet} = fontConfig;
 
-const NotificationListContainer = ({notifications}) => {
+const NotificationListContainer = ({notifications, onRefresh, refreshing}) => {
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      refreshControl={
+        <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+      }>
       {notifications.map((notification, index) => (
         <View key={index} style={styles.notificationItem}>
           <View style={styles.notificationItemHeader}>
@@ -64,7 +74,7 @@ const NotificationListContainer = ({notifications}) => {
           </View>
         </View>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
