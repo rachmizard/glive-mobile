@@ -13,11 +13,11 @@ const PostsTab = () => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = () => {
     setRefreshing(true);
     setPosts(postsDivision);
     wait(1000).then(() => setRefreshing(false));
-  });
+  };
 
   return (
     <FlatList

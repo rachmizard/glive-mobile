@@ -9,12 +9,12 @@ const Channel = ({data}) => {
   return (
     <View style={styles.channelItem}>
       <Icon
-        style={{marginRight: 8}}
+        style={styles.channelIcon}
         name="volume-high"
         color={color.white}
         size={14}
       />
-      <View style={{flex: 1}}>
+      <View style={styles.channelBody}>
         <Text style={fontConfig.fontStylesheet.subtitle2}>
           {data.channelTitle} · {data.channelParticipants} Participants
         </Text>
@@ -36,5 +36,11 @@ export default Channel;
 const styles = StyleSheet.create({
   channelItem: {
     flexDirection: 'row',
+  },
+  channelIcon: {
+    marginRight: 8,
+  },
+  channelBody: {
+    flex: 1,
   },
 });

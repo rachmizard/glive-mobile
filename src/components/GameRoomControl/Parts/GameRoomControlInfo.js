@@ -8,7 +8,7 @@ const GameRoomControlInfo = ({onPress, logoImg, gameName, gameServerInfo}) => {
     <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
       <View style={styles.wrapper}>
         <Image source={logoImg} style={styles.gameLogoImg} />
-        <View style={{marginLeft: 8}}>
+        <View style={styles.gameInfo}>
           <Text style={styles.textHeading}>{gameName}</Text>
           <Text style={styles.textSubheading}>{gameServerInfo}</Text>
         </View>
@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 36 * 2,
+  },
+  gameInfo: {
+    marginLeft: 8,
   },
   textHeading: {
     ...fontConfig.fontStylesheet.subtitle2,

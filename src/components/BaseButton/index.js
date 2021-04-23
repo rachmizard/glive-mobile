@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {StyleSheet} from 'react-native';
 import {Button} from 'react-native-paper';
 import {color, fontConfig} from '../../assets';
 
@@ -81,5 +80,3 @@ BaseButton.propTypes = {
   disabled: PropTypes.bool,
   size: PropTypes.string,
 };
-
-const styles = StyleSheet.create({});

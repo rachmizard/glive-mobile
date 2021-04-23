@@ -10,7 +10,7 @@ const GameRoomControlAction = ({
   isAudio,
 }) => {
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={styles.gameRoomControlActionWrapper}>
       <IconButton
         animated={true}
         icon={isMute ? 'microphone-off' : 'microphone'}
@@ -31,4 +31,8 @@ const GameRoomControlAction = ({
 
 export default GameRoomControlAction;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  gameRoomControlActionWrapper: {
+    flexDirection: 'row',
+  },
+});

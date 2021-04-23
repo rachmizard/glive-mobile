@@ -10,9 +10,7 @@ const AppBarAction = ({title, navigation}) => {
   switch (title) {
     case 'Home':
       renderIcon = {
-        icon: () => (
-          <Image source={IconDirectMessage} style={{width: 24, height: 24}} />
-        ),
+        icon: () => <Image source={IconDirectMessage} style={styles.icon} />,
         onPress: () => navigation.navigate('DirectMessage'),
       };
       break;
@@ -32,4 +30,9 @@ const AppBarAction = ({title, navigation}) => {
 
 export default AppBarAction;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  icon: {
+    width: 24,
+    height: 24,
+  },
+});

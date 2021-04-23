@@ -12,12 +12,10 @@ const GameRoomControl = () => {
     isMute: true,
   });
 
-  const navigation = useNavigation();
-
   const animated = new Animated.Value(255);
   const duration = 500;
 
-  const _slideUp = () =>
+  const _slideUpAnimated = () =>
     Animated.sequence([
       Animated.timing(animated, {
         toValue: 0,
@@ -26,9 +24,14 @@ const GameRoomControl = () => {
       }),
     ]).start();
 
+  const navigation = useNavigation();
+
   useEffect(() => {
-    _slideUp();
-  }, [navigation]);
+    const _unsubscribe = navigation.addListener('focus', () =>
+      _slideUpAnimated(),
+    );
+    return _unsubscribe;
+  });
 
   const _toggleMicHandler = () => {
     setState({...state, isMute: !state.isMute});

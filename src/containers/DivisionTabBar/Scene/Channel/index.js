@@ -15,13 +15,13 @@ const ChannelTab = () => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = () => {
     setState({...state, refreshing: true});
     wait(1000).then(() => {
       setState({...state, refreshing: false});
       setState({...state, channels: channels});
     });
-  });
+  };
 
   return (
     <View style={styles.container}>

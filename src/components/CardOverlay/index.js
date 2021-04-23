@@ -29,7 +29,7 @@ const CardOverlay = ({
     if (overlay) {
       return (
         <LinearGradient
-          style={{borderRadius: 8}}
+          style={styles.linearContent}
           colors={colors}
           start={gradient.start}
           end={gradient.end}>
@@ -49,19 +49,15 @@ const CardOverlay = ({
       <View style={styles.card}>
         <RenderLinearGradient />
         <View style={styles.cardContent}>
-          <Text
-            style={[
-              styles.cardContentText,
-              {color: color.yellow, marginBottom: -3},
-            ]}>
+          <Text style={[styles.cardContentText, styles.tagText]}>
             {tagText}
           </Text>
           <Title style={styles.cardContentText}>{title}</Title>
-          <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+          <View style={styles.cardContentIcon}>
             <Icon
               name="account-multiple"
               color={color.white}
-              style={{marginRight: 8}}
+              style={styles.icon}
               size={18}
             />
             <Text style={[styles.cardContentText]}>{totalUser}</Text>
@@ -99,6 +95,20 @@ const styles = StyleSheet.create({
   },
   cardContentText: {
     ...fontConfig.fontStylesheet.subtitle2,
+  },
+  cardContentIcon: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  tagText: {
+    color: color.yellow,
+    marginBottom: -3,
+  },
+  icon: {
+    marginRight: 8,
+  },
+  linearContent: {
+    borderRadius: 8,
   },
 });
 

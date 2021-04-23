@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     color: color.black,
     borderRadius: 5,
     marginLeft: 8,
-    marginRight: key + 1 == length ? 8 : 0,
+    marginRight: key + 1 === length ? 8 : 0,
   }),
 });
 

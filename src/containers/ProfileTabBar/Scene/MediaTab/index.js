@@ -13,11 +13,11 @@ const MediaTabScene = props => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = () => {
     setRefreshing(true);
     setContents(medias);
     wait(1000).then(() => setRefreshing(false));
-  });
+  };
 
   return (
     <ScrollView

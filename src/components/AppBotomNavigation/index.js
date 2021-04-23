@@ -32,9 +32,11 @@ const AppBotomNavigation = ({state, descriptors, navigation}) => {
   }
 
   const renderBottomNav = () => {
-    if (Platform.OS === 'android' && !showKeyboard) return null;
+    if (Platform.OS === 'android' && !showKeyboard) {
+      return null;
+    }
     return (
-      <View style={{flexDirection: 'column'}}>
+      <View style={styles.appBottomNavContainer}>
         <GameRoomControl />
         <View style={styles.appBotomNavWrapper}>
           {state.routes.map((route, index) => {
@@ -89,6 +91,9 @@ const AppBotomNavigation = ({state, descriptors, navigation}) => {
 export default AppBotomNavigation;
 
 const styles = StyleSheet.create({
+  appBottomNavContainer: {
+    flexDirection: 'column',
+  },
   appBotomNavWrapper: {
     flexDirection: 'row',
     backgroundColor: color.surface,

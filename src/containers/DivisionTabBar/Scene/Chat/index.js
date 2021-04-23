@@ -14,13 +14,12 @@ const ChatTab = () => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
 
-  const onRefresh = React.useCallback(() => {
-    setState({...state, refreshing: true});
+  const onRefresh = () => {
     wait(1000).then(() => {
       setState({...state, refreshing: false});
       setState({...state, chats: chats});
     });
-  });
+  };
 
   return (
     <View style={styles.container}>

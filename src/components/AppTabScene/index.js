@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useWindowDimensions} from 'react-native';
+import {StyleSheet, useWindowDimensions} from 'react-native';
 import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
 import {color, fontConfig} from './../../assets';
 
@@ -18,7 +18,7 @@ const AppTabScene = ({lazy = true, routes, swipeEnabled = true, scenes}) => {
       {...props}
       indicatorContainerStyle={{backgroundColor: color.surface}}
       indicatorStyle={{backgroundColor: color.white}}
-      labelStyle={{...fontStylesheet.button, textTransform: 'capitalize'}}
+      labelStyle={{...fontStylesheet.button, ...styles.labelTextStyle}}
     />
   );
 
@@ -37,6 +37,12 @@ const AppTabScene = ({lazy = true, routes, swipeEnabled = true, scenes}) => {
 };
 
 export default AppTabScene;
+
+const styles = StyleSheet.create({
+  labelTextStyle: {
+    textTransform: 'capitalize',
+  },
+});
 
 AppTabScene.propTypes = {
   lazy: PropTypes.bool,

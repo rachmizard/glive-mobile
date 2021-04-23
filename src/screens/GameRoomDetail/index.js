@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {BaseButton, GameRoomImage} from '../../components';
 import AvailableRoomContainer from '../../containers/AvailableRoom';
 import {gameRooms} from './.././../mocks';
@@ -28,7 +28,7 @@ export default class GameRoomDetailScreen extends Component {
   render() {
     const {params} = this.props.route.params;
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>
           <View style={styles.gameRoomHeader}>
             <GameRoomImage name={params.name} image={params.img} size={64} />
@@ -40,7 +40,7 @@ export default class GameRoomDetailScreen extends Component {
             <BaseButton uppercase={false}>Join Gameroom</BaseButton>
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

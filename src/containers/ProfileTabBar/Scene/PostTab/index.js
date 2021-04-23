@@ -13,11 +13,11 @@ const PostTabScene = props => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = () => {
     setRefreshing(true);
     setPostAndReplies(postsAndReplies);
     wait(1000).then(() => setRefreshing(false));
-  });
+  };
 
   return (
     <FlatList

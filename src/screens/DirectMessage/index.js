@@ -30,7 +30,7 @@ export default class DirectMessageScreen extends Component {
 
   onRefresh() {
     this.setState({refreshing: true});
-    wait(1000).then(() => {
+    this.wait(1000).then(() => {
       this._handleRefreshChats();
       this.setState({refreshing: false});
     });
