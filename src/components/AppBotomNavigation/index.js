@@ -35,9 +35,7 @@ const AppBotomNavigation = ({state, descriptors, navigation}) => {
     if (Platform.OS === 'android' && !showKeyboard) return null;
     return (
       <View style={{flexDirection: 'column'}}>
-        <View>
-          <GameRoomControl />
-        </View>
+        <GameRoomControl />
         <View style={styles.appBotomNavWrapper}>
           {state.routes.map((route, index) => {
             const {options} = descriptors[route.key];
