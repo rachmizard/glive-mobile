@@ -1,37 +1,39 @@
-import {useNavigation} from '@react-navigation/core';
 import React, {useEffect, useState} from 'react';
-import {Animated} from 'react-native';
-import {StyleSheet, View} from 'react-native';
+import {Animated, StyleSheet, View} from 'react-native';
+
 import {color} from '../../assets';
-import {MonsterHunterWorld} from './../../assets/images/gameroom';
+import {MonsterHunterWorld} from '../../assets/images/gameroom';
 import {GameRoomControlInfo, GameRoomControlAction} from './Parts';
 
 const GameRoomControl = () => {
   const [state, setState] = useState({
     isAudio: true,
     isMute: true,
+    animated: new Animated.Value(255),
   });
 
-  const animated = new Animated.Value(255);
   const duration = 500;
 
-  const _slideUpAnimated = () =>
+  useEffect(() => {
     Animated.sequence([
-      Animated.timing(animated, {
+      Animated.timing(state.animated, {
         toValue: 0,
-        duration: duration,
+        duration,
         useNativeDriver: true,
       }),
     ]).start();
 
-  const navigation = useNavigation();
+    const slideDownAnimated = () =>
+      Animated.sequence([
+        Animated.timing(state.animated, {
+          toValue: 255,
+          duration,
+          useNativeDriver: true,
+        }),
+      ]).start();
 
-  useEffect(() => {
-    const _unsubscribe = navigation.addListener('focus', () =>
-      _slideUpAnimated(),
-    );
-    return _unsubscribe;
-  });
+    return () => slideDownAnimated();
+  }, [state.animated]);
 
   const _toggleMicHandler = () => {
     setState({...state, isMute: !state.isMute});
@@ -45,7 +47,7 @@ const GameRoomControl = () => {
     <Animated.View
       style={[
         styles.gameRoomControlWrapper,
-        {transform: [{translateY: animated}]},
+        {transform: [{translateY: state.animated}]},
       ]}>
       <View style={styles.gameRoomControlBody}>
         <GameRoomControlInfo

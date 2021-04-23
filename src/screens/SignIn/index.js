@@ -32,7 +32,7 @@ const SignInScreen = ({navigation}) => {
   };
 
   const onChangeEmail = e => {
-    let copy = {...state};
+    const copy = {...state};
 
     setState({...state, email: e});
 
@@ -109,7 +109,7 @@ const SignInScreen = ({navigation}) => {
               Login
             </BaseButton>
           </View>
-          <View style={{marginTop: 16}}>
+          <View style={styles.buttonSocialWrapper}>
             <ButtonSocial
               social="google"
               uppercase={false}
@@ -117,27 +117,15 @@ const SignInScreen = ({navigation}) => {
               Continue With Google
             </ButtonSocial>
           </View>
-          <View
-            style={{
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}>
+          <View style={styles.textInformationWrapper}>
             <Text
               onPress={() => navigation.navigate('SignUp')}
-              style={{
-                ...fontConfig.fontStylesheet.body2,
-                color: color.yellow,
-                marginTop: 24,
-              }}>
-              Don't have account? <Text>Register Now</Text>
+              style={styles.textInformation}>
+              Dont have account? <Text>Register Now</Text>
             </Text>
             <Text
               onPress={() => navigation.navigate('ResetPassword')}
-              style={{
-                ...fontConfig.fontStylesheet.body2,
-                color: color.yellow,
-                marginTop: 16,
-              }}>
+              style={styles.textInformation}>
               Forgot password? <Text>Reset Now</Text>
             </Text>
           </View>
@@ -164,5 +152,15 @@ const styles = StyleSheet.create({
   },
   signInFormControl: {
     marginBottom: 5,
+  },
+  buttonSocialWrapper: {marginTop: 16},
+  textInformationWrapper: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  textInformation: {
+    ...fontConfig.fontStylesheet.body2,
+    color: color.yellow,
+    marginTop: 16,
   },
 });

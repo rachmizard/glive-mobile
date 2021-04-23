@@ -24,15 +24,17 @@ const PostTabScene = props => {
       style={styles.container}
       data={postAndReplies}
       renderItem={({item}) => (
-        <Post post={item} renderAction={<PostAction post={item} />} />
+        <Post
+          post={item}
+          onPressDetailPost={() => alert('navigate to detail post')}
+          renderAction={<PostAction post={item} />}
+        />
       )}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
       keyExtractor={(item, index) => index}
-      ItemSeparatorComponent={() => (
-        <Divider style={{backgroundColor: color.greyLine, marginVertical: 8}} />
-      )}
+      ItemSeparatorComponent={() => <Divider style={styles.divider} />}
     />
   );
 };
@@ -44,4 +46,5 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 8,
   },
+  divider: {backgroundColor: color.greyLine, marginVertical: 8},
 });

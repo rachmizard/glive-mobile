@@ -55,8 +55,8 @@ ChatItem.defaultProps = {
 };
 
 ChatItem.propTypes = {
-  chat: PropTypes.object,
+  chat: PropTypes.objectOf(Object).isRequired,
   disabled: PropTypes.bool,
-  onPress: PropTypes.func,
+  onPress: PropTypes.func.isRequired,
   touchRippleColor: PropTypes.string,
 };

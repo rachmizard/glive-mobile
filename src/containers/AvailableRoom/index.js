@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import {Text} from 'react-native-paper';
 import {fontConfig} from '../../assets';
 import {ListRoom} from '../../components';
@@ -30,5 +29,3 @@ const AvailableRoomContainer = ({rooms}) => {
 };
 
 export default AvailableRoomContainer;
-
-const styles = StyleSheet.create({});

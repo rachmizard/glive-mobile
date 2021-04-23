@@ -6,7 +6,7 @@ import {
   Pubg,
   Osu,
   Apex,
-} from './../assets/images/gameroom';
+} from '../assets/images/gameroom';
 
 export default [
   {

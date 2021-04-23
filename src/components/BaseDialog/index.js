@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {Button, Paragraph, Dialog, Portal} from 'react-native-paper';
-import {color} from './../../assets';
+import {color} from '../../assets';
 
 const BaseDialog = ({
   visible,
@@ -50,12 +50,13 @@ BaseDialog.defaultProps = {
   visible: true,
   agreeText: 'Yes',
   dismissText: 'No',
+  onDismiss: null,
 };
 
 BaseDialog.propTypes = {
   visible: PropTypes.bool,
-  title: PropTypes.string,
-  content: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
   onDismiss: PropTypes.func,
   agreeText: PropTypes.string,
   dismissText: PropTypes.string,

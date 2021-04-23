@@ -3,8 +3,8 @@ import {
   configureFonts,
 } from 'react-native-paper';
 import {DefaultTheme as NavigationDefaultTheme} from '@react-navigation/native';
-import color from './../color';
-import fontConfig from './../font-config';
+import color from '../color';
+import fontConfig from '../font-config';
 
 export default {
   ...PaperDefaultTheme,

@@ -35,7 +35,7 @@ GameRoomImage.defaultProps = {
 };
 
 GameRoomImage.propTypes = {
-  name: PropTypes.string,
-  image: PropTypes.any,
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
   size: PropTypes.number,
 };

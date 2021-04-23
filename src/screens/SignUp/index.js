@@ -73,7 +73,6 @@ const SignUpScreen = ({navigation}) => {
       !state.errors.password.isError
     ) {
       navigation.replace('SuccessSignUp');
-      return;
     }
   };
 
@@ -150,12 +149,7 @@ const SignUpScreen = ({navigation}) => {
         </BaseButton>
         <Text
           onPress={() => navigation.navigate('SignIn')}
-          style={{
-            ...fontConfig.fontStylesheet.body2,
-            color: color.yellow,
-            marginTop: 24,
-            textAlign: 'center',
-          }}>
+          style={styles.textInformation}>
           Already have account? <Text>Sign In Now</Text>
         </Text>
       </View>
@@ -183,5 +177,11 @@ const styles = StyleSheet.create({
   },
   signUpButton: {
     flex: 1,
+  },
+  textInformation: {
+    ...fontConfig.fontStylesheet.body2,
+    color: color.yellow,
+    marginTop: 24,
+    textAlign: 'center',
   },
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {AppTabScene} from '../../components';
 import {PostTabScene, MediaTabScene, UpvoteTabScene} from './Scene';
 
@@ -20,5 +19,3 @@ const ProfileTabBarContainer = () => {
 };
 
 export default ProfileTabBarContainer;
-
-const styles = StyleSheet.create({});

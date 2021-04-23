@@ -4,7 +4,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {Appbar, Text, Badge} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {color, fontConfig} from './../../assets';
+import {color, fontConfig} from '../../assets';
 
 const AppBar = ({
   title,
@@ -73,18 +73,19 @@ const styles = StyleSheet.create({
   },
 });
 
-AppBar.propTypes = {
-  title: PropTypes.any,
-  titleIcon: PropTypes.any,
-  touchable: PropTypes.bool,
-  onPress: PropTypes.func,
-  onLongPress: PropTypes.func,
-  withBadge: PropTypes.any,
-  badgeCounter: PropTypes.any,
-};
-
 AppBar.defaultProps = {
   touchable: false,
   withBadge: false,
   badgeCounter: 0,
+  onLongPress: null,
+};
+
+AppBar.propTypes = {
+  title: PropTypes.string.isRequired,
+  titleIcon: PropTypes.string.isRequired,
+  touchable: PropTypes.bool,
+  onPress: PropTypes.func.isRequired,
+  onLongPress: PropTypes.func,
+  withBadge: PropTypes.bool,
+  badgeCounter: PropTypes.number,
 };

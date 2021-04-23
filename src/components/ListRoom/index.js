@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, RadioButton} from 'react-native-paper';
-import {color, fontConfig, theme} from '../../assets';
 import {StyleSheet, View} from 'react-native';
+import {color, fontConfig, theme} from '../../assets';
 
 const {roundness} = theme;
 const {fontStylesheet} = fontConfig;
@@ -42,8 +42,13 @@ const styles = StyleSheet.create({
   },
 });
 
+ListRoom.defaultProps = {
+  checked: false,
+  onPress: () => {},
+};
+
 ListRoom.propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   checked: PropTypes.bool,
   onPress: PropTypes.func,
 };

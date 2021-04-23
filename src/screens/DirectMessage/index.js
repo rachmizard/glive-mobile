@@ -21,12 +21,8 @@ export default class DirectMessageScreen extends Component {
   }
 
   componentDidMount() {
-    this.setState({chats: chatsDm, chatsFiltered: chatsDm});
+    this._handleRefreshChats();
   }
-
-  wait = timeout => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
 
   onRefresh() {
     this.setState({refreshing: true});
@@ -36,25 +32,31 @@ export default class DirectMessageScreen extends Component {
     });
   }
 
+  wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
+  _handleNavigateChatScreen = userId => {
+    const {navigation} = this.props;
+    navigation.navigate('Chat', {userId});
+  };
+
   _handleRefreshChats() {
-    this.setState({chats: chatsDm});
+    this.setState({chats: chatsDm, chatsFiltered: chatsDm});
   }
 
   _handleFilterChats(searchValue) {
-    this.setState({
-      chatsFiltered: this.state.chats.filter(
+    this.setState(state => ({
+      chatsFiltered: state.chats.filter(
         i =>
           i.userFullName.toLowerCase().includes(searchValue.toLowerCase()) ||
           i.userName.toLowerCase().includes(searchValue.toLowerCase()),
       ),
-    });
+    }));
   }
 
-  _handleNavigateChatScreen = userId => {
-    this.props.navigation.navigate('Chat', {userId: userId});
-  };
-
   render() {
+    const {refreshing, chatsFiltered} = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.searchDmWrapper}>
@@ -76,17 +78,16 @@ export default class DirectMessageScreen extends Component {
               <TextInput.Icon
                 name="magnify"
                 size={24}
-                style={{alignItems: 'center'}}
                 color={color.background}
               />
             }
           />
         </View>
         <ChatDirectMessageListContainer
-          refreshing={this.state.refreshing}
+          refreshing={refreshing}
           onNavigateChat={this._handleNavigateChatScreen}
           onRefreshChat={this._handleRefreshChats}
-          chats={this.state.chatsFiltered}
+          chats={chatsFiltered}
         />
       </View>
     );

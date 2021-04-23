@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Alert, StyleSheet, SafeAreaView} from 'react-native';
 import {BaseTag} from '../../components';
 import {PostContainer} from '../../containers';
-import {tags, posts} from './../../mocks';
+import {tags, posts} from '../../mocks';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -18,16 +18,11 @@ export default class HomeScreen extends Component {
     this.fetchData();
   }
 
-  fetchData() {
-    this.setState({tags: tags});
-    this.setState({postContents: posts});
-  }
-
   _handlePressTag = index => {
-    this.setState({
-      ...this.state,
-      ...(this.state.tags[index].active = !this.state.tags[index].active),
-    });
+    const {tags} = this.state;
+    const copyTags = [...tags];
+    copyTags[index].active = !copyTags[index].active;
+    this.setState(state => [...state.tags, copyTags]);
   };
 
   wait = timeout => {
@@ -47,7 +42,8 @@ export default class HomeScreen extends Component {
   };
 
   _handlePressRetweet = ({id}) => {
-    const find = this.state.postContents.find(i => i.id === id);
+    const {postContents} = this.state;
+    const find = postContents.find(i => i.id === id);
     if (find) {
       find.isRetweeted = !find.isRetweeted;
       this.setState(state => [...state.postContents, find]);
@@ -55,7 +51,8 @@ export default class HomeScreen extends Component {
   };
 
   _handlePressUpvote = ({id}) => {
-    const find = this.state.postContents.find(i => i.id === id);
+    const {postContents} = this.state;
+    const find = postContents.find(i => i.id === id);
     if (find) {
       find.isUpvote = !find.isUpvote;
       this.setState(state => [...state.postContents, find]);
@@ -66,14 +63,20 @@ export default class HomeScreen extends Component {
     Alert.alert('Navigate', `Pressed post id ${id}`);
   };
 
+  fetchData() {
+    this.setState({tags});
+    this.setState({postContents: posts});
+  }
+
   render() {
+    const {tags, refreshing, postContents} = this.state;
     return (
       <SafeAreaView style={styles.container}>
-        <BaseTag tags={this.state.tags} onPress={this._handlePressTag} />
+        <BaseTag tags={tags} onPress={this._handlePressTag} />
         <PostContainer
-          refreshing={this.state.refreshing}
+          refreshing={refreshing}
           onRefresh={this.onRefresh}
-          postContents={this.state.postContents}
+          postContents={postContents}
           onPressDetailPost={this._handleNavigatePostDetail}
           onPressComment={this._handlePressComment}
           onPressRetweet={this._handlePressRetweet}

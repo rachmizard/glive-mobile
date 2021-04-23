@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
-import {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
+
 import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
 import {Title} from 'react-native-paper';
 import GameRoomItem from '../../components/GameRoomItem';
-import {color, fontConfig} from './../../assets';
+import {color, fontConfig} from '../../assets';
 
 const GameRoomContainer = ({
   onNavigateGameRoom,
@@ -25,7 +25,7 @@ const GameRoomContainer = ({
     <ActivityIndicator
       color={color.white}
       size={30}
-      style={{alignItems: 'center', height: 100}}
+      style={styles.activityIndicator}
     />
   );
 
@@ -70,4 +70,5 @@ const styles = StyleSheet.create({
     height: 100,
     paddingHorizontal: 8,
   },
+  activityIndicator: {alignItems: 'center', height: 100},
 });

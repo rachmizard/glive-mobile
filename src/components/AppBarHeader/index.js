@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import AppBarAction from '../AppBarAction';
-import {color, fontConfig} from './../../assets';
+import {color, fontConfig} from '../../assets';
 
 const headerCentered = title => {
   switch (title) {

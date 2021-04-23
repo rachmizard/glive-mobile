@@ -39,7 +39,7 @@ const AppBotomNavigation = ({state, descriptors, navigation}) => {
       <View style={styles.appBottomNavContainer}>
         <GameRoomControl />
         <View style={styles.appBotomNavWrapper}>
-          {state.routes.map((route, index) => {
+          {state.routes.map((route, i) => {
             const {options} = descriptors[route.key];
             const label =
               options.tabBarLabel !== undefined
@@ -48,7 +48,7 @@ const AppBotomNavigation = ({state, descriptors, navigation}) => {
                 ? options.title
                 : route.name;
 
-            const isFocused = state.index === index;
+            const isFocused = state.index === i;
 
             const onPress = () => {
               const event = navigation.emit({
@@ -71,7 +71,7 @@ const AppBotomNavigation = ({state, descriptors, navigation}) => {
 
             return (
               <AppBottomTabItem
-                key={index}
+                key={i}
                 options={options}
                 onPress={onPress}
                 onLongPress={onLongPress}

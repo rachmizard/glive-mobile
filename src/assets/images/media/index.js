@@ -1,3 +1,3 @@
 import Media1 from './media-1.png';
 
-export {Media1};
+export default Media1;

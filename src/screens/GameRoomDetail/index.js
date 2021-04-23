@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {BaseButton, GameRoomImage} from '../../components';
 import AvailableRoomContainer from '../../containers/AvailableRoom';
-import {gameRooms} from './.././../mocks';
+import {gameRooms} from '../../mocks';
 
 export default class GameRoomDetailScreen extends Component {
   constructor(props) {
@@ -13,12 +13,14 @@ export default class GameRoomDetailScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.navigation.setOptions({title: 'Gameroom'});
+    const {navigation} = this.props;
+    navigation.setOptions({title: 'Gameroom'});
     this.fetchRoom();
   }
 
   fetchRoom() {
-    const {params} = this.props.route.params;
+    const {route} = this.props;
+    const {params} = route.params;
     const findGameId = gameRooms.find(game => game.id === params.id);
     if (findGameId) {
       this.setState({rooms: findGameId.rooms});
@@ -26,18 +28,22 @@ export default class GameRoomDetailScreen extends Component {
   }
 
   render() {
-    const {params} = this.props.route.params;
+    const {route} = this.props;
+    const {params} = route.params;
+    const {rooms} = this.state;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>
           <View style={styles.gameRoomHeader}>
             <GameRoomImage name={params.name} image={params.img} size={64} />
             <View style={styles.availableRoomWrapper}>
-              <AvailableRoomContainer rooms={this.state.rooms} />
+              <AvailableRoomContainer rooms={rooms} />
             </View>
           </View>
           <View style={styles.joinGameRoomBtn}>
-            <BaseButton uppercase={false}>Join Gameroom</BaseButton>
+            <BaseButton uppercase={false} onPress={() => alert('Join')}>
+              Join Gameroom
+            </BaseButton>
           </View>
         </View>
       </SafeAreaView>

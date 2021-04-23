@@ -16,38 +16,39 @@ export default class FollowerRequestScreen extends Component {
     this.fetchFollowerRequest();
   }
 
-  fetchFollowerRequest() {
-    this.setState({...this.state.requests, requests: followerRequests});
-  }
-
   onRefresh() {
-    this.setState({...this.state, refreshing: true});
+    this.setState({refreshing: true});
     setTimeout(() => {
-      this.setState({...this.state, requests: followerRequests});
-      this.setState({...this.state, refreshing: false});
+      this.setState({requests: followerRequests});
+      this.setState({refreshing: false});
     }, 1000);
   }
 
-  _handleAcceptRequest(id) {
+  _handleAcceptRequest = id => {
     Alert.alert('Accepted');
+  };
+
+  fetchFollowerRequest() {
+    this.setState({requests: followerRequests});
   }
 
   _handleRejectRequest(id) {
-    Alert.alert('Rejected');
+    Alert.alert(`Rejected ${id}`);
   }
 
   render() {
+    const {refreshing, requests} = this.state;
     return (
       <View style={styles.container}>
         <FlatList
           refreshControl={
             <RefreshControl
               onRefresh={() => this.onRefresh()}
-              refreshing={this.state.refreshing}
+              refreshing={refreshing}
             />
           }
-          contentContainerStyle={{marginTop: 16}}
-          data={this.state.requests}
+          contentContainerStyle={styles.containerFlatList}
+          data={requests}
           renderItem={({item, index}) => (
             <FollowerRequestItemContainer
               onPressAccept={() => this._handleAcceptRequest(item.id)}
@@ -67,5 +68,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 16,
+  },
+  containerFlatList: {
+    marginTop: 16,
   },
 });

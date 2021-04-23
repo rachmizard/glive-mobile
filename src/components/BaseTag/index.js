@@ -48,6 +48,10 @@ const styles = StyleSheet.create({
   }),
 });
 
+BaseTag.defaultProps = {
+  tags: [],
+};
+
 BaseTag.propTypes = {
-  tags: PropTypes.array,
+  tags: PropTypes.arrayOf(Array),
 };

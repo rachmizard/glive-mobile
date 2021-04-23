@@ -5,33 +5,37 @@ import NotificationListContainer from '../../containers/NotificationList';
 import {notifications} from '../../mocks';
 
 export default class NotificationScreen extends Component {
-  state = {
-    notifications: [],
-    refreshing: false,
-  };
-
-  componentDidMount() {
-    this.fetchData();
+  constructor(props) {
+    super(props);
+    this.state = {
+      notifications: [],
+      refreshing: false,
+    };
   }
 
-  fetchData() {
-    this.setState({notifications: notifications});
+  static getDerivedStateFromProps(props, state) {
+    return {
+      notifications,
+    };
   }
 
-  wait(timeout) {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  }
+  componentDidMount() {}
 
   onRefresh() {
     this.setState({refreshing: true});
     this.wait(1000).then(() => {
-      this.fetchData();
+      this.setState({notifications});
       this.setState({refreshing: false});
     });
   }
 
+  wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
   render() {
     const {navigation} = this.props;
+    const {refreshing, notifications} = this.state;
     return (
       <SafeAreaView style={styles.container}>
         <AppBar
@@ -43,9 +47,9 @@ export default class NotificationScreen extends Component {
           onPress={() => navigation.navigate('FollowerRequest')}
         />
         <NotificationListContainer
-          notifications={this.state.notifications}
-          onRefresh={this.onRefresh.bind(this)}
-          refreshing={this.state.refreshing}
+          notifications={notifications}
+          onRefresh={() => this.onRefresh()}
+          refreshing={refreshing}
         />
       </SafeAreaView>
     );

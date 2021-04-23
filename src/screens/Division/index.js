@@ -5,9 +5,12 @@ import DivisionInfoContainer from '../../containers/DivisionInfo';
 import DivisionTabBarContainer from '../../containers/DivisionTabBar';
 
 export default class DivisionScreen extends Component {
-  state = {
-    division: {},
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      division: {},
+    };
+  }
 
   componentDidMount() {
     const {navigation, route} = this.props;
