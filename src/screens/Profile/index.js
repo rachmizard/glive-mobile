@@ -3,11 +3,11 @@ import {StyleSheet, View} from 'react-native';
 import ProfileCardContainer from '../../containers/ProfileCard';
 import ProfileTabBarContainer from '../../containers/ProfileTabBar';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.profileCardWrapper}>
-        <ProfileCardContainer />
+        <ProfileCardContainer navigation={navigation} />
       </View>
       <ProfileTabBarContainer />
     </View>

@@ -1,8 +1,6 @@
 export const stringLimit = string => {
   const limit = 18;
-  if (string.length <= 25) {
-    return string;
-  }
+  if (string.length <= 25) return string;
   return string.substring(0, limit).concat('..');
 };
 

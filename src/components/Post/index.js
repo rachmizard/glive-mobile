@@ -136,8 +136,12 @@ const styles = StyleSheet.create({
   },
 });
 
+Post.defaultProps = {
+  onPressDetailPost: () => {},
+};
+
 Post.propTypes = {
   post: PropTypes.objectOf(Object).isRequired,
-  onPressDetailPost: PropTypes.func.isRequired,
+  onPressDetailPost: PropTypes.func,
   renderAction: PropTypes.node.isRequired,
 };

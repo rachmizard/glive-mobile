@@ -6,7 +6,7 @@ import UserProfile from '../../assets/images/user-profile-pict.png';
 import {fontConfig} from '../../assets';
 import {BaseButton} from '../../components';
 
-const ProfileCardContainer = () => {
+const ProfileCardContainer = ({navigation}) => {
   const {fontStylesheet} = fontConfig;
 
   return (
@@ -43,7 +43,7 @@ const ProfileCardContainer = () => {
           </View>
           <BaseButton
             uppercase={false}
-            onPress={() => alert('Navigate Edit profile')}
+            onPress={() => navigation.navigate('ProfileEdit')}
             size="small"
             mode="outlined">
             Edit Profile

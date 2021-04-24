@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Image, View, TouchableOpacity} from 'react-native';
 import {Text} from 'react-native-paper';
-import {stringLimit} from '../../constants/helper';
+import {stringLimit} from '../../utils/helper';
 import {fontConfig} from '../../assets';
 
 const {fontStylesheet} = fontConfig;
