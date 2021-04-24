@@ -27,5 +27,6 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'no-alert': 'off',
     'class-methods-use-this': 'off',
+    'react/forbid-prop-types': ['error', {forbid: ['array', 'object']}],
   },
 };

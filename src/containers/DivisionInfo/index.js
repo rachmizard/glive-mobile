@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   divisionInfoWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: 80,
   },
   divisionInfoIcon: {
     flexDirection: 'row',

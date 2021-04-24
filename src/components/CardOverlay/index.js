@@ -118,7 +118,7 @@ CardOverlay.propTypes = {
   end: PropTypes.objectOf(Object),
   tagText: PropTypes.string,
   totalUser: PropTypes.number,
-  img: PropTypes.string.isRequired,
+  img: PropTypes.any.isRequired,
   title: PropTypes.string,
   overlay: PropTypes.bool,
   onPress: PropTypes.func,
