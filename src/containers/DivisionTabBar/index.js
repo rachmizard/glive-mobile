@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {AppTabScene} from '../../components';
 import {PostScene, ChatScene, ChannelScene} from './Scene';
 
@@ -20,5 +19,3 @@ const DivisionTabBarContainer = () => {
 };
 
 export default DivisionTabBarContainer;
-
-const styles = StyleSheet.create({});

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Image, View} from 'react-native';
 import {Text, Caption} from 'react-native-paper';
-import {color, fontConfig, theme} from './../../assets';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {color, fontConfig} from '../../assets';
 import BaseSliderImage from '../BaseSliderImage';
 
 const {fontStylesheet} = fontConfig;
@@ -54,8 +54,8 @@ export default Post;
 
 const PostHeader = ({name, userPict, lastHour, userName}) => (
   <View style={styles.postHeader}>
-    <View style={{marginRight: 8}}>
-      <Image source={userPict} style={styles.postUserImg} />
+    <View style={styles.postUserImg}>
+      <Image source={userPict} style={styles.img} />
     </View>
     <View style={styles.postUserIdentity}>
       <Text style={fontStylesheet.subtitle1}>
@@ -104,6 +104,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   postUserImg: {
+    marginRight: 8,
+  },
+  img: {
     height: 38,
     width: 38,
     borderRadius: 38 * 2,
@@ -133,8 +136,12 @@ const styles = StyleSheet.create({
   },
 });
 
+Post.defaultProps = {
+  onPressDetailPost: () => {},
+};
+
 Post.propTypes = {
-  post: PropTypes.object,
+  post: PropTypes.objectOf(Object).isRequired,
   onPressDetailPost: PropTypes.func,
-  renderAction: PropTypes.node,
+  renderAction: PropTypes.node.isRequired,
 };

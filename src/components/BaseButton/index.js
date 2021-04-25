@@ -13,10 +13,10 @@ const BaseButton = ({
   disabled,
   size,
 }) => {
-  let style = [];
+  const style = [];
   let colorButton = color.greyDark;
   let contentStyle = {height: 48, justifyContent: 'center'};
-  let labelStyle = [fontConfig.fontStylesheet.button];
+  const labelStyle = [fontConfig.fontStylesheet.button];
 
   if (size === 'small') {
     contentStyle = {...contentStyle, height: 36};
@@ -69,12 +69,13 @@ BaseButton.defaultProps = {
   mode: 'contained',
   disabled: false,
   size: 'medium',
+  onLongPress: null,
 };
 
 BaseButton.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.node.isRequired,
   mode: PropTypes.string,
-  onPress: PropTypes.func,
+  onPress: PropTypes.func.isRequired,
   onLongPress: PropTypes.func,
   uppercase: PropTypes.bool,
   disabled: PropTypes.bool,

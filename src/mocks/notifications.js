@@ -1,4 +1,4 @@
-import UserPicture from './../assets/images/user-picture.png';
+import UserPicture from '../assets/images/user-picture.png';
 
 export default [
   {

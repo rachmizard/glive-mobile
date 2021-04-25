@@ -1,12 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {RefreshControl, ScrollView, StyleSheet, View} from 'react-native';
-import {useState} from 'react/cjs/react.development';
 import {ChatUser} from '../../../../components';
-import {chats} from './../../../../mocks';
+import {chats} from '../../../../mocks';
 
 const ChatTab = () => {
   const [state, setState] = useState({
-    chats: chats,
+    chats,
     refreshing: false,
   });
 
@@ -17,7 +16,7 @@ const ChatTab = () => {
   const onRefresh = () => {
     wait(1000).then(() => {
       setState({...state, refreshing: false});
-      setState({...state, chats: chats});
+      setState({...state, chats});
     });
   };
 

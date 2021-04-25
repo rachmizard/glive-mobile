@@ -10,7 +10,7 @@ import {TextInput} from 'react-native-paper';
 import {color} from '../../assets';
 import {BaseTextInput, ChatUser} from '../../components';
 import {chatsDm} from '../../mocks';
-import userPicture from './../../assets/images/user-1.png';
+import userPicture from '../../assets/images/user-1.png';
 
 export default class ChatScreen extends Component {
   constructor(props) {
@@ -28,42 +28,18 @@ export default class ChatScreen extends Component {
   }
 
   componentDidMount() {
-    const {userId} = this.props.route.params;
-    const findUser = chatsDm.find(i => i.userId === userId);
-    this.setState({chats: findUser.chats});
-    this.props.navigation.setOptions({title: findUser.userName});
-  }
-
-  wait(timeout) {
-    return new Promise(resolve => setTimeout(resolve, timeout));
+    this.fetchData();
   }
 
   async onRefresh() {
+    const {route} = this.props;
     this.setState({refreshing: true});
     await this.wait(1000).then(() => {
-      const {userId} = this.props.route.params;
+      const {userId} = route.params;
       const findUser = chatsDm.find(i => i.userId === userId);
       this.setState({refreshing: false});
       this.setState({chats: findUser.chats});
     });
-  }
-
-  _handleSendMessage() {
-    if (!this.state.chatText) {
-      return;
-    }
-    const payload = {
-      ...this.state.user,
-      chatText: this.state.chatText,
-      lastChat: '2s',
-    };
-    this.setState({chats: [...this.state.chats, payload]});
-    this.setState({chatText: ''});
-    this.scrollToBottom();
-  }
-
-  scrollToBottom() {
-    this.ref.current.scrollToEnd({animated: true});
   }
 
   onChangeMessage(text) {
@@ -72,7 +48,39 @@ export default class ChatScreen extends Component {
     });
   }
 
+  wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
+  fetchData() {
+    const {route, navigation} = this.props;
+    const {params} = route;
+    const findUser = chatsDm.find(i => i.userId === params.userId);
+    this.setState({chats: findUser.chats});
+    navigation.setOptions({title: findUser.userName});
+  }
+
+  scrollToBottom() {
+    this.ref.current.scrollToEnd({animated: true});
+  }
+
+  _handleSendMessage() {
+    const {chatText, user} = this.state;
+    if (!chatText) {
+      return;
+    }
+    const payload = {
+      ...user,
+      chatText,
+      lastChat: '2s',
+    };
+    this.setState(state => ({chats: [...state.chats, payload]}));
+    this.setState({chatText: ''});
+    this.scrollToBottom();
+  }
+
   render() {
+    const {refreshing, chats, chatText} = this.state;
     return (
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.chatWrapper}>
@@ -81,13 +89,11 @@ export default class ChatScreen extends Component {
             refreshControl={
               <RefreshControl
                 onRefresh={() => this.onRefresh()}
-                refreshing={this.state.refreshing}
+                refreshing={refreshing}
               />
             }>
-            {this.state.chats &&
-              this.state.chats.map((item, key) => (
-                <ChatUser key={key} chat={item} />
-              ))}
+            {chats &&
+              chats.map((item, key) => <ChatUser key={key} chat={item} />)}
           </ScrollView>
         </View>
         <View style={styles.textInputWrapper}>
@@ -100,11 +106,11 @@ export default class ChatScreen extends Component {
             placeholder="Start a message .."
             roundness={0}
             iconPosition="right"
-            value={this.state.chatText}
+            value={chatText}
             icon={
               <TextInput.Icon
                 onPress={() => this._handleSendMessage()}
-                name={'send'}
+                name="send"
                 color={color.greyLine}
               />
             }

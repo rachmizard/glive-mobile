@@ -1,5 +1,6 @@
-import userPicture from './../assets/images/user-picture.png';
-import Me from './../assets/images/user-profile-pict.png';
+import userPicture from '../assets/images/user-picture.png';
+import Me from '../assets/images/user-profile-pict.png';
+
 export default [
   {
     userImg: userPicture,

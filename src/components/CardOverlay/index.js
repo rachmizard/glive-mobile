@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Title, Text} from 'react-native-paper';
-import {color, fontConfig} from '../../assets';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {color, fontConfig} from '../../assets';
 
 const CardOverlay = ({
   colors,
@@ -19,10 +19,10 @@ const CardOverlay = ({
   onLongPress,
   touchable,
 }) => {
-  let gradient = {
-    colors: colors,
-    start: start,
-    end: end,
+  const gradient = {
+    colors,
+    start,
+    end,
   };
 
   const RenderLinearGradient = () => {
@@ -113,12 +113,12 @@ const styles = StyleSheet.create({
 });
 
 CardOverlay.propTypes = {
-  colors: PropTypes.array,
-  start: PropTypes.object,
-  end: PropTypes.object,
+  colors: PropTypes.arrayOf(Array),
+  start: PropTypes.objectOf(Object),
+  end: PropTypes.objectOf(Object),
   tagText: PropTypes.string,
   totalUser: PropTypes.number,
-  img: PropTypes.any,
+  img: PropTypes.any.isRequired,
   title: PropTypes.string,
   overlay: PropTypes.bool,
   onPress: PropTypes.func,
@@ -132,4 +132,9 @@ CardOverlay.defaultProps = {
   end: {x: 1, y: 1},
   overlay: false,
   touchable: false,
+  title: '',
+  tagText: '',
+  totalUser: 0,
+  onPress: () => {},
+  onLongPress: () => {},
 };

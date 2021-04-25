@@ -1,8 +1,8 @@
 import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {Appbar} from 'react-native-paper';
-import IconDirectMessage from './../../assets/images/icon-send.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconDirectMessage from '../../assets/images/icon-send.png';
 import {color} from '../../assets';
 
 const AppBarAction = ({title, navigation}) => {
@@ -31,8 +31,5 @@ const AppBarAction = ({title, navigation}) => {
 export default AppBarAction;
 
 const styles = StyleSheet.create({
-  icon: {
-    width: 24,
-    height: 24,
-  },
+  icon: {width: 24, height: 24},
 });

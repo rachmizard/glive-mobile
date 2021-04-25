@@ -19,6 +19,7 @@ const ExploreDivisionContainer = ({onNavigateDivision, exploreDivisions}) => {
           textInputColor={color.background}
           focusColor={color.black}
           iconPosition="right"
+          onChangeText={() => console.log('test')}
           icon={
             <TextInput.Icon
               name={() => <Icon name="magnify" size={24} color={color.black} />}

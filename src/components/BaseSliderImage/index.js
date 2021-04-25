@@ -87,7 +87,7 @@ BaseSliderImage.defaultProps = {
 };
 
 BaseSliderImage.propTypes = {
-  images: PropTypes.array,
+  images: PropTypes.arrayOf(Array),
   activeColor: PropTypes.string,
   unactiveColor: PropTypes.string,
 };

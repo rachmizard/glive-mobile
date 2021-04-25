@@ -7,7 +7,7 @@ import {channels} from '../../../../mocks';
 
 const ChannelTab = () => {
   const [state, setState] = useState({
-    channels: channels,
+    channels,
     refreshing: false,
   });
 
@@ -19,7 +19,7 @@ const ChannelTab = () => {
     setState({...state, refreshing: true});
     wait(1000).then(() => {
       setState({...state, refreshing: false});
-      setState({...state, channels: channels});
+      setState({...state, channels});
     });
   };
 
@@ -36,11 +36,7 @@ const ChannelTab = () => {
           data={state.channels}
           renderItem={({item, index}) => <Channel key={index} data={item} />}
           keyExtractor={(item, index) => index}
-          ItemSeparatorComponent={() => (
-            <Divider
-              style={{backgroundColor: color.greyLine, marginVertical: 8}}
-            />
-          )}
+          ItemSeparatorComponent={() => <Divider style={styles.divider} />}
         />
       </View>
     </View>
@@ -60,4 +56,5 @@ const styles = StyleSheet.create({
   channelItem: {
     flexDirection: 'row',
   },
+  divider: {backgroundColor: color.greyLine, marginVertical: 8},
 });

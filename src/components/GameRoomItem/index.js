@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Image, View, TouchableOpacity} from 'react-native';
 import {Text} from 'react-native-paper';
-import {stringLimit} from './../../constants/helper';
-import {fontConfig} from './../../assets';
+import {stringLimit} from '../../utils/helper';
+import {fontConfig} from '../../assets';
 
 const {fontStylesheet} = fontConfig;
 
@@ -46,10 +46,11 @@ const styles = StyleSheet.create({
 
 GameRoomItem.defaultProps = {
   size: 64,
+  onPress: () => {},
 };
 
 GameRoomItem.propTypes = {
-  item: PropTypes.object,
+  item: PropTypes.objectOf(Object).isRequired,
   size: PropTypes.number,
   onPress: PropTypes.func,
 };

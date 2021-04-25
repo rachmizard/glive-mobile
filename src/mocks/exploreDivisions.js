@@ -2,7 +2,7 @@ import {
   ExploreDiv1,
   ExploreDiv2,
   ExploreDiv3,
-} from './../assets/images/explore-division';
+} from '../assets/images/explore-division';
 
 export default [
   {

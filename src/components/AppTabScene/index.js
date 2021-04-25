@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, useWindowDimensions} from 'react-native';
 import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
-import {color, fontConfig} from './../../assets';
+import {color, fontConfig} from '../../assets';
 
-const AppTabScene = ({lazy = true, routes, swipeEnabled = true, scenes}) => {
+const AppTabScene = ({lazy, routes, swipeEnabled, scenes}) => {
   const {fontStylesheet} = fontConfig;
 
   const [index, setIndex] = React.useState(0);
@@ -44,9 +44,14 @@ const styles = StyleSheet.create({
   },
 });
 
+AppTabScene.defaultProps = {
+  lazy: true,
+  swipeEnabled: true,
+};
+
 AppTabScene.propTypes = {
   lazy: PropTypes.bool,
-  routes: PropTypes.arrayOf(Object),
-  scenes: PropTypes.object,
+  routes: PropTypes.arrayOf(Object).isRequired,
+  scenes: PropTypes.objectOf(Object).isRequired,
   swipeEnabled: PropTypes.bool,
 };

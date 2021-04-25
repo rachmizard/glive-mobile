@@ -25,7 +25,7 @@ export default class ResetPasswordScreen extends Component {
   }
 
   _onChangeEmail = email => {
-    this.setState({email: email});
+    this.setState({email});
 
     if (!email.includes('@')) {
       this.setState(state => ({
@@ -47,7 +47,9 @@ export default class ResetPasswordScreen extends Component {
   };
 
   _handleSubmitResetPassword() {
-    if (!this.state.email) {
+    const {email} = this.state;
+    const {navigation} = this.props;
+    if (!email) {
       this.setState(state => ({
         errors: {
           ...state.errors,
@@ -60,7 +62,7 @@ export default class ResetPasswordScreen extends Component {
       return;
     }
 
-    if (!this.state.email.includes('@')) {
+    if (!email.includes('@')) {
       this.setState(state => ({
         errors: {
           ...state.errors,
@@ -75,10 +77,11 @@ export default class ResetPasswordScreen extends Component {
     this.setState({email: ''});
 
     Alert.alert('Reset Password', 'Successfully reset password');
-    this.props.navigation.navigate('SignIn');
+    navigation.navigate('SignIn');
   }
 
   render() {
+    const {errors} = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.titleWrapper}>
@@ -94,12 +97,12 @@ export default class ResetPasswordScreen extends Component {
               label="Email"
               autoCompleteType="off"
               onChangeText={this._onChangeEmail}
-              isError={this.state.errors.email.isError}>
+              isError={errors.email.isError}>
               <HelperText
                 type="error"
                 theme={{colors: {error: color.yellow}}}
-                visible={this.state.errors.email.isError}>
-                {this.state.errors.email.message}
+                visible={errors.email.isError}>
+                {errors.email.message}
               </HelperText>
             </BaseTextInput>
           </View>

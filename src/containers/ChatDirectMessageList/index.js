@@ -21,11 +21,7 @@ const ChatDirectMessageListContainer = ({
           <ChatItem onPress={() => onNavigateChat(item.userId)} chat={item} />
         )}
         keyExtractor={(item, index) => index}
-        ItemSeparatorComponent={() => (
-          <Divider
-            style={{backgroundColor: color.greyLine, marginVertical: 8}}
-          />
-        )}
+        ItemSeparatorComponent={() => <Divider style={styles.dividerChat} />}
       />
     </View>
   );
@@ -36,6 +32,10 @@ export default ChatDirectMessageListContainer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginVertical: 8,
+  },
+  dividerChat: {
+    backgroundColor: color.greyLine,
     marginVertical: 8,
   },
 });

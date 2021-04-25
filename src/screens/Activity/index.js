@@ -13,86 +13,82 @@ export default class ActivityScreen extends Component {
     super(props);
     this.state = {
       isLoadingGameRoom: false,
-      isLoadingYourDivision: false,
-      isLoadingExploreDivision: false,
       refreshing: false,
       gameRooms: [],
       yourDivisions: [],
       exploreDivisions: [],
     };
+
+    this.onRefresh = this.onRefresh.bind(this);
   }
 
   componentDidMount() {
     this.onRefresh();
   }
 
-  wait = timeout => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
-
   onRefresh() {
     this.setState({
       isLoadingGameRoom: true,
-      isLoadingYourDivision: true,
-      isLoadingExploreDivision: true,
       refreshing: true,
     });
     this.wait(650).then(() => {
       this.setState({
-        gameRooms: gameRooms,
-        yourDivisions: yourDivisions,
-        exploreDivisions: exploreDivisions,
+        gameRooms,
+        yourDivisions,
+        exploreDivisions,
       });
       this.setState({
         isLoadingGameRoom: false,
-        isLoadingYourDivision: false,
-        isLoadingExploreDivision: false,
         refreshing: false,
       });
     });
   }
 
   _handleNavigateDivision = division => {
-    this.props.navigation.navigate('Division', {division: division});
+    const {navigation} = this.props;
+    navigation.navigate('Division', {division});
   };
 
   _handleNavigateGameRoom = gameRoom => {
-    this.props.navigation.navigate('GameRoomDetail', {params: gameRoom});
+    const {navigation} = this.props;
+    navigation.navigate('GameRoomDetail', {params: gameRoom});
+  };
+
+  wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
   };
 
   render() {
     const {navigation} = this.props;
+    const {
+      refreshing,
+      isLoadingGameRoom,
+      gameRooms,
+      yourDivisions,
+      exploreDivisions,
+    } = this.state;
 
     return (
       <ScrollView
         style={styles.container}
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this.onRefresh.bind(this)}
-          />
+          <RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />
         }>
         <GameRoomContainer
           onNavigateGameRoom={this._handleNavigateGameRoom}
           navigation={navigation}
-          isLoading={this.state.isLoadingGameRoom}
-          gameRooms={this.state.gameRooms}
+          isLoading={isLoadingGameRoom}
+          gameRooms={gameRooms}
         />
         <YourDivisionContainer
           navigation={navigation}
-          yourDivisions={this.state.yourDivisions}
+          yourDivisions={yourDivisions}
         />
-        <Divider
-          style={{
-            marginVertical: 8,
-            borderColor: '#4F4F4F',
-            borderWidth: 0.5,
-          }}
-        />
+        <Divider style={styles.divider} />
         <ExploreDivisionContainer
-          onNavigateDivision={this._handleNavigateDivision.bind(this)}
-          exploreDivisions={this.state.exploreDivisions}
+          onNavigateDivision={this._handleNavigateDivision}
+          exploreDivisions={exploreDivisions}
         />
       </ScrollView>
     );
@@ -102,5 +98,10 @@ export default class ActivityScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  divider: {
+    marginVertical: 8,
+    borderColor: '#4F4F4F',
+    borderWidth: 0.5,
   },
 });

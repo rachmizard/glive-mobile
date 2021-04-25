@@ -3,7 +3,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ChannelSpeaker from '../ChannelSpeaker';
-import {color, fontConfig} from './../../assets';
+import {color, fontConfig} from '../../assets';
 
 const Channel = ({data}) => {
   return (

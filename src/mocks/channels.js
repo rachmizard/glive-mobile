@@ -1,5 +1,6 @@
-import User1 from './../assets/images/user-picture.png';
-import User2 from './../assets/images/user-profile-pict.png';
+import User1 from '../assets/images/user-picture.png';
+import User2 from '../assets/images/user-profile-pict.png';
+
 export default [
   {
     channelTitle: 'Open discussion',

@@ -1,60 +1,68 @@
 import React from 'react';
 import {Image, ImageBackground, StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
-import BgProfileCard from './../../assets/images/bg-profile-card.png';
-import UserProfile from './../../assets/images/user-profile-pict.png';
-import {fontConfig} from './../../assets';
-import {BaseButton} from './../../components';
+import BgProfileCard from '../../assets/images/bg-profile-card.png';
+import UserProfile from '../../assets/images/user-profile-pict.png';
+import {fontConfig} from '../../assets';
+import {BaseButton} from '../../components';
 
-const ProfileCardContainer = () => {
-  const {fontStylesheet} = fontConfig;
+const ProfileCardContainer = ({navigation}) => {
+  const {overline, subtitle1, caption} = fontConfig.fontStylesheet;
 
   return (
-    <ImageBackground
-      source={BgProfileCard}
-      borderRadius={10}
-      borderBottomLeftRadius={10}
-      borderBottomRightRadius={10}
-      style={styles.cardProfileBg}>
-      <View style={styles.cardProfileBody}>
-        <View style={styles.cardProfileInfo}>
-          <View style={{flex: 1}}>
+    <View style={styles.cardProfileWrapper}>
+      <ImageBackground
+        source={BgProfileCard}
+        borderRadius={10}
+        borderBottomLeftRadius={10}
+        borderBottomRightRadius={10}
+        style={styles.cardProfileBg}>
+        <View style={styles.cardProfileBody}>
+          <View style={styles.cardProfileInfo}>
             <Image source={UserProfile} style={styles.cardProfileImg} />
+            <View style={styles.info}>
+              <Text style={overline}>Post</Text>
+              <Text style={subtitle1}>2</Text>
+            </View>
+            <View style={styles.info}>
+              <Text style={overline}>Upvotes</Text>
+              <Text style={subtitle1}>524</Text>
+            </View>
+            <View style={styles.info}>
+              <Text style={overline}>Mutuals</Text>
+              <Text style={subtitle1}>34</Text>
+            </View>
+            <View style={styles.info}>
+              <Text style={overline}>Division</Text>
+              <Text style={subtitle1}>4</Text>
+            </View>
           </View>
-          <View style={styles.info}>
-            <Text style={fontStylesheet.overline}>Post</Text>
-            <Text style={fontStylesheet.subtitle1}>2</Text>
-          </View>
-          <View style={styles.info}>
-            <Text style={fontStylesheet.overline}>Upvotes</Text>
-            <Text style={fontStylesheet.subtitle1}>524</Text>
-          </View>
-          <View style={styles.info}>
-            <Text style={fontStylesheet.overline}>Mutuals</Text>
-            <Text style={fontStylesheet.subtitle1}>34</Text>
-          </View>
-          <View style={styles.info}>
-            <Text style={fontStylesheet.overline}>Division</Text>
-            <Text style={fontStylesheet.subtitle1}>4</Text>
+          <View style={styles.cardProfileAction}>
+            <View style={styles.userProfile}>
+              <Text style={subtitle1}>Ashley Doe</Text>
+              <Text style={caption}>@xypericious</Text>
+            </View>
+            <BaseButton
+              uppercase={false}
+              onPress={() => navigation.navigate('ProfileEdit')}
+              size="small"
+              mode="outlined">
+              Edit Profile
+            </BaseButton>
           </View>
         </View>
-        <View style={styles.cardProfileAction}>
-          <View style={styles.userProfile}>
-            <Text style={fontStylesheet.subtitle1}>Ashley Doe</Text>
-            <Text style={fontStylesheet.caption}>@xypericious</Text>
-          </View>
-          <BaseButton uppercase={false} size="small" mode="outlined">
-            Edit Profile
-          </BaseButton>
-        </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </View>
   );
 };
 
 export default ProfileCardContainer;
 
 const styles = StyleSheet.create({
+  cardProfileWrapper: {
+    marginHorizontal: 16,
+    marginVertical: 16,
+  },
   cardProfileBg: {
     resizeMode: 'cover',
   },
@@ -63,6 +71,7 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
   },
   cardProfileImg: {
+    flex: 1,
     width: 64,
     height: 64,
     borderRadius: 64 * 2,
