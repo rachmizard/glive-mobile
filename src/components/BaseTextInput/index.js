@@ -66,7 +66,6 @@ const BaseTextInput = ({
         onChangeText={onChangeText}
         error={isError}
         theme={themeTextInput}
-        value={value}
         style={styles}
         {...IconText}
       />
@@ -92,7 +91,6 @@ BaseTextInput.defaultProps = {
   disabled: false,
   iconPosition: 'right',
   icon: '',
-  value: null,
   height: 0,
   placeholder: '',
   label: '',
@@ -116,6 +114,5 @@ BaseTextInput.propTypes = {
   iconPosition: PropTypes.string,
   icon: PropTypes.node,
   disabled: PropTypes.bool,
-  value: PropTypes.string,
   height: PropTypes.number,
 };
