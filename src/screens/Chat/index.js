@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   KeyboardAvoidingView,
   RefreshControl,
@@ -6,10 +6,10 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {TextInput} from 'react-native-paper';
-import {color} from '../../assets';
-import {BaseTextInput, ChatUser} from '../../components';
-import {chatsDm} from '../../mocks';
+import { TextInput } from 'react-native-paper';
+import { color } from '../../assets';
+import { BaseTextInput, ChatUser } from '../../components';
+import { chatsDm } from '../../mocks';
 import userPicture from '../../assets/images/user-1.png';
 
 export default class ChatScreen extends Component {
@@ -32,13 +32,13 @@ export default class ChatScreen extends Component {
   }
 
   async onRefresh() {
-    const {route} = this.props;
-    this.setState({refreshing: true});
+    const { route } = this.props;
+    this.setState({ refreshing: true });
     await this.wait(1000).then(() => {
-      const {userId} = route.params;
+      const { userId } = route.params;
       const findUser = chatsDm.find(i => i.userId === userId);
-      this.setState({refreshing: false});
-      this.setState({chats: findUser.chats});
+      this.setState({ refreshing: false });
+      this.setState({ chats: findUser.chats });
     });
   }
 
@@ -53,19 +53,19 @@ export default class ChatScreen extends Component {
   };
 
   fetchData() {
-    const {route, navigation} = this.props;
-    const {params} = route;
+    const { route, navigation } = this.props;
+    const { params } = route;
     const findUser = chatsDm.find(i => i.userId === params.userId);
-    this.setState({chats: findUser.chats});
-    navigation.setOptions({title: findUser.userName});
+    this.setState({ chats: findUser.chats });
+    navigation.setOptions({ title: findUser.userName });
   }
 
   scrollToBottom() {
-    this.ref.current.scrollToEnd({animated: true});
+    this.ref.current.scrollToEnd({ animated: true });
   }
 
   _handleSendMessage() {
-    const {chatText, user} = this.state;
+    const { chatText, user } = this.state;
     if (!chatText) {
       return;
     }
@@ -74,13 +74,13 @@ export default class ChatScreen extends Component {
       chatText,
       lastChat: '2s',
     };
-    this.setState(state => ({chats: [...state.chats, payload]}));
-    this.setState({chatText: ''});
+    this.setState(state => ({ chats: [...state.chats, payload] }));
+    this.setState({ chatText: '' });
     this.scrollToBottom();
   }
 
   render() {
-    const {refreshing, chats, chatText} = this.state;
+    const { refreshing, chats, chatText } = this.state;
     return (
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.chatWrapper}>

@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {FlatList, RefreshControl, StyleSheet} from 'react-native';
-import {Divider} from 'react-native-paper';
-import {color} from '../../../../assets';
-import {Post, PostAction} from '../../../../components';
-import {postsDivision} from '../../../../mocks';
+import React, { useState } from 'react';
+import { FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { Divider } from 'react-native-paper';
+import { color } from '../../../../assets';
+import { Post, PostAction } from '../../../../components';
+import { postsDivision } from '../../../../mocks';
 
 const PostsTab = () => {
   const [posts, setPosts] = useState(postsDivision);
@@ -23,7 +23,7 @@ const PostsTab = () => {
     <FlatList
       style={styles.container}
       data={posts}
-      renderItem={({item}) => (
+      renderItem={({ item }) => (
         <Post
           post={item}
           onPressDetailPost={() => alert('navigate to post detail view')}
@@ -46,5 +46,5 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 8,
   },
-  divider: {backgroundColor: color.greyLine, marginVertical: 8},
+  divider: { backgroundColor: color.greyLine, marginVertical: 8 },
 });

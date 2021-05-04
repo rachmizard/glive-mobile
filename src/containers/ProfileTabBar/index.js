@@ -1,12 +1,12 @@
 import React from 'react';
-import {AppTabScene} from '../../components';
-import {PostTabScene, MediaTabScene, UpvoteTabScene} from './Scene';
+import { AppTabScene } from '../../components';
+import { PostTabScene, MediaTabScene, UpvoteTabScene } from './Scene';
 
 const ProfileTabBarContainer = () => {
   const [routes] = React.useState([
-    {key: 'first', title: 'All'},
-    {key: 'second', title: 'Media'},
-    {key: 'third', title: 'Upvote'},
+    { key: 'first', title: 'All' },
+    { key: 'second', title: 'Media' },
+    { key: 'third', title: 'Upvote' },
   ]);
 
   const scenes = {

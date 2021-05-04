@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
-import {color, fontConfig} from '../../assets';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { color, fontConfig } from '../../assets';
 import IconHome from '../../assets/images/icon-home.svg';
 import IconHomeActive from '../../assets/images/icon-home-active.svg';
 import IconActivity from '../../assets/images/icon-activity.svg';

@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {RefreshControl, ScrollView, StyleSheet} from 'react-native';
-import {Divider} from 'react-native-paper';
+import React, { Component } from 'react';
+import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
+import { Divider } from 'react-native-paper';
 import {
   ExploreDivisionContainer,
   YourDivisionContainer,
 } from '../../containers';
 import GameRoomContainer from '../../containers/GameRoom';
-import {exploreDivisions, gameRooms, yourDivisions} from '../../mocks';
+import { exploreDivisions, gameRooms, yourDivisions } from '../../mocks';
 
 export default class ActivityScreen extends Component {
   constructor(props) {
@@ -45,13 +45,13 @@ export default class ActivityScreen extends Component {
   }
 
   _handleNavigateDivision = division => {
-    const {navigation} = this.props;
-    navigation.navigate('Division', {division});
+    const { navigation } = this.props;
+    navigation.navigate('Division', { division });
   };
 
   _handleNavigateGameRoom = gameRoom => {
-    const {navigation} = this.props;
-    navigation.navigate('GameRoomDetail', {params: gameRoom});
+    const { navigation } = this.props;
+    navigation.navigate('GameRoomDetail', { params: gameRoom });
   };
 
   wait = timeout => {
@@ -59,7 +59,7 @@ export default class ActivityScreen extends Component {
   };
 
   render() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     const {
       refreshing,
       isLoadingGameRoom,

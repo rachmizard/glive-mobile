@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Image,
@@ -8,17 +8,17 @@ import {
   Dimensions,
   Text,
 } from 'react-native';
-import {color} from '../../assets';
+import { color } from '../../assets';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const SCREEN_WIDTH = width * 0.9;
 const SCREEN_HEIGHT = width * 0.9;
 
-const BaseSliderImage = ({images, activeColor, unactiveColor}) => {
+const BaseSliderImage = ({ images, activeColor, unactiveColor }) => {
   const [active, setActive] = useState(0);
 
-  const _handleChangeScroll = ({nativeEvent}) => {
+  const _handleChangeScroll = ({ nativeEvent }) => {
     const slide = Math.ceil(
       nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width,
     );
@@ -46,7 +46,7 @@ const BaseSliderImage = ({images, activeColor, unactiveColor}) => {
               key={k}
               style={[
                 styles.paginationText,
-                {color: k === active ? activeColor : unactiveColor},
+                { color: k === active ? activeColor : unactiveColor },
               ]}>
               ⬤
             </Text>

@@ -1,9 +1,13 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import {IconButton, Text} from 'react-native-paper';
-import {color} from '../../assets';
+import { Image, StyleSheet, View } from 'react-native';
+import { IconButton, Text } from 'react-native-paper';
+import { color } from '../../assets';
 
-const FollowerRequestItemContainer = ({data, onPressAccept, onPressReject}) => {
+const FollowerRequestItemContainer = ({
+  data,
+  onPressAccept,
+  onPressReject,
+}) => {
   return (
     <View style={styles.followerWrapper}>
       <View style={styles.followerInfo}>

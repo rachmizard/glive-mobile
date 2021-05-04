@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {FlatList, RefreshControl, StyleSheet} from 'react-native';
-import {Divider} from 'react-native-paper';
-import {color} from '../../../../assets';
-import {Post, PostAction} from '../../../../components';
-import {postsAndReplies} from '../../../../mocks';
+import React, { useState } from 'react';
+import { FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { Divider } from 'react-native-paper';
+import { color } from '../../../../assets';
+import { Post, PostAction } from '../../../../components';
+import { postsAndReplies } from '../../../../mocks';
 
 const PostTabScene = props => {
   const [postAndReplies, setPostAndReplies] = useState(postsAndReplies);
@@ -23,7 +23,7 @@ const PostTabScene = props => {
     <FlatList
       style={styles.container}
       data={postAndReplies}
-      renderItem={({item}) => (
+      renderItem={({ item }) => (
         <Post
           post={item}
           onPressDetailPost={() => alert('navigate to detail post')}
@@ -46,5 +46,5 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 8,
   },
-  divider: {backgroundColor: color.greyLine, marginVertical: 8},
+  divider: { backgroundColor: color.greyLine, marginVertical: 8 },
 });

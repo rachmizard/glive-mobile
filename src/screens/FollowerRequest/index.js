@@ -1,7 +1,13 @@
-import React, {Component} from 'react';
-import {Alert, FlatList, RefreshControl, StyleSheet, View} from 'react-native';
+import React, { Component } from 'react';
+import {
+  Alert,
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  View,
+} from 'react-native';
 import FollowerRequestItemContainer from '../../containers/FollowerRequestItem';
-import {followerRequests} from '../../mocks';
+import { followerRequests } from '../../mocks';
 
 export default class FollowerRequestScreen extends Component {
   constructor() {
@@ -17,10 +23,10 @@ export default class FollowerRequestScreen extends Component {
   }
 
   onRefresh() {
-    this.setState({refreshing: true});
+    this.setState({ refreshing: true });
     setTimeout(() => {
-      this.setState({requests: followerRequests});
-      this.setState({refreshing: false});
+      this.setState({ requests: followerRequests });
+      this.setState({ refreshing: false });
     }, 1000);
   }
 
@@ -29,7 +35,7 @@ export default class FollowerRequestScreen extends Component {
   };
 
   fetchFollowerRequest() {
-    this.setState({requests: followerRequests});
+    this.setState({ requests: followerRequests });
   }
 
   _handleRejectRequest(id) {
@@ -37,7 +43,7 @@ export default class FollowerRequestScreen extends Component {
   }
 
   render() {
-    const {refreshing, requests} = this.state;
+    const { refreshing, requests } = this.state;
     return (
       <View style={styles.container}>
         <FlatList
@@ -49,7 +55,7 @@ export default class FollowerRequestScreen extends Component {
           }
           contentContainerStyle={styles.containerFlatList}
           data={requests}
-          renderItem={({item, index}) => (
+          renderItem={({ item, index }) => (
             <FollowerRequestItemContainer
               onPressAccept={() => this._handleAcceptRequest(item.id)}
               onPressReject={() => this._handleRejectRequest(item.id)}

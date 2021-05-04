@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {IconButton} from 'react-native-paper';
-import {color} from '../../../assets';
+import { StyleSheet, View } from 'react-native';
+import { IconButton } from 'react-native-paper';
+import { color } from '../../../assets';
 
 const GameRoomControlAction = ({
   onToggleMic,

@@ -1,12 +1,12 @@
 import React from 'react';
-import {AppTabScene} from '../../components';
-import {PostScene, ChatScene, ChannelScene} from './Scene';
+import { AppTabScene } from '../../components';
+import { PostScene, ChatScene, ChannelScene } from './Scene';
 
 const DivisionTabBarContainer = () => {
   const [routes] = React.useState([
-    {key: 'first', title: 'Posts'},
-    {key: 'second', title: 'Chat'},
-    {key: 'third', title: 'Channel'},
+    { key: 'first', title: 'Posts' },
+    { key: 'second', title: 'Chat' },
+    { key: 'third', title: 'Channel' },
   ]);
 
   const scenes = {

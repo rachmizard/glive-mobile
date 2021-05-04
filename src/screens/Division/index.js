@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import DivisionInfoContainer from '../../containers/DivisionInfo';
 import DivisionTabBarContainer from '../../containers/DivisionTabBar';
 
@@ -13,10 +13,10 @@ export default class DivisionScreen extends Component {
   }
 
   componentDidMount() {
-    const {navigation, route} = this.props;
+    const { navigation, route } = this.props;
     this._unsubscribe = navigation.addListener('focus', () => {
       this.fetchDivision();
-      navigation.setOptions({title: route.params.division.title});
+      navigation.setOptions({ title: route.params.division.title });
     });
   }
 
@@ -25,12 +25,12 @@ export default class DivisionScreen extends Component {
   }
 
   fetchDivision() {
-    const {route} = this.props;
-    this.setState({division: route.params.division});
+    const { route } = this.props;
+    this.setState({ division: route.params.division });
   }
 
   render() {
-    const {division} = this.state;
+    const { division } = this.state;
     return (
       <View style={styles.container}>
         <DivisionInfoContainer data={division} />

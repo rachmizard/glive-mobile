@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Image, View} from 'react-native';
-import {Text, Caption} from 'react-native-paper';
+import { StyleSheet, Image, View } from 'react-native';
+import { Text, Caption } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {color, fontConfig} from '../../assets';
+import { color, fontConfig } from '../../assets';
 import BaseSliderImage from '../BaseSliderImage';
 
-const {fontStylesheet} = fontConfig;
+const { fontStylesheet } = fontConfig;
 
-const Post = ({post, onPressDetailPost, renderAction}) => {
+const Post = ({ post, onPressDetailPost, renderAction }) => {
   const {
     userPict,
     name,
@@ -52,7 +52,7 @@ const Post = ({post, onPressDetailPost, renderAction}) => {
 
 export default Post;
 
-const PostHeader = ({name, userPict, lastHour, userName}) => (
+const PostHeader = ({ name, userPict, lastHour, userName }) => (
   <View style={styles.postHeader}>
     <View style={styles.postUserImg}>
       <Image source={userPict} style={styles.img} />

@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Platform, Keyboard} from 'react-native';
-import {color} from '../../assets';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Platform, Keyboard } from 'react-native';
+import { color } from '../../assets';
 import AppBottomTabItem from '../AppBottomTabItem';
 import GameRoomControl from '../GameRoomControl';
 
-const AppBotomNavigation = ({state, descriptors, navigation}) => {
+const AppBotomNavigation = ({ state, descriptors, navigation }) => {
   const [showKeyboard, setShowKeyboard] = useState(true);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const AppBotomNavigation = ({state, descriptors, navigation}) => {
         <GameRoomControl />
         <View style={styles.appBotomNavWrapper}>
           {state.routes.map((route, i) => {
-            const {options} = descriptors[route.key];
+            const { options } = descriptors[route.key];
             const label =
               options.tabBarLabel !== undefined
                 ? options.tabBarLabel

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Title, Text} from 'react-native-paper';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Title, Text } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {color, fontConfig} from '../../assets';
+import { color, fontConfig } from '../../assets';
 
 const CardOverlay = ({
   colors,
@@ -128,8 +128,8 @@ CardOverlay.propTypes = {
 
 CardOverlay.defaultProps = {
   colors: ['#1A1E23', '#4B32C1'],
-  start: {x: 1, y: 0.25},
-  end: {x: 1, y: 1},
+  start: { x: 1, y: 0.25 },
+  end: { x: 1, y: 1 },
   overlay: false,
   touchable: false,
   title: '',

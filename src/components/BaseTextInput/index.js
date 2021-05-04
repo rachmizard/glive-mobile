@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {TextInput} from 'react-native-paper';
-import {color, theme} from '../../assets';
+import { TextInput } from 'react-native-paper';
+import { color, theme } from '../../assets';
 
 const BaseTextInput = ({
   label,
@@ -50,7 +50,7 @@ const BaseTextInput = ({
     };
   }
   if (height) {
-    styles.push({height});
+    styles.push({ height });
   }
 
   return (

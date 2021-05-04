@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Image, StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
-import {fontConfig} from '../../assets';
+import { Image, StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { fontConfig } from '../../assets';
 
-const {fontStylesheet} = fontConfig;
+const { fontStylesheet } = fontConfig;
 
-const GameRoomImage = ({name, image, size}) => {
+const GameRoomImage = ({ name, image, size }) => {
   return (
     <View style={styles.gameRoomWrapper}>
       <Image source={image} style={styles.gameRoomImg(size)} />

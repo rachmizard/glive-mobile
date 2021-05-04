@@ -1,13 +1,14 @@
 import React from 'react';
-import {Image, ImageBackground, StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
+import PropTypes from 'prop-types';
+import { Image, ImageBackground, StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
 import BgProfileCard from '../../assets/images/bg-profile-card.png';
 import UserProfile from '../../assets/images/user-profile-pict.png';
-import {fontConfig} from '../../assets';
-import {BaseButton} from '../../components';
+import { fontConfig } from '../../assets';
+import BaseButton from '../BaseButton';
 
-const ProfileCardContainer = ({navigation}) => {
-  const {overline, subtitle1, caption} = fontConfig.fontStylesheet;
+const ProfileCard = ({ onNavigateEditProfile, user }) => {
+  const { overline, subtitle1, caption } = fontConfig.fontStylesheet;
 
   return (
     <View style={styles.cardProfileWrapper}>
@@ -22,29 +23,29 @@ const ProfileCardContainer = ({navigation}) => {
             <Image source={UserProfile} style={styles.cardProfileImg} />
             <View style={styles.info}>
               <Text style={overline}>Post</Text>
-              <Text style={subtitle1}>2</Text>
+              <Text style={subtitle1}>{user.post}</Text>
             </View>
             <View style={styles.info}>
               <Text style={overline}>Upvotes</Text>
-              <Text style={subtitle1}>524</Text>
+              <Text style={subtitle1}>{user.upvotes}</Text>
             </View>
             <View style={styles.info}>
               <Text style={overline}>Mutuals</Text>
-              <Text style={subtitle1}>34</Text>
+              <Text style={subtitle1}>{user.mutuals}</Text>
             </View>
             <View style={styles.info}>
               <Text style={overline}>Division</Text>
-              <Text style={subtitle1}>4</Text>
+              <Text style={subtitle1}>{user.division}</Text>
             </View>
           </View>
           <View style={styles.cardProfileAction}>
             <View style={styles.userProfile}>
-              <Text style={subtitle1}>Ashley Doe</Text>
-              <Text style={caption}>@xypericious</Text>
+              <Text style={subtitle1}>{user.name}</Text>
+              <Text style={caption}>{user.userName}</Text>
             </View>
             <BaseButton
               uppercase={false}
-              onPress={() => navigation.navigate('ProfileEdit')}
+              onPress={onNavigateEditProfile}
               size="small"
               mode="outlined">
               Edit Profile
@@ -56,7 +57,7 @@ const ProfileCardContainer = ({navigation}) => {
   );
 };
 
-export default ProfileCardContainer;
+export default ProfileCard;
 
 const styles = StyleSheet.create({
   cardProfileWrapper: {
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
   cardProfileInfo: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   info: {
     flex: 1,
@@ -93,3 +95,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+ProfileCard.defaultProps = {
+  onNavigateEditProfile: () => {},
+};
+
+ProfileCard.propTypes = {
+  onNavigateEditProfile: PropTypes.func,
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
+};

@@ -1,13 +1,13 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import {Headline, Subheading} from 'react-native-paper';
-import {fontConfig} from '../../assets';
-import {BaseButton, ButtonSocial} from '../../components';
+import { Image, StyleSheet, View } from 'react-native';
+import { Headline, Subheading } from 'react-native-paper';
+import { fontConfig } from '../../assets';
+import { BaseButton, ButtonSocial } from '../../components';
 import IconStartUpOutline from '../../assets/images/icon-startup-outline.png';
 
-const SuccessSignUpScreen = ({navigation}) => {
+const SuccessSignUpScreen = ({ navigation }) => {
   const _handleTakeHome = () =>
-    navigation.reset({index: 0, routes: [{name: 'MainScreen'}]});
+    navigation.reset({ index: 0, routes: [{ name: 'MainScreen' }] });
 
   return (
     <View style={styles.container}>

@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {FlatList, RefreshControl, StyleSheet, View} from 'react-native';
-import {Divider} from 'react-native-paper';
-import {color} from '../../../../assets';
-import {Channel} from '../../../../components';
-import {channels} from '../../../../mocks';
+import React, { useState } from 'react';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { Divider } from 'react-native-paper';
+import { color } from '../../../../assets';
+import { Channel } from '../../../../components';
+import { channels } from '../../../../mocks';
 
 const ChannelTab = () => {
   const [state, setState] = useState({
@@ -16,10 +16,10 @@ const ChannelTab = () => {
   };
 
   const onRefresh = () => {
-    setState({...state, refreshing: true});
+    setState({ ...state, refreshing: true });
     wait(1000).then(() => {
-      setState({...state, refreshing: false});
-      setState({...state, channels});
+      setState({ ...state, refreshing: false });
+      setState({ ...state, channels });
     });
   };
 
@@ -34,7 +34,7 @@ const ChannelTab = () => {
             />
           }
           data={state.channels}
-          renderItem={({item, index}) => <Channel key={index} data={item} />}
+          renderItem={({ item, index }) => <Channel key={index} data={item} />}
           keyExtractor={(item, index) => index}
           ItemSeparatorComponent={() => <Divider style={styles.divider} />}
         />
@@ -56,5 +56,5 @@ const styles = StyleSheet.create({
   channelItem: {
     flexDirection: 'row',
   },
-  divider: {backgroundColor: color.greyLine, marginVertical: 8},
+  divider: { backgroundColor: color.greyLine, marginVertical: 8 },
 });

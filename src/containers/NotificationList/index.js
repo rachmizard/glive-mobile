@@ -6,13 +6,17 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {Divider, Text} from 'react-native-paper';
+import { Divider, Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {color, fontConfig} from '../../assets';
+import { color, fontConfig } from '../../assets';
 
-const {fontStylesheet} = fontConfig;
+const { fontStylesheet } = fontConfig;
 
-const NotificationListContainer = ({notifications, onRefresh, refreshing}) => {
+const NotificationListContainer = ({
+  notifications,
+  onRefresh,
+  refreshing,
+}) => {
   return (
     <ScrollView
       style={styles.container}
@@ -63,7 +67,7 @@ const NotificationListContainer = ({notifications, onRefresh, refreshing}) => {
             </View>
           </View>
           <View style={styles.divider}>
-            <Divider style={{backgroundColor: color.greyLine}} />
+            <Divider style={{ backgroundColor: color.greyLine }} />
           </View>
         </View>
       ))}

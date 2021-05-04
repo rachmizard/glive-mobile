@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {BaseButton, GameRoomImage} from '../../components';
+import React, { Component } from 'react';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { BaseButton, GameRoomImage } from '../../components';
 import AvailableRoomContainer from '../../containers/AvailableRoom';
-import {gameRooms} from '../../mocks';
+import { gameRooms } from '../../mocks';
 
 export default class GameRoomDetailScreen extends Component {
   constructor(props) {
@@ -13,24 +13,24 @@ export default class GameRoomDetailScreen extends Component {
   }
 
   componentDidMount() {
-    const {navigation} = this.props;
-    navigation.setOptions({title: 'Gameroom'});
+    const { navigation } = this.props;
+    navigation.setOptions({ title: 'Gameroom' });
     this.fetchRoom();
   }
 
   fetchRoom() {
-    const {route} = this.props;
-    const {params} = route.params;
+    const { route } = this.props;
+    const { params } = route.params;
     const findGameId = gameRooms.find(game => game.id === params.id);
     if (findGameId) {
-      this.setState({rooms: findGameId.rooms});
+      this.setState({ rooms: findGameId.rooms });
     }
   }
 
   render() {
-    const {route} = this.props;
-    const {params} = route.params;
-    const {rooms} = this.state;
+    const { route } = this.props;
+    const { params } = route.params;
+    const { rooms } = this.state;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>

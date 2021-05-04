@@ -1,5 +1,5 @@
 import userPicture from '../assets/images/user-picture.png';
-import {Post1, Post2} from '../assets/images/posts';
+import { Post1, Post2 } from '../assets/images/posts';
 
 export default [
   {

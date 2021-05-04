@@ -128,4 +128,4 @@ const fontStylesheet = {
   },
 };
 
-export default {fontDefault, fontStylesheet};
+export default { fontDefault, fontStylesheet };

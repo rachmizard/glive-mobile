@@ -6,4 +6,4 @@ import Forza from './forza.png';
 import Osu from './osu.png';
 import Apex from './apex.png';
 
-export {MonsterHunterWorld, CivilizationVI, Pubg, Dota2, Forza, Osu, Apex};
+export { MonsterHunterWorld, CivilizationVI, Pubg, Dota2, Forza, Osu, Apex };

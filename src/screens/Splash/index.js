@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
-import {fontConfig} from '../../assets';
+import React, { useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { fontConfig } from '../../assets';
 
-const SplashScreen = ({navigation}) => {
+const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.replace('Auth', {screen: 'SignIn'});
+      navigation.replace('Auth', { screen: 'SignIn' });
     }, 2000);
     return () => {
       clearTimeout(timeout());

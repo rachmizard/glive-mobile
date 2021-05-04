@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
-import {TextInput} from 'react-native-paper';
-import {color} from '../../assets';
-import {BaseTextInput} from '../../components';
-import {ChatDirectMessageListContainer} from '../../containers';
-import {chatsDm} from '../../mocks';
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import { color } from '../../assets';
+import { BaseTextInput } from '../../components';
+import { ChatDirectMessageListContainer } from '../../containers';
+import { chatsDm } from '../../mocks';
 
 export default class DirectMessageScreen extends Component {
   constructor(props) {
@@ -25,10 +25,10 @@ export default class DirectMessageScreen extends Component {
   }
 
   onRefresh() {
-    this.setState({refreshing: true});
+    this.setState({ refreshing: true });
     this.wait(1000).then(() => {
       this._handleRefreshChats();
-      this.setState({refreshing: false});
+      this.setState({ refreshing: false });
     });
   }
 
@@ -37,12 +37,12 @@ export default class DirectMessageScreen extends Component {
   };
 
   _handleNavigateChatScreen = userId => {
-    const {navigation} = this.props;
-    navigation.navigate('Chat', {userId});
+    const { navigation } = this.props;
+    navigation.navigate('Chat', { userId });
   };
 
   _handleRefreshChats() {
-    this.setState({chats: chatsDm, chatsFiltered: chatsDm});
+    this.setState({ chats: chatsDm, chatsFiltered: chatsDm });
   }
 
   _handleFilterChats(searchValue) {
@@ -56,7 +56,7 @@ export default class DirectMessageScreen extends Component {
   }
 
   render() {
-    const {refreshing, chatsFiltered} = this.state;
+    const { refreshing, chatsFiltered } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.searchDmWrapper}>

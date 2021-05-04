@@ -1,9 +1,14 @@
 import React from 'react';
-import {Image, TouchableOpacity, StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
-import {color, fontConfig} from '../../../assets';
+import { Image, TouchableOpacity, StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { color, fontConfig } from '../../../assets';
 
-const GameRoomControlInfo = ({onPress, logoImg, gameName, gameServerInfo}) => {
+const GameRoomControlInfo = ({
+  onPress,
+  logoImg,
+  gameName,
+  gameServerInfo,
+}) => {
   return (
     <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
       <View style={styles.wrapper}>

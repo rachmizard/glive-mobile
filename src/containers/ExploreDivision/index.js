@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import {TextInput, Title} from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { TextInput, Title } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {color, fontConfig} from '../../assets';
-import {BaseTextInput, CardOverlay} from '../../components';
+import { color, fontConfig } from '../../assets';
+import { BaseTextInput, CardOverlay } from '../../components';
 
-const ExploreDivisionContainer = ({onNavigateDivision, exploreDivisions}) => {
+const ExploreDivisionContainer = ({ onNavigateDivision, exploreDivisions }) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchBarWrapper}>

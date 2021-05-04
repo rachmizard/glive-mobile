@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
-    'react/jsx-filename-extension': [1, {extensions: ['.js', '.jsx']}],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
     'react/jsx-props-no-spreading': 'off',
@@ -27,6 +27,6 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'no-alert': 'off',
     'class-methods-use-this': 'off',
-    'react/forbid-prop-types': ['error', {forbid: ['array', 'object']}],
+    'react/forbid-prop-types': ['error', { forbid: ['array', 'object'] }],
   },
 };

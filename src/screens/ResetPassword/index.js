@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {Alert, StyleSheet, View} from 'react-native';
-import {HelperText, Text} from 'react-native-paper';
-import {color, fontConfig} from '../../assets';
-import {BaseButton, BaseTextInput} from '../../components';
+import React, { Component } from 'react';
+import { Alert, StyleSheet, View } from 'react-native';
+import { HelperText, Text } from 'react-native-paper';
+import { color, fontConfig } from '../../assets';
+import { BaseButton, BaseTextInput } from '../../components';
 
-const {fontStylesheet} = fontConfig;
+const { fontStylesheet } = fontConfig;
 
 export default class ResetPasswordScreen extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ export default class ResetPasswordScreen extends Component {
   }
 
   _onChangeEmail = email => {
-    this.setState({email});
+    this.setState({ email });
 
     if (!email.includes('@')) {
       this.setState(state => ({
@@ -40,15 +40,15 @@ export default class ResetPasswordScreen extends Component {
     } else {
       this.setState(state => ({
         errors: {
-          email: {...state.errors.email, isError: false},
+          email: { ...state.errors.email, isError: false },
         },
       }));
     }
   };
 
   _handleSubmitResetPassword() {
-    const {email} = this.state;
-    const {navigation} = this.props;
+    const { email } = this.state;
+    const { navigation } = this.props;
     if (!email) {
       this.setState(state => ({
         errors: {
@@ -74,14 +74,14 @@ export default class ResetPasswordScreen extends Component {
       }));
       return;
     }
-    this.setState({email: ''});
+    this.setState({ email: '' });
 
     Alert.alert('Reset Password', 'Successfully reset password');
     navigation.navigate('SignIn');
   }
 
   render() {
-    const {errors} = this.state;
+    const { errors } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.titleWrapper}>
@@ -100,7 +100,7 @@ export default class ResetPasswordScreen extends Component {
               isError={errors.email.isError}>
               <HelperText
                 type="error"
-                theme={{colors: {error: color.yellow}}}
+                theme={{ colors: { error: color.yellow } }}
                 visible={errors.email.isError}>
                 {errors.email.message}
               </HelperText>

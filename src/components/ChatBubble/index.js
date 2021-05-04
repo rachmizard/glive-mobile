@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
-import {color, fontConfig, theme} from '../../assets';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { color, fontConfig, theme } from '../../assets';
 
-const ChatBubble = ({chat}) => {
+const ChatBubble = ({ chat }) => {
   return (
     <View style={styles.chatBubbleWrapper}>
       <Text style={fontConfig.fontStylesheet.subtitle2}>

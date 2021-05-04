@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, useWindowDimensions} from 'react-native';
-import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
-import {color, fontConfig} from '../../assets';
+import { StyleSheet, useWindowDimensions } from 'react-native';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { color, fontConfig } from '../../assets';
 
-const AppTabScene = ({lazy, routes, swipeEnabled, scenes}) => {
-  const {fontStylesheet} = fontConfig;
+const AppTabScene = ({ lazy, routes, swipeEnabled, scenes }) => {
+  const { fontStylesheet } = fontConfig;
 
   const [index, setIndex] = React.useState(0);
 
@@ -16,9 +16,9 @@ const AppTabScene = ({lazy, routes, swipeEnabled, scenes}) => {
   const _renderTabBar = props => (
     <TabBar
       {...props}
-      indicatorContainerStyle={{backgroundColor: color.surface}}
-      indicatorStyle={{backgroundColor: color.white}}
-      labelStyle={{...fontStylesheet.button, ...styles.labelTextStyle}}
+      indicatorContainerStyle={{ backgroundColor: color.surface }}
+      indicatorStyle={{ backgroundColor: color.white }}
+      labelStyle={{ ...fontStylesheet.button, ...styles.labelTextStyle }}
     />
   );
 
@@ -26,12 +26,12 @@ const AppTabScene = ({lazy, routes, swipeEnabled, scenes}) => {
     <TabView
       swipeEnabled={swipeEnabled}
       lazy={lazy}
-      sceneContainerStyle={{backgroundColor: color.surface}}
-      navigationState={{index, routes}}
+      sceneContainerStyle={{ backgroundColor: color.surface }}
+      navigationState={{ index, routes }}
       renderScene={_renderScene}
       renderTabBar={_renderTabBar}
       onIndexChange={setIndex}
-      initialLayout={{width: layout.width}}
+      initialLayout={{ width: layout.width }}
     />
   );
 };

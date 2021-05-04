@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {Animated, StyleSheet, View} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Animated, StyleSheet, View } from 'react-native';
 
-import {color} from '../../assets';
-import {MonsterHunterWorld} from '../../assets/images/gameroom';
-import {GameRoomControlInfo, GameRoomControlAction} from './Parts';
+import { color } from '../../assets';
+import { MonsterHunterWorld } from '../../assets/images/gameroom';
+import { GameRoomControlInfo, GameRoomControlAction } from './Parts';
 
 const GameRoomControl = () => {
   const [state, setState] = useState({
@@ -36,18 +36,18 @@ const GameRoomControl = () => {
   }, [state.animated]);
 
   const _toggleMicHandler = () => {
-    setState({...state, isMute: !state.isMute});
+    setState({ ...state, isMute: !state.isMute });
   };
 
   const _toggleAudioHandler = () => {
-    setState({...state, isAudio: !state.isAudio});
+    setState({ ...state, isAudio: !state.isAudio });
   };
 
   return (
     <Animated.View
       style={[
         styles.gameRoomControlWrapper,
-        {transform: [{translateY: state.animated}]},
+        { transform: [{ translateY: state.animated }] },
       ]}>
       <View style={styles.gameRoomControlBody}>
         <GameRoomControlInfo

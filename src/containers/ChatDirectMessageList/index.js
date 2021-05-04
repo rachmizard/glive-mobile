@@ -1,8 +1,8 @@
 import React from 'react';
-import {FlatList, RefreshControl, StyleSheet, View} from 'react-native';
-import {Divider} from 'react-native-paper';
-import {color} from '../../assets';
-import {ChatItem} from '../../components';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { Divider } from 'react-native-paper';
+import { color } from '../../assets';
+import { ChatItem } from '../../components';
 
 const ChatDirectMessageListContainer = ({
   onNavigateChat,
@@ -17,7 +17,7 @@ const ChatDirectMessageListContainer = ({
           <RefreshControl onRefresh={onRefreshChat} refreshing={refreshing} />
         }
         data={chats}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <ChatItem onPress={() => onNavigateChat(item.userId)} chat={item} />
         )}
         keyExtractor={(item, index) => index}

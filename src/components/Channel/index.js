@@ -1,11 +1,11 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
+import { FlatList, StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ChannelSpeaker from '../ChannelSpeaker';
-import {color, fontConfig} from '../../assets';
+import { color, fontConfig } from '../../assets';
 
-const Channel = ({data}) => {
+const Channel = ({ data }) => {
   return (
     <View style={styles.channelItem}>
       <Icon
@@ -21,7 +21,7 @@ const Channel = ({data}) => {
         <Text>Speaker :</Text>
         <FlatList
           data={data.speakers}
-          renderItem={({item, index}) => (
+          renderItem={({ item, index }) => (
             <ChannelSpeaker key={index} speaker={item} />
           )}
           keyExtractor={(item, index) => index}

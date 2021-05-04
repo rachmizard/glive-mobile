@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {HelperText, Text, TextInput} from 'react-native-paper';
-import {color, fontConfig} from '../../assets';
-import {BaseButton, BaseTextInput, ButtonSocial} from '../../components';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { HelperText, Text, TextInput } from 'react-native-paper';
+import { color, fontConfig } from '../../assets';
+import { BaseButton, BaseTextInput, ButtonSocial } from '../../components';
 
-const SignInScreen = ({navigation}) => {
+const SignInScreen = ({ navigation }) => {
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -28,13 +28,13 @@ const SignInScreen = ({navigation}) => {
   };
 
   const _handleRedirectHome = () => {
-    navigation.replace('MainScreen', {screen: 'Home'});
+    navigation.replace('MainScreen', { screen: 'Home' });
   };
 
   const onChangeEmail = e => {
-    const copy = {...state};
+    const copy = { ...state };
 
-    setState({...state, email: e});
+    setState({ ...state, email: e });
 
     if (!e.includes('@')) {
       setState(copy);
@@ -46,7 +46,7 @@ const SignInScreen = ({navigation}) => {
   };
 
   const onChangePassword = e => {
-    setState({...state, password: e});
+    setState({ ...state, password: e });
   };
 
   return (
@@ -68,7 +68,7 @@ const SignInScreen = ({navigation}) => {
               isError={state.errors.email.isError}>
               <HelperText
                 type="error"
-                theme={{colors: {error: color.yellow}}}
+                theme={{ colors: { error: color.yellow } }}
                 visible={state.errors.email.isError}>
                 {state.errors.email.message}
               </HelperText>
@@ -92,7 +92,7 @@ const SignInScreen = ({navigation}) => {
               }>
               <HelperText
                 type="error"
-                theme={{colors: {error: color.yellow}}}
+                theme={{ colors: { error: color.yellow } }}
                 visible={state.errors.password.isError}>
                 {state.errors.password.message}
               </HelperText>
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   signInFormControl: {
     marginBottom: 5,
   },
-  buttonSocialWrapper: {marginTop: 16},
+  buttonSocialWrapper: { marginTop: 16 },
   textInformationWrapper: {
     flexDirection: 'column',
     alignItems: 'center',

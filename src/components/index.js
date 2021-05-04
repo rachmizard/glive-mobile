@@ -22,6 +22,7 @@ import ChannelSpeaker from './ChannelSpeaker';
 import ChatItem from './ChatItem';
 import Post from './Post';
 import PostAction from './PostAction';
+import ProfileCard from './ProfileCard';
 
 export {
   AppBar,
@@ -48,4 +49,5 @@ export {
   PostAction,
   BaseSliderImage,
   GameRoomControl,
+  ProfileCard,
 };

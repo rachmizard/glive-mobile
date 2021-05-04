@@ -1,6 +1,6 @@
 import React from 'react';
-import {RefreshControl, ScrollView, StyleSheet} from 'react-native';
-import {Post, PostAction} from '../../components';
+import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
+import { Post, PostAction } from '../../components';
 
 const PostContainer = ({
   postContents,
@@ -11,7 +11,7 @@ const PostContainer = ({
   onPressUpvote,
   onPressDetailPost,
 }) => {
-  const {container} = styles;
+  const { container } = styles;
   return (
     <>
       <ScrollView

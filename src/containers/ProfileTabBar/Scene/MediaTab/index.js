@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {ScrollView, StyleSheet, RefreshControl} from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, RefreshControl } from 'react-native';
 import Post from '../../../../components/Post';
 import PostAction from '../../../../components/PostAction';
-import {medias} from '../../../../mocks';
-import {color, fontConfig, theme} from '../../../../assets';
+import { medias } from '../../../../mocks';
+import { color, fontConfig, theme } from '../../../../assets';
 
 const MediaTabScene = props => {
   const [contents, setContents] = useState(medias);

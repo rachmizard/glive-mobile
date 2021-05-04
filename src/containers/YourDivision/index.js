@@ -1,15 +1,15 @@
-import React, {useEffect, useRef} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {Title} from 'react-native-paper';
-import {fontConfig} from '../../assets';
-import {CardOverlay} from '../../components';
+import React, { useEffect, useRef } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Title } from 'react-native-paper';
+import { fontConfig } from '../../assets';
+import { CardOverlay } from '../../components';
 
-const YourDivisionContainer = ({navigation, yourDivisions}) => {
+const YourDivisionContainer = ({ navigation, yourDivisions }) => {
   const ref = useRef();
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      ref.current.scrollTo({x: 0, y: 0, animated: true});
+      ref.current.scrollTo({ x: 0, y: 0, animated: true });
     });
 
     return () => unsubscribe();
