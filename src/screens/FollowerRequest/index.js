@@ -1,7 +1,13 @@
-import React, {Component} from 'react';
-import {Alert, FlatList, RefreshControl, StyleSheet, View} from 'react-native';
+import React, { Component } from 'react';
+import {
+  Alert,
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  View,
+} from 'react-native';
 import FollowerRequestItemContainer from '../../containers/FollowerRequestItem';
-import {followerRequests} from '../../mocks';
+import { followerRequests } from '../../mocks';
 
 export default class FollowerRequestScreen extends Component {
   constructor() {
@@ -13,38 +19,43 @@ export default class FollowerRequestScreen extends Component {
   }
 
   componentDidMount() {
-    this.setState({...this.state.requests, requests: followerRequests});
+    this.fetchFollowerRequest();
   }
 
   onRefresh() {
-    this.setState({...this.state, refreshing: true});
+    this.setState({ refreshing: true });
     setTimeout(() => {
-      this.setState({...this.state, requests: followerRequests});
-      this.setState({...this.state, refreshing: false});
+      this.setState({ requests: followerRequests });
+      this.setState({ refreshing: false });
     }, 1000);
   }
 
-  _handleAcceptRequest(id) {
+  _handleAcceptRequest = id => {
     Alert.alert('Accepted');
+  };
+
+  fetchFollowerRequest() {
+    this.setState({ requests: followerRequests });
   }
 
   _handleRejectRequest(id) {
-    Alert.alert('Rejected');
+    Alert.alert(`Rejected ${id}`);
   }
 
   render() {
+    const { refreshing, requests } = this.state;
     return (
       <View style={styles.container}>
         <FlatList
           refreshControl={
             <RefreshControl
               onRefresh={() => this.onRefresh()}
-              refreshing={this.state.refreshing}
+              refreshing={refreshing}
             />
           }
-          contentContainerStyle={{marginTop: 16}}
-          data={this.state.requests}
-          renderItem={({item, index}) => (
+          contentContainerStyle={styles.containerFlatList}
+          data={requests}
+          renderItem={({ item, index }) => (
             <FollowerRequestItemContainer
               onPressAccept={() => this._handleAcceptRequest(item.id)}
               onPressReject={() => this._handleRejectRequest(item.id)}
@@ -63,5 +74,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 16,
+  },
+  containerFlatList: {
+    marginTop: 16,
   },
 });

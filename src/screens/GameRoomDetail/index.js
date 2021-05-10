@@ -1,46 +1,55 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {useState} from 'react/cjs/react.development';
-import {BaseButton, GameRoomImage} from '../../components';
+import React, { Component } from 'react';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { BaseButton, GameRoomImage } from '../../components';
 import AvailableRoomContainer from '../../containers/AvailableRoom';
-import {gameRooms} from './.././../mocks';
+import { gameRooms } from '../../mocks';
 
-const GameRoomDetailScreen = ({navigation, route}) => {
-  useEffect(() => {
-    navigation.setOptions({title: 'Gameroom'});
+export default class GameRoomDetailScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      rooms: [],
+    };
+  }
 
+  componentDidMount() {
+    const { navigation } = this.props;
+    navigation.setOptions({ title: 'Gameroom' });
+    this.fetchRoom();
+  }
+
+  fetchRoom() {
+    const { route } = this.props;
+    const { params } = route.params;
     const findGameId = gameRooms.find(game => game.id === params.id);
     if (findGameId) {
-      setRooms(findGameId.rooms);
+      this.setState({ rooms: findGameId.rooms });
     }
-  }, [navigation]);
+  }
 
-  const {params} = route.params;
-  const [rooms, setRooms] = useState([]);
-
-  return (
-    <View style={styles.container}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'space-evenly',
-        }}>
-        <View style={styles.gameRoomImageWrapper}>
-          <GameRoomImage name={params.name} image={params.img} size={64} />
+  render() {
+    const { route } = this.props;
+    const { params } = route.params;
+    const { rooms } = this.state;
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.wrapper}>
+          <View style={styles.gameRoomHeader}>
+            <GameRoomImage name={params.name} image={params.img} size={64} />
+            <View style={styles.availableRoomWrapper}>
+              <AvailableRoomContainer rooms={rooms} />
+            </View>
+          </View>
+          <View style={styles.joinGameRoomBtn}>
+            <BaseButton uppercase={false} onPress={() => alert('Join')}>
+              Join Gameroom
+            </BaseButton>
+          </View>
         </View>
-        <View style={styles.availableRoomWrapper}>
-          <AvailableRoomContainer rooms={rooms} />
-        </View>
-        <View style={styles.joinGameRoomBtn}>
-          <BaseButton uppercase={false}>Join Gameroom</BaseButton>
-        </View>
-      </View>
-    </View>
-  );
-};
-
-export default GameRoomDetailScreen;
+      </SafeAreaView>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -48,9 +57,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   wrapper: {
+    flex: 1,
     flexDirection: 'column',
+    justifyContent: 'space-between',
   },
-  gameRoomImageWrapper: {
+  gameRoomHeader: {
     marginTop: 16,
   },
   availableRoomWrapper: {

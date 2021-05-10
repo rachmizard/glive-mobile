@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useWindowDimensions} from 'react-native';
-import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
-import {color, fontConfig} from './../../assets';
+import { StyleSheet, useWindowDimensions } from 'react-native';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { color, fontConfig } from '../../assets';
 
-const AppTabScene = ({lazy = true, routes, swipeEnabled = true, scenes}) => {
-  const {fontStylesheet} = fontConfig;
+const AppTabScene = ({ lazy, routes, swipeEnabled, scenes }) => {
+  const { fontStylesheet } = fontConfig;
 
   const [index, setIndex] = React.useState(0);
 
@@ -16,9 +16,9 @@ const AppTabScene = ({lazy = true, routes, swipeEnabled = true, scenes}) => {
   const _renderTabBar = props => (
     <TabBar
       {...props}
-      indicatorContainerStyle={{backgroundColor: color.surface}}
-      indicatorStyle={{backgroundColor: color.white}}
-      labelStyle={{...fontStylesheet.button, textTransform: 'capitalize'}}
+      indicatorContainerStyle={{ backgroundColor: color.surface }}
+      indicatorStyle={{ backgroundColor: color.white }}
+      labelStyle={{ ...fontStylesheet.button, ...styles.labelTextStyle }}
     />
   );
 
@@ -26,21 +26,32 @@ const AppTabScene = ({lazy = true, routes, swipeEnabled = true, scenes}) => {
     <TabView
       swipeEnabled={swipeEnabled}
       lazy={lazy}
-      sceneContainerStyle={{backgroundColor: color.surface}}
-      navigationState={{index, routes}}
+      sceneContainerStyle={{ backgroundColor: color.surface }}
+      navigationState={{ index, routes }}
       renderScene={_renderScene}
       renderTabBar={_renderTabBar}
       onIndexChange={setIndex}
-      initialLayout={{width: layout.width}}
+      initialLayout={{ width: layout.width }}
     />
   );
 };
 
 export default AppTabScene;
 
+const styles = StyleSheet.create({
+  labelTextStyle: {
+    textTransform: 'capitalize',
+  },
+});
+
+AppTabScene.defaultProps = {
+  lazy: true,
+  swipeEnabled: true,
+};
+
 AppTabScene.propTypes = {
   lazy: PropTypes.bool,
-  routes: PropTypes.arrayOf(Object),
-  scenes: PropTypes.object,
+  routes: PropTypes.arrayOf(Object).isRequired,
+  scenes: PropTypes.objectOf(Object).isRequired,
   swipeEnabled: PropTypes.bool,
 };

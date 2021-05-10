@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Appbar} from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Appbar } from 'react-native-paper';
 import AppBarAction from '../AppBarAction';
-import {color, fontConfig} from './../../assets';
+import { color, fontConfig } from '../../assets';
 
 const headerCentered = title => {
   switch (title) {
@@ -20,8 +20,8 @@ const headerCentered = title => {
   }
 };
 
-const AppBarHeader = ({navigation, previous, scene}) => {
-  const {options} = scene.descriptor;
+const AppBarHeader = ({ navigation, previous, scene }) => {
+  const { options } = scene.descriptor;
   const title =
     options.headerTitle !== undefined
       ? options.headerTitle

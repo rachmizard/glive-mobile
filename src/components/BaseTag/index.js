@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
-import {color, fontConfig} from '../../assets';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { color, fontConfig } from '../../assets';
 
-const BaseTag = ({tags, onPress}) => {
+const BaseTag = ({ tags, onPress }) => {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -44,10 +44,14 @@ const styles = StyleSheet.create({
     color: color.black,
     borderRadius: 5,
     marginLeft: 8,
-    marginRight: key + 1 == length ? 8 : 0,
+    marginRight: key + 1 === length ? 8 : 0,
   }),
 });
 
+BaseTag.defaultProps = {
+  tags: [],
+};
+
 BaseTag.propTypes = {
-  tags: PropTypes.array,
+  tags: PropTypes.arrayOf(Array),
 };

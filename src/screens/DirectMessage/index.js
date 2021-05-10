@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
-import {TextInput} from 'react-native-paper';
-import {color} from '../../assets';
-import {BaseTextInput} from '../../components';
-import {ChatDirectMessageListContainer} from '../../containers';
-import {chatsDm} from '../../mocks';
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import { color } from '../../assets';
+import { BaseTextInput } from '../../components';
+import { ChatDirectMessageListContainer } from '../../containers';
+import { chatsDm } from '../../mocks';
 
 export default class DirectMessageScreen extends Component {
   constructor(props) {
@@ -12,28 +12,51 @@ export default class DirectMessageScreen extends Component {
     this.state = {
       chats: [],
       chatsFiltered: [],
+      refreshing: false,
     };
+
+    this.onRefresh = this.onRefresh.bind(this);
+    this._handleNavigateChatScreen = this._handleNavigateChatScreen.bind(this);
+    this._handleRefreshChats = this._handleRefreshChats.bind(this);
   }
 
   componentDidMount() {
-    this.setState({chats: chatsDm, chatsFiltered: chatsDm});
+    this._handleRefreshChats();
   }
 
+  onRefresh() {
+    this.setState({ refreshing: true });
+    this.wait(1000).then(() => {
+      this._handleRefreshChats();
+      this.setState({ refreshing: false });
+    });
+  }
+
+  wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
+  _handleNavigateChatScreen = userId => {
+    const { navigation } = this.props;
+    navigation.navigate('Chat', { userId });
+  };
+
   _handleRefreshChats() {
-    this.setState({chats: chatsDm});
+    this.setState({ chats: chatsDm, chatsFiltered: chatsDm });
   }
 
   _handleFilterChats(searchValue) {
-    this.setState({
-      chatsFiltered: this.state.chats.filter(
+    this.setState(state => ({
+      chatsFiltered: state.chats.filter(
         i =>
           i.userFullName.toLowerCase().includes(searchValue.toLowerCase()) ||
           i.userName.toLowerCase().includes(searchValue.toLowerCase()),
       ),
-    });
+    }));
   }
 
   render() {
+    const { refreshing, chatsFiltered } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.searchDmWrapper}>
@@ -55,16 +78,16 @@ export default class DirectMessageScreen extends Component {
               <TextInput.Icon
                 name="magnify"
                 size={24}
-                style={{alignItems: 'center'}}
                 color={color.background}
               />
             }
           />
         </View>
         <ChatDirectMessageListContainer
-          navigation={this.props.navigation}
-          onRefreshChat={() => this._handleRefreshChats()}
-          chats={this.state.chatsFiltered}
+          refreshing={refreshing}
+          onNavigateChat={this._handleNavigateChatScreen}
+          onRefreshChat={this._handleRefreshChats}
+          chats={chatsFiltered}
         />
       </View>
     );

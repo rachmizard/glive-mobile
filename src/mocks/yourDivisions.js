@@ -1,4 +1,4 @@
-import {Division1, Division2, Division3} from './../assets/images/division';
+import { Division1, Division2, Division3 } from '../assets/images/division';
 
 export default [
   {

@@ -1,5 +1,5 @@
-import userPicture from './../assets/images/user-1.png';
-import User2 from './../assets/images/user-2.png';
+import userPicture from '../assets/images/user-1.png';
+import User2 from '../assets/images/user-2.png';
 
 export default [
   {
@@ -13,7 +13,7 @@ export default [
       {
         chatId: 1,
         userImg: userPicture,
-        userName: '@zayross',
+        userName: '@emmastone',
         lastChat: '1h',
         chatText: 'What do you guys think of mmorpg?',
       },
@@ -33,5 +33,6 @@ export default [
     userName: '@jimmy',
     lastChat: '1h',
     lastChatText: "Let's play together!",
+    chats: [],
   },
 ];

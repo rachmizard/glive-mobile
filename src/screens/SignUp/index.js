@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {HelperText, Text, TextInput} from 'react-native-paper';
-import {color, fontConfig} from '../../assets';
-import {BaseButton, BaseTextInput} from '../../components';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { HelperText, Text, TextInput } from 'react-native-paper';
+import { color, fontConfig } from '../../assets';
+import { BaseButton, BaseTextInput } from '../../components';
 
-const SignUpScreen = ({navigation}) => {
+const SignUpScreen = ({ navigation }) => {
   const [state, setState] = useState({
     username: '',
     email: '',
@@ -36,19 +36,19 @@ const SignUpScreen = ({navigation}) => {
   };
 
   const onChangeUsername = e => {
-    setState({...state, username: e});
+    setState({ ...state, username: e });
   };
 
   const onChangeEmail = e => {
-    setState({...state, email: e});
+    setState({ ...state, email: e });
   };
 
   const onChangePassword = e => {
-    setState({...state, password: e});
+    setState({ ...state, password: e });
   };
 
   const _handleSubmitRegister = () => {
-    const copyState = {...state};
+    const copyState = { ...state };
     copyState.errors.username.isError = false;
     copyState.errors.email.isError = false;
     copyState.errors.password.isError = false;
@@ -73,7 +73,6 @@ const SignUpScreen = ({navigation}) => {
       !state.errors.password.isError
     ) {
       navigation.replace('SuccessSignUp');
-      return;
     }
   };
 
@@ -96,7 +95,7 @@ const SignUpScreen = ({navigation}) => {
             isError={state.errors.username.isError}>
             <HelperText
               type="error"
-              theme={{colors: {error: color.yellow}}}
+              theme={{ colors: { error: color.yellow } }}
               visible={state.errors.username.isError}>
               {state.errors.username.message}
             </HelperText>
@@ -110,7 +109,7 @@ const SignUpScreen = ({navigation}) => {
             isError={state.errors.email.isError}>
             <HelperText
               type="error"
-              theme={{colors: {error: color.yellow}}}
+              theme={{ colors: { error: color.yellow } }}
               visible={state.errors.email.isError}>
               {state.errors.email.message}
             </HelperText>
@@ -133,7 +132,7 @@ const SignUpScreen = ({navigation}) => {
             }>
             <HelperText
               type="error"
-              theme={{colors: {error: color.yellow}}}
+              theme={{ colors: { error: color.yellow } }}
               visible={state.errors.password.isError}>
               {state.errors.password.message}
             </HelperText>
@@ -150,12 +149,7 @@ const SignUpScreen = ({navigation}) => {
         </BaseButton>
         <Text
           onPress={() => navigation.navigate('SignIn')}
-          style={{
-            ...fontConfig.fontStylesheet.body2,
-            color: color.yellow,
-            marginTop: 24,
-            textAlign: 'center',
-          }}>
+          style={styles.textInformation}>
           Already have account? <Text>Sign In Now</Text>
         </Text>
       </View>
@@ -183,5 +177,11 @@ const styles = StyleSheet.create({
   },
   signUpButton: {
     flex: 1,
+  },
+  textInformation: {
+    ...fontConfig.fontStylesheet.body2,
+    color: color.yellow,
+    marginTop: 24,
+    textAlign: 'center',
   },
 });

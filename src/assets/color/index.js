@@ -8,6 +8,7 @@ const color = {
   yellow: '#F2C94C',
   black: '#000000',
   brown: '#4F4F4F',
+  red: '#EB5757',
   text: '#EAEAEA',
   background: '#1A1E23',
   surface: '#252A31',

@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Image, StyleSheet} from 'react-native';
-import {Button} from 'react-native-paper';
-import IconGoogle from './../../assets/images/icon-google.png';
-import IconDiscord from './../../assets/images/icon-discord.png';
-import IconSteam from './../../assets/images/icon-steam.png';
-import IconFacebook from './../../assets/images/icon-facebook.png';
-import {color, fontConfig} from '../../assets';
+import { Image, StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
+import IconGoogle from '../../assets/images/icon-google.png';
+import IconDiscord from '../../assets/images/icon-discord.png';
+import IconSteam from '../../assets/images/icon-steam.png';
+import IconFacebook from '../../assets/images/icon-facebook.png';
+import { color, fontConfig } from '../../assets';
 
-const ButtonSocial = ({children, onPress, onLongPress, uppercase, social}) => {
+const ButtonSocial = ({
+  children,
+  onPress,
+  onLongPress,
+  uppercase,
+  social,
+}) => {
   let socialIcon = null;
   let contentStyle = color.white;
   let labelStyle = color.greyDark;
@@ -72,10 +78,12 @@ const styles = StyleSheet.create({
 
 ButtonSocial.defaultProps = {
   uppercase: true,
+  onPress: () => {},
+  onLongPress: () => {},
 };
 
 ButtonSocial.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.node.isRequired,
   onPress: PropTypes.func,
   onLongPress: PropTypes.func,
   uppercase: PropTypes.bool,

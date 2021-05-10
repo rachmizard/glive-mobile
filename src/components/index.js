@@ -13,6 +13,7 @@ import CardOverlay from './CardOverlay';
 import BaseDialog from './BaseDialog';
 import GameRoomItem from './GameRoomItem';
 import GameRoomImage from './GameRoomImage';
+import GameRoomControl from './GameRoomControl';
 import ListRoom from './ListRoom';
 import ChatUser from './ChatUser';
 import ChatBubble from './ChatBubble';
@@ -21,6 +22,7 @@ import ChannelSpeaker from './ChannelSpeaker';
 import ChatItem from './ChatItem';
 import Post from './Post';
 import PostAction from './PostAction';
+import ProfileCard from './ProfileCard';
 
 export {
   AppBar,
@@ -46,4 +48,6 @@ export {
   Post,
   PostAction,
   BaseSliderImage,
+  GameRoomControl,
+  ProfileCard,
 };

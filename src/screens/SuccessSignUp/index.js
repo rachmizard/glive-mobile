@@ -1,13 +1,13 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import {Headline, Subheading} from 'react-native-paper';
-import {fontConfig} from '../../assets';
-import {BaseButton, ButtonSocial} from '../../components';
-import IconStartUpOutline from './../../assets/images/icon-startup-outline.png';
+import { Image, StyleSheet, View } from 'react-native';
+import { Headline, Subheading } from 'react-native-paper';
+import { fontConfig } from '../../assets';
+import { BaseButton, ButtonSocial } from '../../components';
+import IconStartUpOutline from '../../assets/images/icon-startup-outline.png';
 
-const SuccessSignUpScreen = ({navigation}) => {
+const SuccessSignUpScreen = ({ navigation }) => {
   const _handleTakeHome = () =>
-    navigation.reset({index: 0, routes: [{name: 'MainScreen'}]});
+    navigation.reset({ index: 0, routes: [{ name: 'MainScreen' }] });
 
   return (
     <View style={styles.container}>
@@ -24,7 +24,7 @@ const SuccessSignUpScreen = ({navigation}) => {
         <Image source={IconStartUpOutline} style={styles.startUpImg} />
       </View>
       <View style={styles.buttonWrapper}>
-        <View style={{marginBottom: 16}}>
+        <View style={styles.buttonGap}>
           <ButtonSocial
             social="discord"
             uppercase={false}
@@ -32,12 +32,12 @@ const SuccessSignUpScreen = ({navigation}) => {
             Continue Discord Account
           </ButtonSocial>
         </View>
-        <View style={{marginBottom: 16}}>
+        <View style={styles.buttonGap}>
           <BaseButton
             mode="contained"
             uppercase={false}
             onPress={_handleTakeHome}>
-            Take me "Home"
+            Take me Home
           </BaseButton>
         </View>
       </View>
@@ -66,5 +66,8 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     flexDirection: 'column',
+  },
+  buttonGap: {
+    marginBottom: 16,
   },
 });

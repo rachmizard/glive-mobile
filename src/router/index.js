@@ -1,9 +1,12 @@
 import React from 'react';
-import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {SplashScreen} from '../screens';
-import {AppBotomNavigation} from '../components';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SplashScreen } from '../screens';
+import { AppBotomNavigation } from '../components';
 import {
   ActivityStack,
   AuthStack,
@@ -21,7 +24,9 @@ const AddContentScreen = () => {
 
 const MainScreen = () => {
   return (
-    <Tab.Navigator tabBar={props => <AppBotomNavigation {...props} />}>
+    <Tab.Navigator
+      tabBarOptions={{ keyboardHidesTabBar: true }}
+      tabBar={props => <AppBotomNavigation {...props} />}>
       <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="Activity" component={ActivityStack} />
       <Tab.Screen name="Add" component={AddContentScreen} />
@@ -36,21 +41,21 @@ const RootRouter = () => {
     <Stack.Navigator
       initialRouteName="Splash"
       headerMode="none"
-      screenOptions={{...TransitionPresets.FadeFromBottomAndroid}}>
+      screenOptions={{ ...TransitionPresets.FadeFromBottomAndroid }}>
       <Stack.Screen
         name="Splash"
         component={SplashScreen}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Auth"
         component={AuthStack}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="MainScreen"
         component={MainScreen}
-        options={({route}) => ({
+        options={({ route }) => ({
           headerTitle: getHeaderTitle(route),
         })}
       />

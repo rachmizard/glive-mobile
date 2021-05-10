@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Title, Text} from 'react-native-paper';
-import {color, fontConfig} from '../../assets';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Title, Text } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { color, fontConfig } from '../../assets';
 
 const CardOverlay = ({
   colors,
@@ -19,17 +19,17 @@ const CardOverlay = ({
   onLongPress,
   touchable,
 }) => {
-  let gradient = {
-    colors: colors,
-    start: start,
-    end: end,
+  const gradient = {
+    colors,
+    start,
+    end,
   };
 
   const RenderLinearGradient = () => {
     if (overlay) {
       return (
         <LinearGradient
-          style={{borderRadius: 8}}
+          style={styles.linearContent}
           colors={colors}
           start={gradient.start}
           end={gradient.end}>
@@ -49,19 +49,15 @@ const CardOverlay = ({
       <View style={styles.card}>
         <RenderLinearGradient />
         <View style={styles.cardContent}>
-          <Text
-            style={[
-              styles.cardContentText,
-              {color: color.yellow, marginBottom: -3},
-            ]}>
+          <Text style={[styles.cardContentText, styles.tagText]}>
             {tagText}
           </Text>
           <Title style={styles.cardContentText}>{title}</Title>
-          <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+          <View style={styles.cardContentIcon}>
             <Icon
               name="account-multiple"
               color={color.white}
-              style={{marginRight: 8}}
+              style={styles.icon}
               size={18}
             />
             <Text style={[styles.cardContentText]}>{totalUser}</Text>
@@ -100,15 +96,29 @@ const styles = StyleSheet.create({
   cardContentText: {
     ...fontConfig.fontStylesheet.subtitle2,
   },
+  cardContentIcon: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  tagText: {
+    color: color.yellow,
+    marginBottom: -3,
+  },
+  icon: {
+    marginRight: 8,
+  },
+  linearContent: {
+    borderRadius: 8,
+  },
 });
 
 CardOverlay.propTypes = {
-  colors: PropTypes.array,
-  start: PropTypes.object,
-  end: PropTypes.object,
+  colors: PropTypes.arrayOf(Array),
+  start: PropTypes.objectOf(Object),
+  end: PropTypes.objectOf(Object),
   tagText: PropTypes.string,
   totalUser: PropTypes.number,
-  img: PropTypes.any,
+  img: PropTypes.any.isRequired,
   title: PropTypes.string,
   overlay: PropTypes.bool,
   onPress: PropTypes.func,
@@ -118,8 +128,13 @@ CardOverlay.propTypes = {
 
 CardOverlay.defaultProps = {
   colors: ['#1A1E23', '#4B32C1'],
-  start: {x: 1, y: 0.25},
-  end: {x: 1, y: 1},
+  start: { x: 1, y: 0.25 },
+  end: { x: 1, y: 1 },
   overlay: false,
   touchable: false,
+  title: '',
+  tagText: '',
+  totalUser: 0,
+  onPress: () => {},
+  onLongPress: () => {},
 };

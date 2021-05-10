@@ -1,51 +1,51 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import {Caption, Text, Title} from 'react-native-paper';
+import { Image, StyleSheet, View } from 'react-native';
+import { Caption, Text, Title } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {color, fontConfig} from '../../assets';
-import {BaseButton} from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
+import { color, fontConfig } from '../../assets';
+import { BaseButton } from '../../components';
 
-const {fontStylesheet} = fontConfig;
+const { fontStylesheet } = fontConfig;
 
-const DivisionInfoContainer = ({data}) => {
+const DivisionInfoContainer = ({ data }) => {
   return (
     <>
-      <View style={styles.divisionWrapper}>
+      <View style={styles.divisionContainer}>
         <LinearGradient
           style={styles.divisionBg}
           colors={['#00048F', '#825EF5']}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 1}}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
         />
-        <View style={styles.divisionInfo}>
-          <Image source={data.img} style={styles.divisionPictureInfo} />
+        <View style={styles.divisionWrapper}>
+          <Image source={data.img} style={styles.divisionImg} />
           <View style={styles.divisionInteractionWrapper}>
             <View>
               <Text style={fontStylesheet.subtitle1}>{data.title}</Text>
-              <View style={{flexDirection: 'row'}}>
-                <Icon
-                  style={{marginRight: 8}}
-                  name="account-multiple"
-                  color={color.white}
-                  size={14}
-                />
-                <Text style={{marginRight: 8}}>{data.totalUser}</Text>
-                <Text style={{marginRight: 8, color: color.yellow}}>
-                  {data.tagText}
-                </Text>
+              <View style={styles.divisionInfoWrapper}>
+                <View style={styles.divisionInfoIcon}>
+                  <Icon name="account-multiple" color={color.white} size={14} />
+                  <Text style={styles.divisionIconText}>{data.totalUser}</Text>
+                </View>
+                <Text style={{ color: color.yellow }}>{data.tagText}</Text>
               </View>
             </View>
-            <View style={{width: 88}}>
-              <BaseButton uppercase={false} size="small" mode="contained">
+            <View style={styles.buttonInfoJoin}>
+              <BaseButton
+                uppercase={false}
+                onPress={() => alert('Join')}
+                size="small"
+                mode="contained">
                 Join
               </BaseButton>
             </View>
           </View>
         </View>
-        <View style={{marginHorizontal: 16, marginTop: -30}}>
+        <View style={styles.divisionInfoDescription}>
           <Title style={fontStylesheet.subtitle2}>Description</Title>
-          <Caption style={{...fontStylesheet.caption, ...{color: color.white}}}>
+          <Caption
+            style={{ ...fontStylesheet.caption, ...{ color: color.white } }}>
             {data.description}
           </Caption>
         </View>
@@ -61,11 +61,11 @@ const styles = StyleSheet.create({
     height: 129,
     resizeMode: 'cover',
   },
-  divisionWrapper: {
+  divisionContainer: {
     position: 'relative',
     marginBottom: 16,
   },
-  divisionInfo: {
+  divisionWrapper: {
     position: 'relative',
     bottom: 30,
     flexDirection: 'row',
@@ -73,10 +73,20 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     marginBottom: 16,
   },
-  divisionPictureInfo: {
+  divisionInfoWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 80,
+  },
+  divisionInfoIcon: {
+    flexDirection: 'row',
+  },
+  divisionIconText: {
+    marginLeft: 2,
+  },
+  divisionImg: {
     width: 80,
     height: 80,
-    borderRadius: 8,
   },
   divisionInteractionWrapper: {
     flex: 1,
@@ -84,4 +94,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 8,
   },
+  divisionInfoDescription: { marginHorizontal: 16, marginTop: -30 },
+  buttonInfoJoin: { width: 88 },
 });

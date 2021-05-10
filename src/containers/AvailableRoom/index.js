@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
-import {Text} from 'react-native-paper';
-import {fontConfig} from '../../assets';
-import {ListRoom} from '../../components';
+import React, { useState } from 'react';
+import { Text } from 'react-native-paper';
+import { fontConfig } from '../../assets';
+import { ListRoom } from '../../components';
 
-const AvailableRoomContainer = ({rooms}) => {
+const AvailableRoomContainer = ({ rooms }) => {
   const [radioValue, setRadioValue] = useState('');
 
   const _handleCheckedRoom = value => {
@@ -14,7 +13,10 @@ const AvailableRoomContainer = ({rooms}) => {
   return (
     <>
       <Text
-        style={{...fontConfig.fontStylesheet.subtitle2, ...{marginBottom: 8}}}>
+        style={{
+          ...fontConfig.fontStylesheet.subtitle2,
+          ...{ marginBottom: 8 },
+        }}>
         Available Room
       </Text>
       {rooms.map((channel, index) => (
@@ -30,5 +32,3 @@ const AvailableRoomContainer = ({rooms}) => {
 };
 
 export default AvailableRoomContainer;
-
-const styles = StyleSheet.create({});

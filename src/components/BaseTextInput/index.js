@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {TextInput} from 'react-native-paper';
-import {color, theme} from '../../assets';
+import { TextInput } from 'react-native-paper';
+import { color, theme } from '../../assets';
 
 const BaseTextInput = ({
   label,
@@ -34,11 +34,11 @@ const BaseTextInput = ({
       primary: focusColor,
       error: errorColor,
     },
-    roundness: roundness,
+    roundness,
   };
 
   let IconText = null;
-  let styles = [];
+  const styles = [];
 
   if (iconPosition === 'left') {
     IconText = {
@@ -50,7 +50,7 @@ const BaseTextInput = ({
     };
   }
   if (height) {
-    styles.push({height: height});
+    styles.push({ height });
   }
 
   return (
@@ -66,7 +66,6 @@ const BaseTextInput = ({
         onChangeText={onChangeText}
         error={isError}
         theme={themeTextInput}
-        value={value}
         style={styles}
         {...IconText}
       />
@@ -90,6 +89,11 @@ BaseTextInput.defaultProps = {
   keyboardType: 'default',
   secureTextEntry: false,
   disabled: false,
+  iconPosition: 'right',
+  icon: '',
+  height: 0,
+  placeholder: '',
+  label: '',
 };
 
 BaseTextInput.propTypes = {
@@ -97,19 +101,18 @@ BaseTextInput.propTypes = {
   mode: PropTypes.string,
   autoCompleteType: PropTypes.string,
   placeholder: PropTypes.string,
-  placeHolderColor: PropTypes.any,
-  textInputColor: PropTypes.any,
-  textInputBackgroundColor: PropTypes.any,
-  focusColor: PropTypes.any,
-  errorColor: PropTypes.any,
-  onChangeText: PropTypes.func,
+  placeHolderColor: PropTypes.string,
+  textInputColor: PropTypes.string,
+  textInputBackgroundColor: PropTypes.string,
+  focusColor: PropTypes.string,
+  errorColor: PropTypes.string,
+  onChangeText: PropTypes.func.isRequired,
   isError: PropTypes.bool,
   roundness: PropTypes.number,
   keyboardType: PropTypes.string,
   secureTextEntry: PropTypes.bool,
-  iconPosition: PropTypes.any,
+  iconPosition: PropTypes.string,
   icon: PropTypes.node,
   disabled: PropTypes.bool,
-  value: PropTypes.string,
   height: PropTypes.number,
 };

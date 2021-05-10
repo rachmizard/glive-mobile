@@ -1,7 +1,7 @@
-import UserProfile from './../assets/images/user-profile-pict.png';
-import UserPicture from './../assets/images/user-picture.png';
-import {Media1} from '../assets/images/media';
-import {Post1} from '../assets/images/posts';
+import UserProfile from '../assets/images/user-profile-pict.png';
+import UserPicture from '../assets/images/user-picture.png';
+import Media1 from '../assets/images/media';
+import { Post1 } from '../assets/images/posts';
 
 export default [
   {

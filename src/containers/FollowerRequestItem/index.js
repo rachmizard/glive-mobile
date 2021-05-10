@@ -1,14 +1,18 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import {IconButton, Text} from 'react-native-paper';
-import {color} from './../../assets';
+import { Image, StyleSheet, View } from 'react-native';
+import { IconButton, Text } from 'react-native-paper';
+import { color } from '../../assets';
 
-const FollowerRequestItemContainer = ({data, onPressAccept, onPressReject}) => {
+const FollowerRequestItemContainer = ({
+  data,
+  onPressAccept,
+  onPressReject,
+}) => {
   return (
     <View style={styles.followerWrapper}>
       <View style={styles.followerInfo}>
         <Image source={data.userImg} style={styles.followerImg} />
-        <Text style={{marginLeft: 8}}>{data.userName}</Text>
+        <Text>{data.userName}</Text>
       </View>
       <View style={styles.followerAction}>
         <IconButton
@@ -16,7 +20,6 @@ const FollowerRequestItemContainer = ({data, onPressAccept, onPressReject}) => {
           color={color.white}
           size={28}
           onPress={onPressAccept}
-          style={{marginRight: -10}}
         />
         <IconButton
           icon="close-circle-outline"
@@ -47,6 +50,7 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 36 * 2,
+    marginRight: 8,
   },
   followerAction: {
     flexDirection: 'row',

@@ -1,23 +1,35 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import {Divider, Text} from 'react-native-paper';
+import {
+  Image,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
+import { Divider, Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {color, fontConfig} from '../../assets';
+import { color, fontConfig } from '../../assets';
 
-const {fontStylesheet} = fontConfig;
+const { fontStylesheet } = fontConfig;
 
-const NotificationListContainer = ({notifications}) => {
+const NotificationListContainer = ({
+  notifications,
+  onRefresh,
+  refreshing,
+}) => {
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      refreshControl={
+        <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+      }>
       {notifications.map((notification, index) => (
         <View key={index} style={styles.notificationItem}>
           <View style={styles.notificationItemHeader}>
-            <View style={{marginRight: 8}}>
-              <Image
-                source={notification.userPict}
-                style={styles.notificationUserImg}
-              />
-            </View>
+            <Image
+              source={notification.userPict}
+              style={styles.notificationUserImg}
+            />
             <View style={styles.notificationUserIdentity}>
               <Text style={fontStylesheet.subtitle1}>
                 {notification.userName} · {notification.lastHour}
@@ -50,21 +62,16 @@ const NotificationListContainer = ({notifications}) => {
 
             <View style={styles.notificationAction}>
               <Icon name="comment-outline" size={24} color={color.white} />
-              <Icon
-                style={{marginHorizontal: 32}}
-                name="sync"
-                size={24}
-                color={color.white}
-              />
+              <Icon name="sync" size={24} color={color.white} />
               <Icon name="arrow-up" size={24} color={color.white} />
             </View>
           </View>
           <View style={styles.divider}>
-            <Divider style={{backgroundColor: color.greyLine}} />
+            <Divider style={{ backgroundColor: color.greyLine }} />
           </View>
         </View>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -87,6 +94,7 @@ const styles = StyleSheet.create({
     height: 38,
     width: 38,
     borderRadius: 38 * 2,
+    marginRight: 8,
   },
   notificationUserIdentity: {
     flex: 1,

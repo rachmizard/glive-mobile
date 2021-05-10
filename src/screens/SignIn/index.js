@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {HelperText, Text, TextInput} from 'react-native-paper';
-import {color, fontConfig} from '../../assets';
-import {BaseButton, BaseTextInput, ButtonSocial} from '../../components';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { HelperText, Text, TextInput } from 'react-native-paper';
+import { color, fontConfig } from '../../assets';
+import { BaseButton, BaseTextInput, ButtonSocial } from '../../components';
 
-const SignInScreen = ({navigation}) => {
+const SignInScreen = ({ navigation }) => {
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -28,13 +28,13 @@ const SignInScreen = ({navigation}) => {
   };
 
   const _handleRedirectHome = () => {
-    navigation.replace('MainScreen', {screen: 'Home'});
+    navigation.replace('MainScreen', { screen: 'Home' });
   };
 
   const onChangeEmail = e => {
-    let copy = {...state};
+    const copy = { ...state };
 
-    setState({...state, email: e});
+    setState({ ...state, email: e });
 
     if (!e.includes('@')) {
       setState(copy);
@@ -46,7 +46,7 @@ const SignInScreen = ({navigation}) => {
   };
 
   const onChangePassword = e => {
-    setState({...state, password: e});
+    setState({ ...state, password: e });
   };
 
   return (
@@ -68,7 +68,7 @@ const SignInScreen = ({navigation}) => {
               isError={state.errors.email.isError}>
               <HelperText
                 type="error"
-                theme={{colors: {error: color.yellow}}}
+                theme={{ colors: { error: color.yellow } }}
                 visible={state.errors.email.isError}>
                 {state.errors.email.message}
               </HelperText>
@@ -92,7 +92,7 @@ const SignInScreen = ({navigation}) => {
               }>
               <HelperText
                 type="error"
-                theme={{colors: {error: color.yellow}}}
+                theme={{ colors: { error: color.yellow } }}
                 visible={state.errors.password.isError}>
                 {state.errors.password.message}
               </HelperText>
@@ -109,7 +109,7 @@ const SignInScreen = ({navigation}) => {
               Login
             </BaseButton>
           </View>
-          <View style={{marginTop: 16}}>
+          <View style={styles.buttonSocialWrapper}>
             <ButtonSocial
               social="google"
               uppercase={false}
@@ -117,27 +117,16 @@ const SignInScreen = ({navigation}) => {
               Continue With Google
             </ButtonSocial>
           </View>
-          <View
-            style={{
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}>
+          <View style={styles.textInformationWrapper}>
             <Text
               onPress={() => navigation.navigate('SignUp')}
-              style={{
-                ...fontConfig.fontStylesheet.body2,
-                color: color.yellow,
-                marginTop: 24,
-              }}>
-              Don't have account? <Text>Register Now</Text>
+              style={styles.textInformation}>
+              Dont have account? <Text>Register Now</Text>
             </Text>
             <Text
-              style={{
-                ...fontConfig.fontStylesheet.body2,
-                color: color.yellow,
-                marginTop: 16,
-              }}>
-              Forgot password? <Text>Rest Now</Text>
+              onPress={() => navigation.navigate('ResetPassword')}
+              style={styles.textInformation}>
+              Forgot password? <Text>Reset Now</Text>
             </Text>
           </View>
         </View>
@@ -163,5 +152,15 @@ const styles = StyleSheet.create({
   },
   signInFormControl: {
     marginBottom: 5,
+  },
+  buttonSocialWrapper: { marginTop: 16 },
+  textInformationWrapper: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  textInformation: {
+    ...fontConfig.fontStylesheet.body2,
+    color: color.yellow,
+    marginTop: 16,
   },
 });

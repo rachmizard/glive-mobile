@@ -1,11 +1,11 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   ActivityScreen,
   DivisionScreen,
   GameRoomDetailScreen,
 } from '../../../screens';
-import {AppBarHeader} from '../../../components';
+import { AppBarHeader } from '../../../components';
 
 const Stack = createStackNavigator();
 

@@ -1,26 +1,12 @@
-import React, {useRef, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import {TextInput, Title} from 'react-native-paper';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { TextInput, Title } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {color, fontConfig} from '../../assets';
-import {BaseTextInput, CardOverlay} from '../../components';
+import { color, fontConfig } from '../../assets';
+import { BaseTextInput, CardOverlay } from '../../components';
 
-const ExploreDivisionContainer = ({navigation, exploreDivisions}) => {
-  const ref = useRef();
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      ref.current.scrollTo({x: 0, y: 0, animated: true});
-    });
-
-    return () => unsubscribe();
-  });
-
-  const _handleNavigateDivision = explore => {
-    navigation.navigate('Division', {division: explore});
-  };
-
+const ExploreDivisionContainer = ({ onNavigateDivision, exploreDivisions }) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchBarWrapper}>
@@ -33,6 +19,7 @@ const ExploreDivisionContainer = ({navigation, exploreDivisions}) => {
           textInputColor={color.background}
           focusColor={color.black}
           iconPosition="right"
+          onChangeText={() => console.log('test')}
           icon={
             <TextInput.Icon
               name={() => <Icon name="magnify" size={24} color={color.black} />}
@@ -45,7 +32,6 @@ const ExploreDivisionContainer = ({navigation, exploreDivisions}) => {
           <Title style={fontConfig.fontStylesheet.h6}>Explore Division</Title>
         </View>
         <ScrollView
-          ref={ref}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.exploreList}>
@@ -58,7 +44,7 @@ const ExploreDivisionContainer = ({navigation, exploreDivisions}) => {
               tagText={explore.tagText}
               touchable={false}
               overlay={true}
-              onPress={() => _handleNavigateDivision(explore)}
+              onPress={() => onNavigateDivision(explore)}
             />
           ))}
         </ScrollView>

@@ -1,5 +1,5 @@
-import userPicture from './../assets/images/user-picture.png';
-import userPicture2 from './../assets/images/user-profile-pict.png';
+import userPicture from '../assets/images/user-picture.png';
+import userPicture2 from '../assets/images/user-profile-pict.png';
 
 export default [
   {

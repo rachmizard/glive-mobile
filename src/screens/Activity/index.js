@@ -1,54 +1,107 @@
-import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {Divider} from 'react-native-paper';
+import React, { Component } from 'react';
+import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
+import { Divider } from 'react-native-paper';
 import {
   ExploreDivisionContainer,
   YourDivisionContainer,
 } from '../../containers';
 import GameRoomContainer from '../../containers/GameRoom';
-import {exploreDivisions, gameRooms, yourDivisions} from '../../mocks';
+import { exploreDivisions, gameRooms, yourDivisions } from '../../mocks';
 
-const ActivityScreen = ({navigation}) => {
-  const [state, setState] = useState({
-    isLoadingGameRoom: false,
-    gameRooms: gameRooms,
-    yourDivisions: yourDivisions,
-    exploreDivisions: exploreDivisions,
-  });
+export default class ActivityScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoadingGameRoom: false,
+      refreshing: false,
+      gameRooms: [],
+      yourDivisions: [],
+      exploreDivisions: [],
+    };
 
-  useEffect(() => {
-    setState({...state, isLoadingGameRoom: true});
-    setTimeout(() => setState({...state, isLoadingGameRoom: false}), 2000);
-  }, []);
+    this.onRefresh = this.onRefresh.bind(this);
+  }
 
-  return (
-    <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+  componentDidMount() {
+    this.onRefresh();
+  }
+
+  onRefresh() {
+    this.setState({
+      isLoadingGameRoom: true,
+      refreshing: true,
+    });
+    this.wait(650).then(() => {
+      this.setState({
+        gameRooms,
+        yourDivisions,
+        exploreDivisions,
+      });
+      this.setState({
+        isLoadingGameRoom: false,
+        refreshing: false,
+      });
+    });
+  }
+
+  _handleNavigateDivision = division => {
+    const { navigation } = this.props;
+    navigation.navigate('Division', { division });
+  };
+
+  _handleNavigateGameRoom = gameRoom => {
+    const { navigation } = this.props;
+    navigation.navigate('GameRoomDetail', { params: gameRoom });
+  };
+
+  wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
+  render() {
+    const { navigation } = this.props;
+    const {
+      refreshing,
+      isLoadingGameRoom,
+      gameRooms,
+      yourDivisions,
+      exploreDivisions,
+    } = this.state;
+
+    return (
+      <ScrollView
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />
+        }>
         <GameRoomContainer
+          onNavigateGameRoom={this._handleNavigateGameRoom}
           navigation={navigation}
-          isLoading={state.isLoadingGameRoom}
-          gameRooms={state.gameRooms}
+          isLoading={isLoadingGameRoom}
+          gameRooms={gameRooms}
         />
         <YourDivisionContainer
           navigation={navigation}
-          yourDivisions={state.yourDivisions}
+          yourDivisions={yourDivisions}
         />
-        <Divider
-          style={{marginVertical: 8, borderColor: '#4F4F4F', borderWidth: 0.5}}
-        />
+        <Divider style={styles.divider} />
         <ExploreDivisionContainer
-          navigation={navigation}
-          exploreDivisions={state.exploreDivisions}
+          onNavigateDivision={this._handleNavigateDivision}
+          exploreDivisions={exploreDivisions}
         />
       </ScrollView>
-    </View>
-  );
-};
-
-export default ActivityScreen;
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  divider: {
+    marginVertical: 8,
+    borderColor: '#4F4F4F',
+    borderWidth: 0.5,
   },
 });

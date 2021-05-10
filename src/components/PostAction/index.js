@@ -1,13 +1,18 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Text, TouchableRipple} from 'react-native-paper';
-import {kFormatter} from '../../constants/helper';
-import {color, fontConfig} from './../../assets';
+import { StyleSheet, View } from 'react-native';
+import { Text, TouchableRipple } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { kFormatter } from '../../utils/helper';
+import { color, fontConfig } from '../../assets';
 
-const {fontStylesheet} = fontConfig;
+const { fontStylesheet } = fontConfig;
 
-const PostAction = ({post, onPressComment, onPressRetweet, onPressUpvote}) => {
+const PostAction = ({
+  post,
+  onPressComment,
+  onPressRetweet,
+  onPressUpvote,
+}) => {
   return (
     <View style={styles.interactionControl}>
       <TouchableRipple onPress={onPressComment}>

@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {FlatList, RefreshControl, StyleSheet} from 'react-native';
-import {Divider} from 'react-native-paper';
-import {color} from '../../../../assets';
-import {Post, PostAction} from '../../../../components';
-import {postsAndReplies} from '../../../../mocks';
+import React, { useState } from 'react';
+import { FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { Divider } from 'react-native-paper';
+import { color } from '../../../../assets';
+import { Post, PostAction } from '../../../../components';
+import { postsAndReplies } from '../../../../mocks';
 
 const PostTabScene = props => {
   const [postAndReplies, setPostAndReplies] = useState(postsAndReplies);
@@ -13,26 +13,28 @@ const PostTabScene = props => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = () => {
     setRefreshing(true);
     setPostAndReplies(postsAndReplies);
     wait(1000).then(() => setRefreshing(false));
-  });
+  };
 
   return (
     <FlatList
       style={styles.container}
       data={postAndReplies}
-      renderItem={({item}) => (
-        <Post post={item} renderAction={<PostAction post={item} />} />
+      renderItem={({ item }) => (
+        <Post
+          post={item}
+          onPressDetailPost={() => alert('navigate to detail post')}
+          renderAction={<PostAction post={item} />}
+        />
       )}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
       keyExtractor={(item, index) => index}
-      ItemSeparatorComponent={() => (
-        <Divider style={{backgroundColor: color.greyLine, marginVertical: 8}} />
-      )}
+      ItemSeparatorComponent={() => <Divider style={styles.divider} />}
     />
   );
 };
@@ -44,4 +46,5 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 8,
   },
+  divider: { backgroundColor: color.greyLine, marginVertical: 8 },
 });

@@ -1,30 +1,60 @@
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, { Component } from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import AppBar from '../../components/AppBar';
 import NotificationListContainer from '../../containers/NotificationList';
-import {notifications} from '../../mocks';
+import { notifications } from '../../mocks';
 
-const NotificationScreen = ({navigation}) => {
-  const [state] = useState({
-    notifications: notifications,
-  });
+export default class NotificationScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      notifications: [],
+      refreshing: false,
+    };
+  }
 
-  return (
-    <View style={styles.container}>
-      <AppBar
-        title="Friend Requests"
-        titleIcon="account-plus"
-        touchable={true}
-        withBadge
-        badgeCounter={12}
-        onPress={() => navigation.navigate('FollowerRequest')}
-      />
-      <NotificationListContainer notifications={state.notifications} />
-    </View>
-  );
-};
+  static getDerivedStateFromProps(props, state) {
+    return {
+      notifications,
+    };
+  }
 
-export default NotificationScreen;
+  componentDidMount() {}
+
+  onRefresh() {
+    this.setState({ refreshing: true });
+    this.wait(1000).then(() => {
+      this.setState({ notifications });
+      this.setState({ refreshing: false });
+    });
+  }
+
+  wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
+  render() {
+    const { navigation } = this.props;
+    const { refreshing, notifications } = this.state;
+    return (
+      <SafeAreaView style={styles.container}>
+        <AppBar
+          title="Friend Requests"
+          titleIcon="account-plus"
+          touchable={true}
+          withBadge
+          badgeCounter={12}
+          onPress={() => navigation.navigate('FollowerRequest')}
+        />
+        <NotificationListContainer
+          notifications={notifications}
+          onRefresh={() => this.onRefresh()}
+          refreshing={refreshing}
+        />
+      </SafeAreaView>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
