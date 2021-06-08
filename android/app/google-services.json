@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "544542676644",
+    "project_id": "glive-mobile",
+    "storage_bucket": "glive-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544542676644:android:de9b069a95398b45f5f831",
+        "android_client_info": {
+          "package_name": "com.glive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544542676644-63br87usubbemoucbdjlqt2ltjbb6o0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1QQE3StWwERNS98_GNky3dFJATLTfIqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544542676644-63br87usubbemoucbdjlqt2ltjbb6o0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
