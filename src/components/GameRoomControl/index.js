@@ -5,7 +5,7 @@ import { color } from '../../assets';
 import { MonsterHunterWorld } from '../../assets/images/gameroom';
 import { GameRoomControlInfo, GameRoomControlAction } from './Parts';
 
-const GameRoomControl = () => {
+const GameRoomControl = ({ onPressGameControl }) => {
   const [state, setState] = useState({
     isAudio: true,
     isMute: true,
@@ -51,6 +51,7 @@ const GameRoomControl = () => {
       ]}>
       <View style={styles.gameRoomControlBody}>
         <GameRoomControlInfo
+          onPress={onPressGameControl}
           gameName="Monster Hunter: World"
           gameServerInfo="2 Players - Indonesia"
           logoImg={MonsterHunterWorld}
