@@ -25,14 +25,6 @@ const SignUpScreen = ({ navigation }) => {
         message: 'Username cannot be empty',
         isError: false,
       },
-      email: {
-        message: 'Invalid email, Here is a hint: bernard@gmail.com',
-        isError: false,
-      },
-      password: {
-        message: 'Password cannot be empty',
-        isError: false,
-      },
     },
   });
 

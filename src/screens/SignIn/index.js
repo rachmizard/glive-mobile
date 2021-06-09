@@ -5,8 +5,16 @@ import { color, fontConfig } from '../../assets';
 import { BaseButton, BaseTextInput, ButtonSocial } from '../../components';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import firestore from '@react-native-firebase/firestore';
+import { MMKV } from 'react-native-mmkv';
 
 const SignInScreen = ({ navigation }) => {
+  GoogleSignin.configure({
+    webClientId: '698183645681-50ngj8q5n5e13ass4h8rubo5rrq4kvot.apps.googleusercontent.com',
+  });
+
+  const usersCollection = firestore().collection('Users');
+
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
   const [state, setState] = useState({
@@ -19,12 +27,11 @@ const SignInScreen = ({ navigation }) => {
         message: 'Invalid email, Here is a hint: bernard@gmail.com',
         isError: false,
       },
-      password: {},
+      password: {
+        message: 'Password cannot be empty',
+        isError: false,
+      },
     },
-  });
-
-  GoogleSignin.configure({
-    webClientId: '698183645681-50ngj8q5n5e13ass4h8rubo5rrq4kvot.apps.googleusercontent.com',
   });
   
   //view handling
@@ -36,26 +43,62 @@ const SignInScreen = ({ navigation }) => {
     });
   };
 
-  const _handleRedirectHome = () => {
-    //check on firestore if user doesnot exist then go to socialOnBoardingPage
+  const _handleSubmitLogin = () => {
+    const copyState = { ...state };
+    copyState.errors.email.isError = false;
+    copyState.errors.password.isError = false;
 
-    //else
-    //save user to redux
-    navigation.replace('MainScreen', { screen: 'Home' });
+    if (!state.email.includes('@')) {
+      copyState.errors.email.isError = true;
+    }
+
+    if (state.password === '') {
+      copyState.errors.password.isError = true;
+    }
+
+    setState(copyState);
+
+    if (
+      !state.errors.email.isError &&
+      !state.errors.password.isError
+    ) {
+      auth()
+      .signInWithEmailAndPassword(state.email, state.password)
+      .then(() => {
+        _handleRedirectHome();
+      }).catch(error => {
+        //TODO: show toast/modals error
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+        console.error(error);
+      });
+    }
+  };
+
+  const _handleRedirectHome = async () => {
+    var userDb = await usersCollection.doc(state.email).get()
+    .finally(result => result)
+    .catch(console.log());
+
+    if (userDb.exists) {
+      console.log(userDb.data());
+      if (state.password == userDb.get('password')) {
+      //save user to local
+      MMKV.set('current_user', userDb.data());
+      //navigation.replace('MainScreen', { screen: 'Home' });
+      }
+    } else {
+      //go to social on boarding passing state.email
+      console.log('doesnt exist');
+    }
   };
 
   const onChangeEmail = e => {
-    const copy = { ...state };
-
     setState({ ...state, email: e });
-
-    if (!e.includes('@')) {
-      setState(copy);
-      copy.errors.email.isError = true;
-    } else {
-      copy.errors.email.isError = false;
-      setState(copy);
-    }
   };
 
   const onChangePassword = e => {
@@ -136,7 +179,7 @@ const SignInScreen = ({ navigation }) => {
                 mode="contained"
                 uppercase={false}
                 size="medium"
-                onPress={() => _handleRedirectHome()}>
+                onPress={() => _handleSubmitLogin()}>
                 Login
               </BaseButton>
             </View>
