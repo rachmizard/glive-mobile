@@ -10,7 +10,8 @@ import { MMKV } from 'react-native-mmkv';
 
 const SignInScreen = ({ navigation }) => {
   GoogleSignin.configure({
-    webClientId: '698183645681-50ngj8q5n5e13ass4h8rubo5rrq4kvot.apps.googleusercontent.com',
+    webClientId:
+      '698183645681-50ngj8q5n5e13ass4h8rubo5rrq4kvot.apps.googleusercontent.com',
   });
 
   const usersCollection = firestore().collection('Users');
@@ -33,7 +34,7 @@ const SignInScreen = ({ navigation }) => {
       },
     },
   });
-  
+
   //view handling
   const _handleTogglePassword = () => {
     setState({
@@ -58,38 +59,38 @@ const SignInScreen = ({ navigation }) => {
 
     setState(copyState);
 
-    if (
-      !state.errors.email.isError &&
-      !state.errors.password.isError
-    ) {
+    if (!state.errors.email.isError && !state.errors.password.isError) {
       auth()
-      .signInWithEmailAndPassword(state.email, state.password)
-      .then(() => {
-        _handleRedirectHome();
-      }).catch(error => {
-        //TODO: show toast/modals error
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-        console.error(error);
-      });
+        .signInWithEmailAndPassword(state.email, state.password)
+        .then(() => {
+          _handleRedirectHome();
+        })
+        .catch(error => {
+          //TODO: show toast/modals error
+          if (error.code === 'auth/email-already-in-use') {
+            console.log('That email address is already in use!');
+          }
+          if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+          }
+          console.error(error);
+        });
     }
   };
 
   const _handleRedirectHome = async () => {
-    var userDb = await usersCollection.doc(state.email).get()
-    .finally(result => result)
-    .catch(console.log());
+    var userDb = await usersCollection
+      .doc(state.email)
+      .get()
+      .finally(result => result)
+      .catch(console.log());
 
     if (userDb.exists) {
       console.log(userDb.data());
-      if (state.password == userDb.get('password')) {
-      //save user to local
-      MMKV.set('current_user', userDb.data());
-      //navigation.replace('MainScreen', { screen: 'Home' });
+      if (state.password === userDb.get('password')) {
+        //save user to local
+        MMKV.set('current_user', userDb.data());
+        //navigation.replace('MainScreen', { screen: 'Home' });
       }
     } else {
       //go to social on boarding passing state.email
@@ -113,15 +114,20 @@ const SignInScreen = ({ navigation }) => {
 
   function onAuthStateChanged(user) {
     setUser(user);
-    if (initializing) setInitializing(false);
+    if (initializing) {
+      setInitializing(false);
+    }
   }
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber;
-  }, []);
+  });
 
-  if (initializing) return null;
+  if (initializing) {
+    return null;
+  }
+
   if (!user) {
     return (
       <ScrollView>
@@ -187,7 +193,9 @@ const SignInScreen = ({ navigation }) => {
               <ButtonSocial
                 social="google"
                 uppercase={false}
-                onPress={() => onGoogleButtonPress().then(() => _handleRedirectHome())}>
+                onPress={() =>
+                  onGoogleButtonPress().then(() => _handleRedirectHome())
+                }>
                 Continue With Google
               </ButtonSocial>
             </View>
@@ -211,19 +219,23 @@ const SignInScreen = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <View style={styles.signInTitleWrapper}>
-          <Text style={styles.signInTitleHeadingText}>Welcome {user.email}</Text>
+          <Text style={styles.signInTitleHeadingText}>
+            Welcome {user.email}
+          </Text>
         </View>
         <View>
-            <BaseButton
-              mode="contained"
-              uppercase={false}
-              size="medium"
-              onPress={() => auth()
+          <BaseButton
+            mode="contained"
+            uppercase={false}
+            size="medium"
+            onPress={() =>
+              auth()
                 .signOut()
-                .then(() => console.log('User signed out!'))}>
-              Logout
-            </BaseButton>
-          </View>
+                .then(() => console.log('User signed out!'))
+            }>
+            Logout
+          </BaseButton>
+        </View>
       </View>
     );
   }

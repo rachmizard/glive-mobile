@@ -4,9 +4,9 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'eslint:recommended',
+    // 'eslint:recommended',
     'plugin:react/recommended',
-    'airbnb',
+    // 'airbnb',
     'prettier',
     '@react-native-community',
   ],
@@ -28,5 +28,6 @@ module.exports = {
     'no-alert': 'off',
     'class-methods-use-this': 'off',
     'react/forbid-prop-types': ['error', { forbid: ['array', 'object'] }],
+    'import/prefer-default-export': 'off',
   },
 };
