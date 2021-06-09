@@ -1,0 +1,111 @@
+user: {
+    email: String,
+    password: String,
+    name: String,
+    userName: String,
+    discordAccount: String,
+    googleAccount: String,
+    facebookAccount: String,
+    profileImageUrl: String,
+    backgroundImageUrl: String,
+    postCount: number,
+    divisionCount: number,
+    friendsCount: number,
+    likersCount: number,
+    accountType: String (public, private)
+}
+
+connection: {
+    follower: {_id: UserId},
+    following: {_id: UserId},
+    connectionStatus: String (pending, accepted),
+}
+
+post: {
+    caption: String,
+    tags: [{_id: TagId}],
+    game: [{_id: GameId}],
+    mentions: [{_id: UserId}],
+    media: [{_id: PostMediaId}],
+    author: {_id: UserId},
+    division: {_id: DivisionId},
+    postParent: {_id: PostId},
+    likersCount: number,
+    replyCount: number,
+    repostCount: number
+}
+
+postLiker: {
+    user: {_id: UserId},
+    post: {_id: PostId}   
+}
+
+postReposter: {
+    user: {_id: UserId},
+    post: {_id: PostId},
+    isQuotes: Boolean,
+}
+
+tag: {
+    name: String
+}
+
+platform: {
+    title: String
+}
+
+game: {
+    title: String,
+    desc: String,
+    releaseDate: Date,
+    developer: String,
+    platforms: [{_id: PlatformId}]
+}
+
+postMedia: {
+    mediaUrl: String,
+    mediaType: String (img/vid),
+    mediaRatio: String (square, horizontal, vertical)
+}
+
+room: {
+    participants: [{_id: UserId}],
+    participantCount: number,
+    maxCapacity: number,
+    status: String (available, unavailable),
+    region: String (COUNTRYISO-CITY)
+}
+
+gameroom: {
+    game: {_id: GameId},
+    rooms: [{_id: RoomId}]
+}
+
+division: {
+    name: String,
+    desc: String,
+    tag: [{_id: TagId}],
+    divisionImageUrl: String,
+    backgroundImageUrl: String,
+    coverImageUrl: String,
+    membersCount: number,
+    user: {_id: UserId},
+    admins: [{_id: UserId}],
+    type: String (public, private),
+}
+
+divisionRoom: {
+    title: String,
+    speakers: [{_id: UserId}],
+    room: {_id: RoomId}
+}
+
+userDivision: {
+    user: {_id: UserId},
+    divisions: [{_id: DivisionId}],
+}
+
+directMessages: {
+    name: String,
+    participants: [{_id: UserId}],
+}
