@@ -39,7 +39,11 @@ const AppBarHeader = ({ navigation, previous, scene }) => {
         title={title}
         titleStyle={fontConfig.fontStylesheet.subtitle1}
       />
-      <AppBarAction title={title} navigation={navigation} />
+      {
+        previous && (
+          <AppBarAction title={title} navigation={navigation} />
+        )
+      }
     </Appbar.Header>
   );
 };
