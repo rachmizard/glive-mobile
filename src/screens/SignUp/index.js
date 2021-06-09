@@ -3,8 +3,12 @@ import { StyleSheet, View } from 'react-native';
 import { HelperText, Text, TextInput } from 'react-native-paper';
 import { color, fontConfig } from '../../assets';
 import { BaseButton, BaseTextInput } from '../../components';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const SignUpScreen = ({ navigation }) => {
+  const usersCollection = firestore().collection('Users');
+
   const [state, setState] = useState({
     username: '',
     email: '',
@@ -72,7 +76,25 @@ const SignUpScreen = ({ navigation }) => {
       !state.errors.email.isError &&
       !state.errors.password.isError
     ) {
-      navigation.replace('SuccessSignUp');
+      //
+      auth()
+      .createUserWithEmailAndPassword(state.email, state.password)
+      .then(() => {
+        //firestore
+        navigation.replace('SuccessSignUp');
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        //TODO: show toast/message error
+        console.error(error);
+      });
     }
   };
 
