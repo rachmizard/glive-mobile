@@ -13,6 +13,7 @@ import DivisionScreen from './Division';
 import FollowerRequestScreen from './FollowerRequest';
 import DirectMessageScreen from './DirectMessage';
 import ChatScreen from './Chat';
+import SocialOnBoardingScreen from './SocialOnBoarding';
 
 export {
   SplashScreen,
@@ -30,4 +31,5 @@ export {
   FollowerRequestScreen,
   DirectMessageScreen,
   ChatScreen,
+  SocialOnBoardingScreen,
 };

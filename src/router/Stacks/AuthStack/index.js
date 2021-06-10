@@ -5,6 +5,7 @@ import {
   SignInScreen,
   SignUpScreen,
   SuccessSignUpScreen,
+  SocialOnBoardingScreen,
 } from '../../../screens';
 import { AppBarHeader } from '../../../components';
 
@@ -34,6 +35,11 @@ const AuthStack = () => (
       name="ResetPassword"
       component={ResetPasswordScreen}
       options={{ headerTitle: 'Reset Password' }}
+    />
+    <Stack.Screen
+      name="SocialOnBoarding"
+      component={SocialOnBoardingScreen}
+      options={{ headerTitle: 'Social On Boarding' }}
     />
   </Stack.Navigator>
 );

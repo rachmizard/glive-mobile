@@ -7,13 +7,14 @@ import RootRouter from './router';
 import { theme } from './assets';
 import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { navigationRef } from './router/rootNavigation';
 
 const App = () => {
   return (
     <ReduxProvider store={store}>
       <PersistGate persistor={persistor}>
         <PaperProvider theme={theme}>
-          <NavigationContainer theme={theme}>
+          <NavigationContainer ref={navigationRef} theme={theme}>
             <RootRouter />
           </NavigationContainer>
         </PaperProvider>

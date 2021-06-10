@@ -92,37 +92,39 @@ const SignUpScreen = ({ navigation }) => {
       !state.errors.password.isError
     ) {
       auth()
-      .createUserWithEmailAndPassword(state.email, state.password)
-      .then(() => {
-        //TODO: make users model
-        usersCollection.doc(state.email)
-        .set({
-          name: state.name,
-          userName: state.username,
-          password: state.password,
-          profileImageUrl: 'default',
-          backgroundImageUrl: 'default',
-          accountType: 'public',
-          postCount: 0,
-          divisionCount: 0,
-          friendsCount: 0,
-          likersCount: 0
-        })
+        .createUserWithEmailAndPassword(state.email, state.password)
         .then(() => {
-          //save to redux
-          console.log('User added!');
-          navigation.replace('SuccessSignUp');
+          //TODO: make users model
+          usersCollection
+            .doc(state.email)
+            .set({
+              name: state.name,
+              userName: state.username,
+              password: state.password,
+              profileImageUrl: 'default',
+              backgroundImageUrl: 'default',
+              accountType: 'public',
+              postCount: 0,
+              divisionCount: 0,
+              friendsCount: 0,
+              likersCount: 0,
+            })
+            .then(() => {
+              //save to redux
+              console.log('User added!');
+              navigation.replace('SuccessSignUp');
+            });
+        })
+        .catch(error => {
+          //TODO: show toast/modals error
+          if (error.code === 'auth/email-already-in-use') {
+            console.log('That email address is already in use!');
+          }
+          if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+          }
+          console.error(error);
         });
-      }).catch(error => {
-        //TODO: show toast/modals error
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-        console.error(error);
-      });
     }
   };
 
@@ -137,7 +139,7 @@ const SignUpScreen = ({ navigation }) => {
         </Text>
       </View>
       <View style={styles.signUpFormWrapper}>
-      <View style={styles.signUpFormControl}>
+        <View style={styles.signUpFormControl}>
           <BaseTextInput
             mode="outlined"
             label="Name"
