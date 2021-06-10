@@ -23,16 +23,18 @@ const storage = {
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['authReducer'],
+  whitelist: ['authReducer'],
 };
 
 const middlewares = [thunk];
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = createStore(
+const store = createStore(
   persistedReducer,
   composeWithDevTools(applyMiddleware(...middlewares)),
 );
 
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
+
+export { store, persistor };
