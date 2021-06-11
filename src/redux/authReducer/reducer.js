@@ -5,6 +5,7 @@ import {
   SET_CLOSE_ERROR,
   SET_LOADING_AUTH,
   SET_STOP_LOADING_AUTH,
+  SET_REGISTER,
 } from './types';
 
 const authInitialState = {
@@ -18,7 +19,8 @@ const authInitialState = {
     discordAccount: null,
     googleAccount: null,
     facebookAccount: null,
-    profileImageUrl: null,
+    profileImageUrl:
+      'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-thumbnail.png?alt=media&token=1fe2eb1f-4756-40b0-97f3-7cc2ad08a6b5',
     backgroundImageUrl: null,
     postCount: 0,
     divisionCount: 0,
@@ -43,7 +45,8 @@ const defaultInitialState = {
     discordAccount: null,
     googleAccount: null,
     facebookAccount: null,
-    profileImageUrl: null,
+    profileImageUrl:
+      'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-thumbnail.png?alt=media&token=1fe2eb1f-4756-40b0-97f3-7cc2ad08a6b5',
     backgroundImageUrl: null,
     postCount: 0,
     divisionCount: 0,
@@ -58,17 +61,14 @@ const defaultInitialState = {
 };
 
 const authReducer = (state = authInitialState, action) => {
-  if (action.type === SET_LOGIN) {
+  if (action.type === SET_LOGIN || action.type === SET_REGISTER) {
     return {
       ...state,
       user: action.payload,
       isLoggedIn: true,
     };
   } else if (action.type === SET_LOGOUT) {
-    return {
-      ...state,
-      defaultInitialState,
-    };
+    return defaultInitialState;
   } else if (action.type === SET_LOGIN_ERROR) {
     return {
       ...state,

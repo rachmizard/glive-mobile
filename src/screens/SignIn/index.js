@@ -117,6 +117,7 @@ const SignInScreen = ({ navigation }) => {
               label="Email"
               autoCompleteType="off"
               onChangeText={onChangeEmail}
+              value={state.email}
               isError={state.errors.email.isError}>
               <HelperText
                 type="error"
@@ -131,6 +132,7 @@ const SignInScreen = ({ navigation }) => {
               autoCompleteType="off"
               mode="outlined"
               label="Password"
+              value={state.password}
               secureTextEntry={!state.showPassword}
               onChangeText={onChangePassword}
               isError={state.errors.password.isError}

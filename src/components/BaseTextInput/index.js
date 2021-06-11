@@ -67,6 +67,7 @@ const BaseTextInput = ({
         error={isError}
         theme={themeTextInput}
         style={styles}
+        value={value}
         {...IconText}
       />
       {children}

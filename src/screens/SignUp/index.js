@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { HelperText, Text, TextInput } from 'react-native-paper';
+import {
+  HelperText,
+  Text,
+  TextInput,
+  Snackbar,
+  ActivityIndicator,
+} from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 import { color, fontConfig } from '../../assets';
 import { BaseButton, BaseTextInput } from '../../components';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import { clearErrorAuth, registerAsync } from '../../redux/authReducer/actions';
 
 const SignUpScreen = ({ navigation }) => {
-  const usersCollection = firestore().collection('Users');
+  const dispatch = useDispatch();
+
+  const authReducer = useSelector(state => state.authReducer);
 
   const [state, setState] = useState({
     name: '',
@@ -44,20 +52,8 @@ const SignUpScreen = ({ navigation }) => {
     });
   };
 
-  const onChangeName = e => {
-    setState({ ...state, name: e });
-  };
-
-  const onChangeUsername = e => {
-    setState({ ...state, username: e });
-  };
-
-  const onChangeEmail = e => {
-    setState({ ...state, email: e });
-  };
-
-  const onChangePassword = e => {
-    setState({ ...state, password: e });
+  const onChangeText = (target, e) => {
+    setState({ ...state, [target]: e });
   };
 
   const _handleSubmitRegister = () => {
@@ -91,40 +87,9 @@ const SignUpScreen = ({ navigation }) => {
       !state.errors.email.isError &&
       !state.errors.password.isError
     ) {
-      auth()
-        .createUserWithEmailAndPassword(state.email, state.password)
-        .then(() => {
-          //TODO: make users model
-          usersCollection
-            .doc(state.email)
-            .set({
-              name: state.name,
-              userName: state.username,
-              password: state.password,
-              profileImageUrl: 'default',
-              backgroundImageUrl: 'default',
-              accountType: 'public',
-              postCount: 0,
-              divisionCount: 0,
-              friendsCount: 0,
-              likersCount: 0,
-            })
-            .then(() => {
-              //save to redux
-              console.log('User added!');
-              navigation.replace('SuccessSignUp');
-            });
-        })
-        .catch(error => {
-          //TODO: show toast/modals error
-          if (error.code === 'auth/email-already-in-use') {
-            console.log('That email address is already in use!');
-          }
-          if (error.code === 'auth/invalid-email') {
-            console.log('That email address is invalid!');
-          }
-          console.error(error);
-        });
+      dispatch(
+        registerAsync(state.name, state.username, state.email, state.password),
+      );
     }
   };
 
@@ -143,7 +108,7 @@ const SignUpScreen = ({ navigation }) => {
           <BaseTextInput
             mode="outlined"
             label="Name"
-            onChangeText={onChangeName}
+            onChangeText={e => onChangeText('name', e)}
             isError={state.errors.name.isError}>
             <HelperText
               type="error"
@@ -157,7 +122,8 @@ const SignUpScreen = ({ navigation }) => {
           <BaseTextInput
             mode="outlined"
             label="Username"
-            onChangeText={onChangeUsername}
+            onChangeText={e => onChangeText('username', e)}
+            value={state.username}
             isError={state.errors.username.isError}>
             <HelperText
               type="error"
@@ -171,7 +137,8 @@ const SignUpScreen = ({ navigation }) => {
           <BaseTextInput
             mode="outlined"
             label="Email"
-            onChangeText={onChangeEmail}
+            onChangeText={e => onChangeText('email', e)}
+            value={state.email}
             isError={state.errors.email.isError}>
             <HelperText
               type="error"
@@ -187,7 +154,7 @@ const SignUpScreen = ({ navigation }) => {
             label="Password"
             secureTextEntry={!state.showPassword}
             isError={state.errors.password.isError}
-            onChangeText={onChangePassword}
+            onChangeText={e => onChangeText('password', e)}
             iconPosition="right"
             icon={
               <TextInput.Icon
@@ -206,19 +173,39 @@ const SignUpScreen = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.signUpButton}>
-        <BaseButton
-          mode="contained"
-          uppercase={false}
-          size="medium"
-          onPress={() => _handleSubmitRegister()}>
-          Register
-        </BaseButton>
-        <Text
-          onPress={() => navigation.navigate('SignIn')}
-          style={styles.textInformation}>
-          Already have account? <Text>Sign In Now</Text>
-        </Text>
+        <View>
+          <BaseButton
+            mode="contained"
+            uppercase={false}
+            size="medium"
+            onPress={() => _handleSubmitRegister()}>
+            Register
+          </BaseButton>
+          <Text
+            onPress={() => navigation.navigate('SignIn')}
+            style={styles.textInformation}>
+            Already have account? <Text>Sign In Now</Text>
+          </Text>
+        </View>
+        <ActivityIndicator
+          size={36}
+          animating={authReducer.isLoading}
+          color={color.white}
+        />
       </View>
+
+      <Snackbar
+        visible={authReducer.isError}
+        duration={700}
+        onDismiss={() => ({})}
+        action={{
+          label: 'Close',
+          onPress: () => {
+            dispatch(clearErrorAuth());
+          },
+        }}>
+        <Text>{authReducer.errorMessages}</Text>
+      </Snackbar>
     </View>
   );
 };
@@ -242,12 +229,14 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   signUpButton: {
-    flex: 1,
+    height: 160,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   textInformation: {
     ...fontConfig.fontStylesheet.body2,
     color: color.yellow,
-    marginTop: 24,
+    marginTop: 18,
     textAlign: 'center',
   },
 });

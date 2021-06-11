@@ -10,3 +10,7 @@ export function navigate(name, params) {
 export function push(...args) {
   navigationRef.current?.dispatch(StackActions.push(...args));
 }
+
+export function replace(...args) {
+  navigationRef.current?.dispatch(StackActions.replace(...args));
+}

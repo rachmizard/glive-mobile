@@ -1,17 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { HelperText, Text } from 'react-native-paper';
+import {
+  HelperText,
+  Text,
+  Snackbar,
+  ActivityIndicator,
+} from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 import { color, fontConfig } from '../../assets';
 import { BaseButton, BaseTextInput } from '../../components';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import {
+  clearErrorAuth,
+  registSocialOnBoarding,
+} from '../../redux/authReducer/actions';
 
 const SocialOnBoardingScreen = ({ navigation }) => {
-  const usersCollection = firestore().collection('Users');
+  const dispatch = useDispatch();
+  const authReducer = useSelector(state => state.authReducer);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setState({ ...state, name: authReducer.user.name });
+    });
+
+    return () => unsubscribe();
+  });
 
   const [state, setState] = useState({
+    name: '',
     username: '',
     errors: {
+      name: {
+        message: 'Name cannot be empty',
+        isError: false,
+      },
       username: {
         message: 'Username cannot be empty',
         isError: false,
@@ -19,8 +41,8 @@ const SocialOnBoardingScreen = ({ navigation }) => {
     },
   });
 
-  const onChangeUsername = e => {
-    setState({ ...state, username: e });
+  const onChangeInput = (e, target) => {
+    setState({ ...state, [target]: e });
   };
 
   const _handleSubmitRegister = () => {
@@ -33,40 +55,7 @@ const SocialOnBoardingScreen = ({ navigation }) => {
     setState(copyState);
 
     if (!state.errors.username.isError) {
-      auth()
-        .createUserWithEmailAndPassword(state.email, state.password)
-        .then(() => {
-          //TODO: make users model
-          usersCollection
-            .doc(state.email)
-            .set({
-              name: state.name,
-              userName: state.username,
-              password: state.password,
-              profileImageUrl: 'default',
-              backgroundImageUrl: 'default',
-              accountType: 'public',
-              postCount: 0,
-              divisionCount: 0,
-              friendsCount: 0,
-              likersCount: 0,
-            })
-            .then(() => {
-              //save to redux
-              console.log('User added!');
-              navigation.replace('SuccessSignUp');
-            });
-        })
-        .catch(error => {
-          //TODO: show toast/modals error
-          if (error.code === 'auth/email-already-in-use') {
-            console.log('That email address is already in use!');
-          }
-          if (error.code === 'auth/invalid-email') {
-            console.log('That email address is invalid!');
-          }
-          console.error(error);
-        });
+      dispatch(registSocialOnBoarding(state.name, state.username));
     }
   };
 
@@ -84,8 +73,23 @@ const SocialOnBoardingScreen = ({ navigation }) => {
         <View style={styles.signUpFormControl}>
           <BaseTextInput
             mode="outlined"
+            label="Name"
+            value={state.name}
+            onChangeText={e => onChangeInput(e, 'name')}
+            isError={state.errors.name.isError}>
+            <HelperText
+              type="error"
+              theme={{ colors: { error: color.yellow } }}
+              visible={state.errors.name.isError}>
+              {state.errors.name.message}
+            </HelperText>
+          </BaseTextInput>
+        </View>
+        <View style={styles.signUpFormControl}>
+          <BaseTextInput
+            mode="outlined"
             label="Username"
-            onChangeText={onChangeUsername}
+            onChangeText={e => onChangeInput(e, 'username')}
             isError={state.errors.username.isError}>
             <HelperText
               type="error"
@@ -101,10 +105,29 @@ const SocialOnBoardingScreen = ({ navigation }) => {
           mode="contained"
           uppercase={false}
           size="medium"
+          disabled={authReducer.isLoading}
           onPress={() => _handleSubmitRegister()}>
           Register
         </BaseButton>
+        <ActivityIndicator
+          size={36}
+          animating={authReducer.isLoading}
+          color={color.white}
+        />
       </View>
+
+      <Snackbar
+        visible={authReducer.isError}
+        duration={700}
+        onDismiss={() => ({})}
+        action={{
+          label: 'Close',
+          onPress: () => {
+            dispatch(clearErrorAuth());
+          },
+        }}>
+        <Text>{authReducer.errorMessages}</Text>
+      </Snackbar>
     </View>
   );
 };
@@ -128,7 +151,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   signUpButton: {
-    flex: 1,
+    height: 130,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   textInformation: {
     ...fontConfig.fontStylesheet.body2,

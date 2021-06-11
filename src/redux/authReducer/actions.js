@@ -5,14 +5,24 @@ import {
   SET_LOGIN_ERROR,
   SET_LOGOUT,
   SET_STOP_LOADING_AUTH,
+  SET_REGISTER,
 } from './types';
-import { GoogleSignin } from '../../services/google';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import { navigate } from '../../router/rootNavigation';
+import {
+  getUsersCollection,
+  signInWithEmailAndPassword,
+  signInWithGoogle,
+  signUpUserWithEmailAndPassword,
+  signInOut,
+} from '../../services/google';
+import * as navigation from '../../router/rootNavigation';
 
 export const login = payload => ({
   type: SET_LOGIN,
+  payload,
+});
+
+export const register = payload => ({
+  type: SET_REGISTER,
   payload,
 });
 
@@ -40,11 +50,21 @@ export const logout = () => ({
 export const loginAsync = (email, password) => {
   return dispatch => {
     dispatch(startLoading());
-    auth()
-      .signInWithEmailAndPassword(email, password)
+
+    signInWithEmailAndPassword(email, password)
       .then(data => {
-        console.log('Success', data.additionalUserInfo.profile);
-        dispatch(stopLoading());
+        getUsersCollection()
+          .doc(data.user.email)
+          .get()
+          .then(document => {
+            dispatch(login(document.data()));
+            dispatch(stopLoading());
+            navigation.replace('MainScreen', { screen: 'Home' });
+          })
+          .catch(err => {
+            dispatch(errorAuth('Query not found!'));
+            console.log(err);
+          });
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -56,22 +76,32 @@ export const loginAsync = (email, password) => {
         if (error.code === 'auth/user-not-found') {
           dispatch(errorAuth('No user was found!'));
         }
+        if (error.code === 'auth/wrong-password') {
+          dispatch(
+            errorAuth(
+              'The password is invalid or the user does not have a password',
+            ),
+          );
+        }
+        if (error.code === 'auth/too-many-requests') {
+          dispatch(
+            errorAuth(
+              'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.',
+            ),
+          );
+        }
         dispatch(stopLoading());
       });
   };
 };
 
 export const loginGoogleAsync = () => {
-  return async (dispatch, getState) => {
-    dispatch(startLoading());
-
-    const { idToken } = await GoogleSignin.signIn();
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    const usersCollection = firestore().collection('Users');
+  return (dispatch, getState) => {
     const { authReducer } = getState();
 
-    return auth()
-      .signInWithCredential(googleCredential)
+    dispatch(startLoading());
+
+    signInWithGoogle()
       .then(data => {
         const { email, displayName, photoURL } = data.user;
 
@@ -86,34 +116,104 @@ export const loginGoogleAsync = () => {
         dispatch(login(payload));
         dispatch(stopLoading());
 
-        usersCollection
+        getUsersCollection()
           .doc(email)
           .get()
           .then(document => {
             if (document.exists) {
-              navigate('MainScreen', { screen: 'Home' });
+              navigation.replace('MainScreen', { screen: 'Home' });
             } else {
-              usersCollection
+              getUsersCollection()
                 .doc(email)
                 .set(payload)
                 .then(() => {
-                  navigate('SocialOnBoarding');
+                  navigation.navigate('SocialOnBoarding');
                 });
             }
           });
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.message));
+  };
+};
+
+export const registerAsync = (name, userName, email, password) => {
+  return (dispatch, getState) => {
+    const { authReducer } = getState();
+    dispatch(startLoading());
+
+    const payload = {
+      ...authReducer.user,
+      name,
+      userName,
+      email,
+      password,
+    };
+
+    dispatch(register(payload));
+    signUpUserWithEmailAndPassword(email, password)
+      .then(() => {
+        getUsersCollection
+          .doc(email)
+          .set(payload)
+          .then(() => {
+            dispatch(stopLoading());
+            navigation.navigate('SuccessSignUp');
+          });
+      })
+      .catch(error => {
+        dispatch(stopLoading());
+
+        if (error.code === 'auth/email-already-in-use') {
+          dispatch(errorAuth('That email address is already in use!'));
+        }
+        if (error.code === 'auth/invalid-email') {
+          dispatch(errorAuth('That email address is invalid!'));
+        }
+      });
+  };
+};
+
+export const registSocialOnBoarding = (name, userName) => {
+  return (dispatch, getState) => {
+    dispatch(startLoading());
+    const { authReducer } = getState();
+
+    const payload = {
+      ...authReducer.user,
+      name,
+      userName,
+    };
+
+    getUsersCollection()
+      .doc(authReducer.user.email)
+      .get()
+      .then(doc => {
+        dispatch(stopLoading());
+
+        if (!doc.exists) {
+          dispatch(errorAuth('User not found!'));
+        } else {
+          getUsersCollection()
+            .doc(authReducer.user.email)
+            .update(payload)
+            .then(res => {
+              dispatch(login(payload));
+              navigation.navigate('SuccessSignUp');
+            })
+            .catch(err => dispatch(errorAuth(err.message)));
+        }
+      })
+      .catch(err => dispatch(errorAuth(err.message)));
   };
 };
 
 export const logoutSocialAsync = () => {
   return dispatch => {
-    auth()
-      .signOut()
+    signInOut()
       .then(() => {
         dispatch(logout());
       })
-      .then(() => navigate('SignIn'))
-      .catch(err => console.log(err));
+      .then(() => navigation.replace('Auth', { screen: 'SignIn' }))
+      .catch(err => dispatch(errorAuth(err.message)));
   };
 };
