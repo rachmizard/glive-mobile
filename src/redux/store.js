@@ -8,6 +8,7 @@ import rootReducer from './rootReducers';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  whitelist: ['authReducer'],
 };
 
 const middlewares = [thunk];
