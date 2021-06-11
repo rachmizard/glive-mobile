@@ -61,32 +61,48 @@ const defaultInitialState = {
 };
 
 const authReducer = (state = authInitialState, action) => {
-  if (action.type === SET_LOGIN || action.type === SET_REGISTER) {
-    return {
-      ...state,
-      user: action.payload,
-      isLoggedIn: true,
-    };
-  } else if (action.type === SET_LOGOUT) {
-    return defaultInitialState;
-  } else if (action.type === SET_LOGIN_ERROR) {
-    return {
-      ...state,
-      errorMessages: action.payload,
-      isError: true,
-    };
-  } else if (action.type === SET_CLOSE_ERROR) {
-    return {
-      ...state,
-      errorMessages: null,
-      isError: false,
-    };
-  } else if (action.type === SET_LOADING_AUTH) {
-    return { ...state, isLoading: true };
-  } else if (action.type === SET_STOP_LOADING_AUTH) {
-    return { ...state, isLoading: false };
+  switch (action.type) {
+    case SET_LOGIN:
+    case SET_REGISTER: {
+      return {
+        ...state,
+        user: action.payload,
+        isLoggedIn: true,
+      };
+    }
+
+    case SET_LOGOUT: {
+      return defaultInitialState;
+    }
+
+    case SET_LOGIN_ERROR: {
+      return {
+        ...state,
+        errorMessages: action.payload,
+        isError: true,
+      };
+    }
+
+    case SET_CLOSE_ERROR: {
+      return {
+        ...state,
+        errorMessages: null,
+        isError: false,
+      };
+    }
+
+    case SET_LOADING_AUTH: {
+      return { ...state, isLoading: true };
+    }
+
+    case SET_STOP_LOADING_AUTH: {
+      return { ...state, isLoading: false };
+    }
+
+    default: {
+      return state;
+    }
   }
-  return state;
 };
 
 export default authReducer;

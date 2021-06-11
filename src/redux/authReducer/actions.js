@@ -132,7 +132,10 @@ export const loginGoogleAsync = () => {
             }
           });
       })
-      .catch(err => console.log(err.message));
+      .catch(err => {
+        dispatch(errorAuth(err.message));
+        dispatch(stopLoading());
+      });
   };
 };
 
