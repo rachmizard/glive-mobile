@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import {
   HelperText,
@@ -36,29 +36,6 @@ const SignInScreen = ({ navigation }) => {
       },
     },
   });
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      setState({
-        email: '',
-        password: '',
-        showPassword: false,
-        iconPassword: 'eye',
-        errors: {
-          email: {
-            message: 'Invalid email, Here is a hint: bernard@gmail.com',
-            isError: false,
-          },
-          password: {
-            message: 'Password cannot be empty',
-            isError: false,
-          },
-        },
-      });
-    });
-
-    return () => unsubscribe();
-  }, [navigation]);
 
   //view handling
   const _handleTogglePassword = () => {
@@ -118,7 +95,8 @@ const SignInScreen = ({ navigation }) => {
               autoCompleteType="off"
               onChangeText={onChangeEmail}
               value={state.email}
-              isError={state.errors.email.isError}>
+              isError={state.errors.email.isError}
+              keyboardType="email-address">
               <HelperText
                 type="error"
                 theme={{ colors: { error: color.yellow } }}
@@ -156,6 +134,7 @@ const SignInScreen = ({ navigation }) => {
         <View style={styles.signInButton}>
           <View>
             <BaseButton
+              disabled={authReducer.isLoading}
               mode="contained"
               uppercase={false}
               size="medium"

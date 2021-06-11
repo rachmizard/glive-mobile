@@ -7,7 +7,7 @@ import IconStartUpOutline from '../../assets/images/icon-startup-outline.png';
 
 const SuccessSignUpScreen = ({ navigation }) => {
   const _handleTakeHome = () => {
-    navigation.navigate('MainScreen', { screen: 'Home' });
+    navigation.replace('MainScreen', { screen: 'Home' });
   };
 
   return (

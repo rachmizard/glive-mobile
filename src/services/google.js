@@ -24,6 +24,10 @@ export const signUpUserWithEmailAndPassword = (email, password) => {
   return auth().createUserWithEmailAndPassword(email, password);
 };
 
+export const sendPasswordResetEmail = (email, actionCodeSettings = null) => {
+  return auth().sendPasswordResetEmail(email, actionCodeSettings);
+};
+
 export const signInOut = () => {
   return auth().signOut();
 };
