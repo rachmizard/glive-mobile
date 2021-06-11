@@ -13,6 +13,7 @@ import {
   signInWithGoogle,
   signUpUserWithEmailAndPassword,
   signInOut,
+  sendPasswordResetEmail,
 } from '../../services/google';
 import * as navigation from '../../router/rootNavigation';
 
@@ -105,24 +106,26 @@ export const loginGoogleAsync = () => {
       .then(data => {
         const { email, displayName, photoURL } = data.user;
 
-        const payload = {
-          ...authReducer.user,
-          email,
-          name: displayName,
-          googleAccount: displayName,
-          profileImageUrl: photoURL,
-        };
-
-        dispatch(login(payload));
-        dispatch(stopLoading());
-
         getUsersCollection()
           .doc(email)
           .get()
           .then(document => {
+            dispatch(stopLoading());
+
             if (document.exists) {
+              dispatch(login(document.data()));
               navigation.replace('MainScreen', { screen: 'Home' });
             } else {
+              const payload = {
+                ...authReducer.user,
+                email,
+                name: displayName,
+                googleAccount: displayName,
+                profileImageUrl: photoURL,
+              };
+
+              dispatch(login(payload));
+
               getUsersCollection()
                 .doc(email)
                 .set(payload)
@@ -155,12 +158,12 @@ export const registerAsync = (name, userName, email, password) => {
     dispatch(register(payload));
     signUpUserWithEmailAndPassword(email, password)
       .then(() => {
-        getUsersCollection
+        getUsersCollection()
           .doc(email)
           .set(payload)
           .then(() => {
             dispatch(stopLoading());
-            navigation.navigate('SuccessSignUp');
+            navigation.replace('Auth', { screen: 'SuccessSignUp' });
           });
       })
       .catch(error => {
@@ -176,7 +179,7 @@ export const registerAsync = (name, userName, email, password) => {
   };
 };
 
-export const registSocialOnBoarding = (name, userName) => {
+export const registSocialOnBoarding = (name, username) => {
   return (dispatch, getState) => {
     dispatch(startLoading());
     const { authReducer } = getState();
@@ -184,7 +187,7 @@ export const registSocialOnBoarding = (name, userName) => {
     const payload = {
       ...authReducer.user,
       name,
-      userName,
+      userName: username,
     };
 
     getUsersCollection()
@@ -201,13 +204,27 @@ export const registSocialOnBoarding = (name, userName) => {
             .update(payload)
             .then(res => {
               dispatch(login(payload));
-              navigation.navigate('SuccessSignUp');
+              navigation.replace('Auth', { screen: 'SuccessSignUp' });
             })
             .catch(err => dispatch(errorAuth(err.message)));
         }
       })
       .catch(err => dispatch(errorAuth(err.message)));
   };
+};
+
+export const sendResetPasswordToEmail = email => {
+  return dispatch =>
+    new Promise((resolve, reject) => {
+      sendPasswordResetEmail(email)
+        .then(() => {
+          resolve();
+        })
+        .catch(err => {
+          dispatch(errorAuth(err.message));
+          reject(err.message);
+        });
+    });
 };
 
 export const logoutSocialAsync = () => {
