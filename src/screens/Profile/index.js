@@ -1,32 +1,21 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
 import { ProfileCard } from '../../components';
 import ProfileTabBarContainer from '../../containers/ProfileTabBar';
 
-export default class ProfileScreen extends Component {
+class ProfileScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: {
-        name: 'Ashley Doe',
-        userName: '@xypericious',
-        post: 2,
-        upvotes: 524,
-        mutuals: 34,
-        division: 4,
-      },
-    };
   }
 
   render() {
-    const { navigation } = this.props;
-
-    const { user } = this.state;
+    const { navigation, auth } = this.props;
 
     return (
       <View style={styles.container}>
         <ProfileCard
-          user={user}
+          user={auth.user}
           onNavigateEditProfile={() => navigation.navigate('ProfileEdit')}
         />
         <ProfileTabBarContainer />
@@ -40,3 +29,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+const mapStateToProps = state => ({
+  auth: state.authReducer,
+});
+
+export default connect(mapStateToProps)(ProfileScreen);

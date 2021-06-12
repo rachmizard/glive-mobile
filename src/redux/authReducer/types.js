@@ -1,0 +1,7 @@
+export const SET_LOGIN = 'SET_LOGIN';
+export const SET_REGISTER = 'SET_REGISTER';
+export const SET_LOGOUT = 'SET_LOGOUT';
+export const SET_LOGIN_ERROR = 'SET_LOGIN_ERROR';
+export const SET_CLOSE_ERROR = 'SET_CLOSE_ERROR';
+export const SET_LOADING_AUTH = 'SET_LOADING_AUTH';
+export const SET_STOP_LOADING_AUTH = 'SET_STOP_LOADING_AUTH';

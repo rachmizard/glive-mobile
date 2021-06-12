@@ -6,8 +6,9 @@ import { BaseButton, ButtonSocial } from '../../components';
 import IconStartUpOutline from '../../assets/images/icon-startup-outline.png';
 
 const SuccessSignUpScreen = ({ navigation }) => {
-  const _handleTakeHome = () =>
-    navigation.reset({ index: 0, routes: [{ name: 'MainScreen' }] });
+  const _handleTakeHome = () => {
+    navigation.replace('MainScreen', { screen: 'Home' });
+  };
 
   return (
     <View style={styles.container}>
@@ -24,14 +25,14 @@ const SuccessSignUpScreen = ({ navigation }) => {
         <Image source={IconStartUpOutline} style={styles.startUpImg} />
       </View>
       <View style={styles.buttonWrapper}>
-        <View style={styles.buttonGap}>
+        {/* <View style={styles.buttonGap}>
           <ButtonSocial
             social="discord"
             uppercase={false}
             onPress={() => console.log('Hello')}>
             Continue Discord Account
           </ButtonSocial>
-        </View>
+        </View> */}
         <View style={styles.buttonGap}>
           <BaseButton
             mode="contained"

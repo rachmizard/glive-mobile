@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 import { fontConfig } from '../../assets';
 
 const SplashScreen = ({ navigation }) => {
+  const authReducer = useSelector(state => state.authReducer);
+
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.replace('Auth', { screen: 'SignIn' });
-    }, 2000);
+      if (authReducer.isLoggedIn) {
+        navigation.replace('MainScreen', { screen: 'Home' });
+      } else {
+        navigation.replace('Auth', { screen: 'SignIn' });
+      }
+    }, 100);
     return () => {
       clearTimeout(timeout());
     };

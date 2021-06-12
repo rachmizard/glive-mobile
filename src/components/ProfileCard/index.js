@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import BgProfileCard from '../../assets/images/bg-profile-card.png';
-import UserProfile from '../../assets/images/user-profile-pict.png';
 import { fontConfig } from '../../assets';
 import BaseButton from '../BaseButton';
 
@@ -20,22 +19,25 @@ const ProfileCard = ({ onNavigateEditProfile, user }) => {
         style={styles.cardProfileBg}>
         <View style={styles.cardProfileBody}>
           <View style={styles.cardProfileInfo}>
-            <Image source={UserProfile} style={styles.cardProfileImg} />
+            <Image
+              source={{ uri: user.profileImageUrl }}
+              style={styles.cardProfileImg}
+            />
             <View style={styles.info}>
               <Text style={overline}>Post</Text>
-              <Text style={subtitle1}>{user.post}</Text>
+              <Text style={subtitle1}>{user.postCount}</Text>
             </View>
             <View style={styles.info}>
               <Text style={overline}>Upvotes</Text>
-              <Text style={subtitle1}>{user.upvotes}</Text>
+              <Text style={subtitle1}>{user.likersCount}</Text>
             </View>
             <View style={styles.info}>
               <Text style={overline}>Mutuals</Text>
-              <Text style={subtitle1}>{user.mutuals}</Text>
+              <Text style={subtitle1}>{user.friendsCount}</Text>
             </View>
             <View style={styles.info}>
               <Text style={overline}>Division</Text>
-              <Text style={subtitle1}>{user.division}</Text>
+              <Text style={subtitle1}>{user.divisionCount}</Text>
             </View>
           </View>
           <View style={styles.cardProfileAction}>

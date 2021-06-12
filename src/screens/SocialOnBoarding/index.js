@@ -1,29 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
   HelperText,
   Text,
-  TextInput,
   Snackbar,
   ActivityIndicator,
 } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { color, fontConfig } from '../../assets';
 import { BaseButton, BaseTextInput } from '../../components';
-import { clearErrorAuth, registerAsync } from '../../redux/authReducer/actions';
+import {
+  clearErrorAuth,
+  registSocialOnBoarding,
+} from '../../redux/authReducer/actions';
 
-const SignUpScreen = ({ navigation }) => {
+const SocialOnBoardingScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-
   const authReducer = useSelector(state => state.authReducer);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setState({ ...state, name: authReducer.user.name });
+    });
+
+    return () => unsubscribe();
+  });
 
   const [state, setState] = useState({
     name: '',
     username: '',
-    email: '',
-    password: '',
-    showPassword: false,
-    iconPassword: 'eye',
     errors: {
       name: {
         message: 'Name cannot be empty',
@@ -33,63 +38,24 @@ const SignUpScreen = ({ navigation }) => {
         message: 'Username cannot be empty',
         isError: false,
       },
-      email: {
-        message: 'Invalid email, Here is a hint: bernard@gmail.com',
-        isError: false,
-      },
-      password: {
-        message: 'Password cannot be empty',
-        isError: false,
-      },
     },
   });
 
-  const _handleTogglePassword = () => {
-    setState({
-      ...state,
-      showPassword: !state.showPassword,
-      iconPassword: state.showPassword ? 'eye' : 'eye-off',
-    });
-  };
-
-  const onChangeText = (target, e) => {
+  const onChangeInput = (e, target) => {
     setState({ ...state, [target]: e });
   };
 
   const _handleSubmitRegister = () => {
     const copyState = { ...state };
-    copyState.errors.name.isError = false;
     copyState.errors.username.isError = false;
-    copyState.errors.email.isError = false;
-    copyState.errors.password.isError = false;
-
-    if (state.name === '') {
-      copyState.errors.name.isError = true;
-    }
 
     if (state.username === '') {
       copyState.errors.username.isError = true;
     }
-
-    if (!state.email.includes('@')) {
-      copyState.errors.email.isError = true;
-    }
-
-    if (state.password === '') {
-      copyState.errors.password.isError = true;
-    }
-
     setState(copyState);
 
-    if (
-      !state.errors.name.isError &&
-      !state.errors.username.isError &&
-      !state.errors.email.isError &&
-      !state.errors.password.isError
-    ) {
-      dispatch(
-        registerAsync(state.name, state.username, state.email, state.password),
-      );
+    if (!state.errors.username.isError) {
+      dispatch(registSocialOnBoarding(state.name, state.username));
     }
   };
 
@@ -108,7 +74,8 @@ const SignUpScreen = ({ navigation }) => {
           <BaseTextInput
             mode="outlined"
             label="Name"
-            onChangeText={e => onChangeText('name', e)}
+            value={state.name}
+            onChangeText={e => onChangeInput(e, 'name')}
             isError={state.errors.name.isError}>
             <HelperText
               type="error"
@@ -122,8 +89,7 @@ const SignUpScreen = ({ navigation }) => {
           <BaseTextInput
             mode="outlined"
             label="Username"
-            onChangeText={e => onChangeText('username', e)}
-            value={state.username}
+            onChangeText={e => onChangeInput(e, 'username')}
             isError={state.errors.username.isError}>
             <HelperText
               type="error"
@@ -133,60 +99,16 @@ const SignUpScreen = ({ navigation }) => {
             </HelperText>
           </BaseTextInput>
         </View>
-        <View style={styles.signUpFormControl}>
-          <BaseTextInput
-            mode="outlined"
-            label="Email"
-            onChangeText={e => onChangeText('email', e)}
-            value={state.email}
-            isError={state.errors.email.isError}>
-            <HelperText
-              type="error"
-              theme={{ colors: { error: color.yellow } }}
-              visible={state.errors.email.isError}>
-              {state.errors.email.message}
-            </HelperText>
-          </BaseTextInput>
-        </View>
-        <View style={styles.signUpFormControl}>
-          <BaseTextInput
-            mode="outlined"
-            label="Password"
-            secureTextEntry={!state.showPassword}
-            isError={state.errors.password.isError}
-            onChangeText={e => onChangeText('password', e)}
-            iconPosition="right"
-            icon={
-              <TextInput.Icon
-                name={state.iconPassword}
-                color={color.greyLine}
-                onPress={() => _handleTogglePassword()}
-              />
-            }>
-            <HelperText
-              type="error"
-              theme={{ colors: { error: color.yellow } }}
-              visible={state.errors.password.isError}>
-              {state.errors.password.message}
-            </HelperText>
-          </BaseTextInput>
-        </View>
       </View>
       <View style={styles.signUpButton}>
-        <View>
-          <BaseButton
-            mode="contained"
-            uppercase={false}
-            size="medium"
-            onPress={() => _handleSubmitRegister()}>
-            Register
-          </BaseButton>
-          <Text
-            onPress={() => navigation.navigate('SignIn')}
-            style={styles.textInformation}>
-            Already have account? <Text>Sign In Now</Text>
-          </Text>
-        </View>
+        <BaseButton
+          mode="contained"
+          uppercase={false}
+          size="medium"
+          disabled={authReducer.isLoading}
+          onPress={() => _handleSubmitRegister()}>
+          Register
+        </BaseButton>
         <ActivityIndicator
           size={36}
           animating={authReducer.isLoading}
@@ -210,7 +132,7 @@ const SignUpScreen = ({ navigation }) => {
   );
 };
 
-export default SignUpScreen;
+export default SocialOnBoardingScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -229,14 +151,14 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   signUpButton: {
-    height: 160,
+    height: 130,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
   textInformation: {
     ...fontConfig.fontStylesheet.body2,
     color: color.yellow,
-    marginTop: 18,
+    marginTop: 24,
     textAlign: 'center',
   },
 });

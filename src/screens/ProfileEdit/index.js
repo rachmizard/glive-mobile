@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-paper';
+import { connect } from 'react-redux';
+import { BaseButton } from '../../components';
+import { logoutSocialAsync } from '../../redux/authReducer/actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,17 +12,26 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class ProfileEditScreen extends Component {
+class ProfileEditScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+  }
+
+  _onLogoutHandler() {
+    this.props.onLogout();
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello word</Text>
+        <BaseButton onPress={() => this._onLogoutHandler()}>Logout</BaseButton>
       </View>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  onLogout: () => dispatch(logoutSocialAsync()),
+});
+
+export default connect(null, mapDispatchToProps)(ProfileEditScreen);
