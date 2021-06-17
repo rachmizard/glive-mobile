@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   dividerChat: {
-    backgroundColor: color.greyLine,
+    backgroundColor: color.grayLine,
     marginVertical: 8,
   },
 });

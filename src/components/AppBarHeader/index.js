@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import AppBarAction from '../AppBarAction';
 import { color, fontConfig } from '../../assets';
+import { useSelector } from 'react-redux';
 
 const headerCentered = title => {
   switch (title) {
@@ -21,6 +22,8 @@ const headerCentered = title => {
 };
 
 const AppBarHeader = ({ navigation, previous, scene }) => {
+  const { isLoggedIn } = useSelector(state => state.authReducer);
+
   const { options } = scene.descriptor;
   const title =
     options.headerTitle !== undefined
@@ -39,7 +42,7 @@ const AppBarHeader = ({ navigation, previous, scene }) => {
         title={title}
         titleStyle={fontConfig.fontStylesheet.subtitle1}
       />
-      <AppBarAction title={title} navigation={navigation} />
+      {isLoggedIn && <AppBarAction title={title} navigation={navigation} />}
     </Appbar.Header>
   );
 };

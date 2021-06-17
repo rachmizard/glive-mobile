@@ -67,7 +67,7 @@ const NotificationListContainer = ({
             </View>
           </View>
           <View style={styles.divider}>
-            <Divider style={{ backgroundColor: color.greyLine }} />
+            <Divider style={{ backgroundColor: color.grayLine }} />
           </View>
         </View>
       ))}

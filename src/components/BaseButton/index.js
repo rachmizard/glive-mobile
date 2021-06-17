@@ -14,7 +14,7 @@ const BaseButton = ({
   size,
 }) => {
   const style = [];
-  let colorButton = color.greyDark;
+  let colorButton = color.grayDark;
   let contentStyle = { height: 48, justifyContent: 'center' };
   const labelStyle = [fontConfig.fontStylesheet.button];
 
@@ -31,8 +31,8 @@ const BaseButton = ({
   }
 
   if (mode === 'contained' && disabled) {
-    colorButton = color.greyLight;
-    contentStyle = { ...contentStyle, backgroundColor: color.greyDark };
+    colorButton = color.grayLight;
+    contentStyle = { ...contentStyle, backgroundColor: color.grayDark };
     labelStyle.push({ color: color.white });
   }
 
@@ -42,8 +42,8 @@ const BaseButton = ({
   }
 
   if (mode === 'outlined' && disabled) {
-    labelStyle.push({ color: color.greyMedium });
-    style.push({ borderColor: color.greyMedium });
+    labelStyle.push({ color: color.grayMedium });
+    style.push({ borderColor: color.grayMedium });
   }
 
   return (
@@ -70,12 +70,13 @@ BaseButton.defaultProps = {
   disabled: false,
   size: 'medium',
   onLongPress: null,
+  onPress: () => ({}),
 };
 
 BaseButton.propTypes = {
   children: PropTypes.node.isRequired,
   mode: PropTypes.string,
-  onPress: PropTypes.func.isRequired,
+  onPress: PropTypes.func,
   onLongPress: PropTypes.func,
   uppercase: PropTypes.bool,
   disabled: PropTypes.bool,

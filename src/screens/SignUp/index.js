@@ -159,7 +159,7 @@ const SignUpScreen = ({ navigation }) => {
             icon={
               <TextInput.Icon
                 name={state.iconPassword}
-                color={color.greyLine}
+                color={color.grayLine}
                 onPress={() => _handleTogglePassword()}
               />
             }>

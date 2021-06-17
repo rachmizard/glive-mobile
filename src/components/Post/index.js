@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   textInfo: {
-    color: color.greyLine,
+    color: color.grayLine,
     ...fontStylesheet.subtitle2,
     marginBottom: 4,
   },
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
 });
 
 Post.defaultProps = {
-  onPressDetailPost: () => {},
+  onPressDetailPost: () => ({}),
 };
 
 Post.propTypes = {

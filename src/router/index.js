@@ -12,15 +12,12 @@ import {
   AuthStack,
   HomeStack,
   NotificationStack,
+  PostStack,
   ProfileStack,
 } from './Stacks';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
-const AddContentScreen = () => {
-  return null;
-};
 
 const MainScreen = () => {
   return (
@@ -29,7 +26,11 @@ const MainScreen = () => {
       tabBar={props => <AppBotomNavigation {...props} />}>
       <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="Activity" component={ActivityStack} />
-      <Tab.Screen name="Add" component={AddContentScreen} />
+      <Tab.Screen
+        name="Post"
+        component={PostStack}
+        options={{ tabBarVisible: false }}
+      />
       <Tab.Screen name="Notification" component={NotificationStack} />
       <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>

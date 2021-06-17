@@ -56,5 +56,5 @@ const styles = StyleSheet.create({
   channelItem: {
     flexDirection: 'row',
   },
-  divider: { backgroundColor: color.greyLine, marginVertical: 8 },
+  divider: { backgroundColor: color.grayLine, marginVertical: 8 },
 });

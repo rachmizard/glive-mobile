@@ -24,6 +24,7 @@ const BaseTextInput = ({
   disabled,
   value,
   height,
+  ...otherProps
 }) => {
   const themeTextInput = {
     colors: {
@@ -69,6 +70,7 @@ const BaseTextInput = ({
         style={styles}
         value={value}
         {...IconText}
+        {...otherProps}
       />
       {children}
     </>
@@ -80,8 +82,8 @@ export default BaseTextInput;
 BaseTextInput.defaultProps = {
   mode: 'outlined',
   autoCompleteType: 'off',
-  placeHolderColor: color.greyLine,
-  textInputColor: color.greyLine,
+  placeHolderColor: color.grayLine,
+  textInputColor: color.grayLine,
   textInputBackgroundColor: color.background,
   focusColor: color.blue,
   errorColor: color.blue,

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   textInfo: {
-    color: color.greyLine,
+    color: color.grayLine,
     ...fontConfig.fontStylesheet.subtitle2,
     marginBottom: 4,
   },

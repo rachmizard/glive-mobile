@@ -36,7 +36,7 @@ const AppBottomTabItem = ({
       );
       break;
 
-    case 'Add':
+    case 'Post':
       icon = <IconAddContent width={36} height={36} />;
       break;
 
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     width: 80,
   },
   text: isFocused => ({
-    color: isFocused ? color.primary : color.greyLight,
+    color: isFocused ? color.primary : color.grayLight,
     fontFamily: fontConfig.fontStylesheet.subtitle1,
   }),
 });
