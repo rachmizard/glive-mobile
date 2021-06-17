@@ -14,10 +14,10 @@ const color = {
   surface: '#252A31',
   placeholder: '#393E46',
   disabled: '#393E46',
-  greyDark: '#393E46',
-  greyMedium: '#8F97A3',
-  greyLine: '#9DA4AE',
-  greyLight: '#CFD0D7',
+  grayDark: '#393E46',
+  grayMedium: '#8F97A3',
+  grayLine: '#9DA4AE',
+  grayLight: '#CFD0D7',
 };
 
 export default color;

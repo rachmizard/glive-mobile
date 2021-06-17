@@ -46,5 +46,5 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 8,
   },
-  divider: { backgroundColor: color.greyLine, marginVertical: 8 },
+  divider: { backgroundColor: color.grayLine, marginVertical: 8 },
 });

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     ...fontConfig.fontStylesheet.subtitle2,
     padding: 4,
     textAlign: 'center',
-    backgroundColor: active ? color.yellow : color.greyLight,
+    backgroundColor: active ? color.yellow : color.grayLight,
     color: color.black,
     borderRadius: 5,
     marginLeft: 8,

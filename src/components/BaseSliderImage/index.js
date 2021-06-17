@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
 BaseSliderImage.defaultProps = {
   images: [],
   activeColor: color.white,
-  unactiveColor: color.greyDark,
+  unactiveColor: color.grayDark,
 };
 
 BaseSliderImage.propTypes = {

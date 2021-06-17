@@ -111,7 +111,7 @@ export default class ChatScreen extends Component {
               <TextInput.Icon
                 onPress={() => this._handleSendMessage()}
                 name="send"
-                color={color.greyLine}
+                color={color.grayLine}
               />
             }
           />

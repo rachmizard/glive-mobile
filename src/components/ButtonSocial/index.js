@@ -18,7 +18,7 @@ const ButtonSocial = ({
 }) => {
   let socialIcon = null;
   let contentStyle = color.white;
-  let labelStyle = color.greyDark;
+  let labelStyle = color.grayDark;
 
   switch (social) {
     case 'google':

@@ -14,6 +14,7 @@ import FollowerRequestScreen from './FollowerRequest';
 import DirectMessageScreen from './DirectMessage';
 import ChatScreen from './Chat';
 import SocialOnBoardingScreen from './SocialOnBoarding';
+import CreatePostScreen from './CreatePost';
 
 export {
   SplashScreen,
@@ -32,4 +33,5 @@ export {
   DirectMessageScreen,
   ChatScreen,
   SocialOnBoardingScreen,
+  CreatePostScreen,
 };
