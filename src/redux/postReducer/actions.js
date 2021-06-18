@@ -1,6 +1,10 @@
 import * as navigation from '../../router/rootNavigation';
 import { generateFile } from '../../constants/generateFile';
-import { getPostsCollection, storeMediaToStorage } from '../../services/google';
+import {
+  getPostsCollection,
+  getUsersCollection,
+  storeMediaToStorage,
+} from '../../services/google';
 import { GET_POSTS, SET_IS_UPLOADING, SET_TRANSFERRED } from './types';
 import firestore from '@react-native-firebase/firestore';
 
@@ -25,8 +29,20 @@ export const getPostAsync = () => {
       .orderBy('createdAt', 'desc')
       .get()
       .then(querySnapshot => {
-        const map = querySnapshot.docs.map(data => data.data());
-        dispatch(getPosts(map));
+        async function findAnAuthor(document) {
+          const post = document.data();
+
+          const findAuthor = await getUsersCollection().doc(post.author).get();
+
+          return {
+            ...post,
+            author: findAuthor.data(),
+          };
+        }
+
+        Promise.all(querySnapshot.docs.map(findAnAuthor)).then(res =>
+          dispatch(getPosts(res)),
+        );
       });
   };
 };
@@ -69,7 +85,7 @@ export const createPostAsync = payload => {
     }
 
     Promise.all(payload.media.map(getUrlAfterUploaded)).then(res => {
-      const author = authReducer.user;
+      const author = authReducer.user.email;
 
       const body = {
         ...postReducer.formData,
