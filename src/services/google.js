@@ -13,6 +13,8 @@ export const getUsersCollection = () => firestore().collection('Users');
 
 export const getPostsCollection = () => firestore().collection('Posts');
 
+export const getMediaCollections = () => firestore().collection('PostMedias');
+
 export const signInWithEmailAndPassword = (email, password) => {
   return auth().signInWithEmailAndPassword(email.toLowerCase(), password);
 };
@@ -33,7 +35,9 @@ export const sendPasswordResetEmail = (email, actionCodeSettings = null) => {
 };
 
 export const storeMediaToStorage = filename => {
-  return storage().ref(filename);
+  const pathFile = 'posts/';
+
+  return storage().ref(`${pathFile}${filename}`);
 };
 
 export const storePostCollection = (collection, body = {}) => {

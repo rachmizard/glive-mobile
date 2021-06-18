@@ -20,7 +20,6 @@ class CreatePostScreen extends Component {
     const options = {
       noData: true,
       selectionLimit: 0,
-      mediaType: 'mixed',
     };
 
     launchImageLibrary(options, response => {
@@ -34,9 +33,8 @@ class CreatePostScreen extends Component {
     });
   }
 
-  async _submitPostHandler() {
-    await this.props.createPost(this.state);
-    this._resetState();
+  _submitPostHandler() {
+    this.props.createPost(this.state);
   }
 
   _resetPreviewHandler() {
@@ -53,18 +51,21 @@ class CreatePostScreen extends Component {
 
   _renderPreview() {
     const { media } = this.state;
+    const { postReducer } = this.props;
 
     if (media.length > 0) {
       return (
-        <React.Fragment>
+        <View style={styles.previewContent}>
           <BaseSliderImage images={media} />
-          <IconButton
-            icon="delete"
-            color={color.red}
-            size={28}
-            onPress={() => this._resetPreviewHandler()}
-          />
-        </React.Fragment>
+          {postReducer.isUploading ? null : (
+            <IconButton
+              icon="delete"
+              color={color.red}
+              size={28}
+              onPress={() => this._resetPreviewHandler()}
+            />
+          )}
+        </View>
       );
     }
 
@@ -97,13 +98,16 @@ class CreatePostScreen extends Component {
             value={caption}
             onChangeText={text => this.setState({ caption: text })}
           />
-          {this._renderPreview()}
-          {this._renderProgressbar()}
+          <View style={styles.previewWrapper}>
+            {this._renderPreview()}
+            {this._renderProgressbar()}
+          </View>
         </View>
         <View>
           <Divider style={styles.divider} />
           <View style={styles.formActionBody}>
             <IconButton
+              disabled={postReducer.isUploading}
               icon="image-area"
               color={color.white}
               size={24}
@@ -113,8 +117,7 @@ class CreatePostScreen extends Component {
               <BaseButton
                 disabled={
                   postReducer.isUploading ||
-                  caption === '' ||
-                  media.length === 0
+                  (caption === '' && media.length === 0)
                 }
                 uppercase={false}
                 onPress={() => this._submitPostHandler()}>
@@ -161,6 +164,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
   },
   postButtonWrapper: { width: 150 },
+  previewWrapper: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  previewContent: {
+    marginBottom: 20,
+  },
   previewImg: {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,

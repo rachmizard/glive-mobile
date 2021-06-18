@@ -15,7 +15,12 @@ const { width } = Dimensions.get('window');
 const SCREEN_WIDTH = width * 0.9;
 const SCREEN_HEIGHT = width * 0.9;
 
-const BaseSliderImage = ({ images, activeColor, unactiveColor }) => {
+const BaseSliderImage = ({
+  images,
+  activeColor,
+  unactiveColor,
+  baseUriImage,
+}) => {
   const [active, setActive] = useState(0);
 
   const _handleChangeScroll = ({ nativeEvent }) => {
@@ -35,9 +40,17 @@ const BaseSliderImage = ({ images, activeColor, unactiveColor }) => {
         pagingEnabled
         horizontal
         showsHorizontalScrollIndicator={false}>
-        {images.map((image, i) => (
-          <Image key={i} source={image} style={styles.sliderImg} />
-        ))}
+        {images.map((image, i) => {
+          let source = null;
+
+          if (baseUriImage) {
+            source = { uri: image };
+          } else {
+            source = image;
+          }
+
+          return <Image key={i} source={source} style={styles.sliderImg} />;
+        })}
       </ScrollView>
       <View style={styles.paginationWrapper}>
         {images.length > 1 &&
@@ -84,10 +97,12 @@ BaseSliderImage.defaultProps = {
   images: [],
   activeColor: color.white,
   unactiveColor: color.grayDark,
+  baseUriImage: false,
 };
 
 BaseSliderImage.propTypes = {
   images: PropTypes.arrayOf(Array),
   activeColor: PropTypes.string,
+  baseUriImage: PropTypes.bool,
   unactiveColor: PropTypes.string,
 };

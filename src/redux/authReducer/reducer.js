@@ -20,7 +20,7 @@ const authInitialState = {
     googleAccount: null,
     facebookAccount: null,
     profileImageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-thumbnail.png?alt=media&token=1fe2eb1f-4756-40b0-97f3-7cc2ad08a6b5',
+      'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/user.png?alt=media&token=215c0ab8-f88a-4425-bdc4-035e3b2f2516',
     backgroundImageUrl: null,
     postCount: 0,
     divisionCount: 0,
@@ -46,7 +46,7 @@ const defaultInitialState = {
     googleAccount: null,
     facebookAccount: null,
     profileImageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-thumbnail.png?alt=media&token=1fe2eb1f-4756-40b0-97f3-7cc2ad08a6b5',
+      'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/user.png?alt=media&token=215c0ab8-f88a-4425-bdc4-035e3b2f2516',
     backgroundImageUrl: null,
     postCount: 0,
     divisionCount: 0,

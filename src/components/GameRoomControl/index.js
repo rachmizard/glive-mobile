@@ -5,7 +5,7 @@ import { color } from '../../assets';
 import { MonsterHunterWorld } from '../../assets/images/gameroom';
 import { GameRoomControlInfo, GameRoomControlAction } from './Parts';
 
-const GameRoomControl = ({ onPressGameControl }) => {
+const GameRoomControl = ({ onPressGameControl, visible }) => {
   const [state, setState] = useState({
     isAudio: true,
     isMute: true,
@@ -46,7 +46,7 @@ const GameRoomControl = ({ onPressGameControl }) => {
   return (
     <Animated.View
       style={[
-        styles.gameRoomControlWrapper,
+        styles.gameRoomControlWrapper(visible),
         { transform: [{ translateY: state.animated }] },
       ]}>
       <View style={styles.gameRoomControlBody}>
@@ -70,13 +70,14 @@ const GameRoomControl = ({ onPressGameControl }) => {
 export default GameRoomControl;
 
 const styles = StyleSheet.create({
-  gameRoomControlWrapper: {
+  gameRoomControlWrapper: visible => ({
+    display: visible ? 'flex' : 'none',
     flexDirection: 'column',
     justifyContent: 'center',
     marginBottom: 1,
     backgroundColor: color.surface,
     height: 56,
-  },
+  }),
   gameRoomControlBody: {
     flexDirection: 'row',
     paddingHorizontal: 24,

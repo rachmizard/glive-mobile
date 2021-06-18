@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Alert, StyleSheet, SafeAreaView } from 'react-native';
+import { ProgressBar } from 'react-native-paper';
+import { connect } from 'react-redux';
+import { color } from '../../assets';
 import { BaseTag } from '../../components';
 import { PostContainer } from '../../containers';
-import { tags, posts } from '../../mocks';
+import { tags } from '../../mocks';
+import { getPostAsync } from '../../redux/postReducer/actions';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +20,14 @@ export default class HomeScreen extends Component {
 
   componentDidMount() {
     this.fetchData();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (
+      prevProps.postReducer.isUploading !== this.props.postReducer.isUploading
+    ) {
+      this.props.getPosts();
+    }
   }
 
   _handlePressTag = index => {
@@ -33,7 +45,7 @@ export default class HomeScreen extends Component {
     this.setState({ refreshing: true });
     this.wait(1000).then(() => {
       this.setState({ refreshing: false });
-      this.setState({ postContents: posts });
+      this.fetchData();
     });
   };
 
@@ -65,18 +77,23 @@ export default class HomeScreen extends Component {
 
   fetchData() {
     this.setState({ tags });
-    this.setState({ postContents: posts });
+    this.props.getPosts();
   }
 
   render() {
     const { tags, refreshing, postContents } = this.state;
+    const { postReducer } = this.props;
+
     return (
       <SafeAreaView style={styles.container}>
+        {postReducer.isUploading && (
+          <ProgressBar progress={postReducer.transferred} color={color.blue} />
+        )}
         <BaseTag tags={tags} onPress={this._handlePressTag} />
         <PostContainer
           refreshing={refreshing}
           onRefresh={this.onRefresh}
-          postContents={postContents}
+          postContents={postReducer.posts}
           onPressDetailPost={this._handleNavigatePostDetail}
           onPressComment={this._handlePressComment}
           onPressRetweet={this._handlePressRetweet}
@@ -92,3 +109,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+const mapStateToProps = state => ({
+  postReducer: state.postReducer,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getPosts: () => dispatch(getPostAsync()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

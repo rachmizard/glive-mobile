@@ -1,16 +1,8 @@
+import * as navigation from '../../router/rootNavigation';
 import { generateFile } from '../../constants/generateFile';
 import { getPostsCollection, storeMediaToStorage } from '../../services/google';
-import {
-  CREATE_POST,
-  GET_POSTS,
-  SET_IS_UPLOADING,
-  SET_TRANSFERRED,
-} from './types';
-
-const createPost = payload => ({
-  type: CREATE_POST,
-  payload,
-});
+import { GET_POSTS, SET_IS_UPLOADING, SET_TRANSFERRED } from './types';
+import firestore from '@react-native-firebase/firestore';
 
 const getPosts = payload => ({
   type: GET_POSTS,
@@ -27,12 +19,26 @@ const setIsUploading = payload => ({
   payload,
 });
 
+export const getPostAsync = () => {
+  return dispatch => {
+    getPostsCollection()
+      .orderBy('age', 'desc')
+      .get()
+      .then(querySnapshot => {
+        const map = querySnapshot.docs.map(data => data.data());
+        dispatch(getPosts(map));
+      });
+  };
+};
+
 export const createPostAsync = payload => {
   return (dispatch, getState) => {
-    const { postReducer } = getState();
+    const { postReducer, authReducer } = getState();
 
     dispatch(setIsUploading(true));
-    dispatch(setTransferred(0));
+    dispatch(setTransferred(0.5));
+
+    navigation.replace('MainScreen', { screen: 'Home' });
 
     async function getUrlAfterUploaded(media) {
       const { filename, uploadUri } = generateFile(media);
@@ -41,9 +47,7 @@ export const createPostAsync = payload => {
 
       task.on('state_changed', snapshot => {
         dispatch(
-          setTransferred(
-            Math.round(snapshot.bytesTransferred / snapshot.totalBytes),
-          ),
+          setTransferred(snapshot.bytesTransferred / snapshot.totalBytes),
         );
       });
 
@@ -65,15 +69,21 @@ export const createPostAsync = payload => {
     }
 
     Promise.all(payload.media.map(getUrlAfterUploaded)).then(res => {
+      const author = authReducer.user;
+
       const body = {
         ...postReducer.formData,
         ...payload,
+        author: author,
         media: [...res],
+        createdAt: firestore.Timestamp.now(),
+        updatedAt: firestore.Timestamp.now(),
       };
 
       getPostsCollection()
         .add(body)
-        .then(res => console.log('SUCCESS!!', res));
+        .then(() => dispatch(setIsUploading(false)))
+        .catch(err => dispatch(setIsUploading(false)));
     });
   };
 };
