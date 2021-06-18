@@ -22,7 +22,7 @@ const setIsUploading = payload => ({
 export const getPostAsync = () => {
   return dispatch => {
     getPostsCollection()
-      .orderBy('age', 'desc')
+      .orderBy('createdAt', 'desc')
       .get()
       .then(querySnapshot => {
         const map = querySnapshot.docs.map(data => data.data());

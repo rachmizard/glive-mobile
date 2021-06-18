@@ -8,7 +8,7 @@ export default [
     media: [
       {
         mediaUrl:
-          'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/rn_image_picker_lib_temp_0a3c78b8-de22-400e-8872-65bfd512e0bd.jpg?alt=media&token=66d81a20-424f-4ed0-9d8c-4c2211b64046',
+          'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/post-2.png?alt=media&token=0a117aa7-2605-48fb-98e9-9b9bb7856201',
         mediaType: 'image/jpeg',
       },
     ],
@@ -48,7 +48,7 @@ export default [
     media: [
       {
         mediaUrl:
-          'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/rn_image_picker_lib_temp_0a3c78b8-de22-400e-8872-65bfd512e0bd.jpg?alt=media&token=66d81a20-424f-4ed0-9d8c-4c2211b64046',
+          'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/post-1.png?alt=media&token=1d5b8bb2-5559-4930-82ff-12a21987b5ae',
         mediaType: 'image/jpeg',
       },
     ],
