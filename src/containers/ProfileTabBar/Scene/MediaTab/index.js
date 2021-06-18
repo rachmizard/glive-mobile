@@ -19,6 +19,8 @@ const MediaTabScene = props => {
     wait(1000).then(() => setRefreshing(false));
   };
 
+  console.log(contents);
+
   return (
     <ScrollView
       style={styles.container}

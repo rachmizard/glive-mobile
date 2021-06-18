@@ -9,30 +9,21 @@ import BaseSliderImage from '../BaseSliderImage';
 const { fontStylesheet } = fontConfig;
 
 const Post = ({ post, onPressDetailPost, renderAction }) => {
-  const {
-    userPict,
-    name,
-    lastHour,
-    userName,
-    contentImgs,
-    content,
-    tags,
-    isReposted,
-  } = post;
+  const { caption, tags, media, author, isReposted, createdAt } = post;
 
   return (
     <View style={styles.container}>
       <View style={styles.postWrapper}>
         {isReposted && <Text style={styles.textInfo}>Reposted By you</Text>}
         <PostHeader
-          name={name}
-          userPict={userPict}
-          lastHour={lastHour}
-          userName={userName}
+          name={author.name}
+          userPict={author.profileImageUrl}
+          lastHour={null}
+          userName={author.userName}
         />
         <PostContent
-          contentImgs={contentImgs}
-          content={content}
+          contentImgs={media}
+          content={caption}
           onPressDetailPost={onPressDetailPost}
           renderAction={renderAction}
           tags={tags}
@@ -55,13 +46,13 @@ export default Post;
 const PostHeader = ({ name, userPict, lastHour, userName }) => (
   <View style={styles.postHeader}>
     <View style={styles.postUserImg}>
-      <Image source={userPict} style={styles.img} />
+      <Image source={{ uri: userPict }} style={styles.img} />
     </View>
     <View style={styles.postUserIdentity}>
       <Text style={fontStylesheet.subtitle1}>
         {name} · {lastHour}
       </Text>
-      <Text style={fontStylesheet.caption}>{userName}</Text>
+      <Text style={fontStylesheet.caption}>@{userName}</Text>
     </View>
   </View>
 );
@@ -72,16 +63,21 @@ const PostContent = ({
   onPressDetailPost,
   renderAction,
   tags,
-}) => (
-  <View style={styles.postContent}>
-    {contentImgs ? <BaseSliderImage images={contentImgs} /> : null}
-    <Caption onPress={onPressDetailPost} style={styles.contentCaptionText}>
-      {content}
-    </Caption>
-    <Text style={styles.contentTagsText}>{tags.join(' ')}</Text>
-    {renderAction}
-  </View>
-);
+}) => {
+  const mapContentImgs = contentImgs.map(img => img.mediaUrl);
+  return (
+    <View style={styles.postContent}>
+      {mapContentImgs.length !== 0 ? (
+        <BaseSliderImage baseUriImage images={mapContentImgs} />
+      ) : null}
+      <Caption onPress={onPressDetailPost} style={styles.contentCaptionText}>
+        {content}
+      </Caption>
+      <Text style={styles.contentTagsText}>{tags.join(' ')}</Text>
+      {renderAction}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

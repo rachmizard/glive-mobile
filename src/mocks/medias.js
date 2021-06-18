@@ -1,42 +1,83 @@
-import UserProfile from '../assets/images/user-profile-pict.png';
-import UserPicture from '../assets/images/user-picture.png';
-import Media1 from '../assets/images/media';
-import { Post1 } from '../assets/images/posts';
-
 export default [
   {
-    id: 1,
-    userPict: UserProfile,
-    name: 'Ashley Doe',
-    userName: '@xypericious',
-    lastHour: '1h',
+    caption:
+      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+    tags: [],
+    game: [],
+    mentions: [],
+    media: [
+      {
+        mediaUrl:
+          'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/post-2.png?alt=media&token=0a117aa7-2605-48fb-98e9-9b9bb7856201',
+        mediaType: 'image/jpeg',
+      },
+    ],
+    author: {
+      email: 'kumal@gmail.com',
+      password: null,
+      name: 'Kumal Gumpar',
+      userName: '@zayrass',
+      discordAccount: null,
+      googleAccount: null,
+      facebookAccount: null,
+      profileImageUrl:
+        'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/user-picture.png?alt=media&token=1831940f-afd0-48f8-872a-e94316e64847',
+      backgroundImageUrl: null,
+      postCount: 8,
+      divisionCount: 900,
+      friendsCount: 900,
+      likersCount: 900,
+      accountType: 'public',
+    },
+    division: {},
+    postParent: {},
+    likersCount: 900,
+    replyCount: 900,
+    repostCount: 900,
     isRetweeted: false,
     isUpvote: false,
-    contentImg: Media1,
-    contentImgs: [Media1, Post1],
-    content:
-      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
     isReposted: false,
-    tags: ['#hero', '#down'],
-    totalComments: 359,
-    totalRetweeted: 11300,
-    totalUpvoted: 59000,
+    createdAt: '2h',
+    updatedAt: '2h',
   },
   {
-    id: 2,
-    userPict: UserPicture,
-    name: 'Kumal Gumpar',
-    userName: '@@zayrass',
-    lastHour: '1h',
-    isRetweeted: true,
-    isUpvote: true,
-    contentImg: null,
-    content:
-      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-    tags: ['#tags', '#sample'],
-    isReposted: true,
-    totalComments: 359,
-    totalRetweeted: 11000,
-    totalUpvoted: 59000,
+    caption: 'Cant wait to stream again xoxo',
+    tags: [],
+    game: [],
+    mentions: [],
+    media: [
+      {
+        mediaUrl:
+          'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/post-1.png?alt=media&token=1d5b8bb2-5559-4930-82ff-12a21987b5ae',
+        mediaType: 'image/jpeg',
+      },
+    ],
+    author: {
+      email: 'rebeccapurple@gmail.com',
+      password: null,
+      name: 'Rebecca Purple',
+      userName: '@rbcpurple',
+      discordAccount: null,
+      googleAccount: null,
+      facebookAccount: null,
+      profileImageUrl:
+        'https://firebasestorage.googleapis.com/v0/b/app-glive.appspot.com/o/user-3.png?alt=media&token=4feed043-0cb7-413b-9193-754a5079cc9b',
+      backgroundImageUrl: null,
+      postCount: 0,
+      divisionCount: 900,
+      friendsCount: 900,
+      likersCount: 900,
+      accountType: 'public',
+    },
+    division: {},
+    postParent: {},
+    likersCount: 0,
+    replyCount: 0,
+    repostCount: 0,
+    isRetweeted: false,
+    isUpvote: false,
+    isReposted: false,
+    createdAt: '2h',
+    updatedAt: '2h',
   },
 ];

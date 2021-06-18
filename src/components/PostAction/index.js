@@ -23,7 +23,7 @@ const PostAction = ({
             style={styles.iconInteraction()}
           />
           <Text style={styles.interactionCounter()}>
-            {kFormatter(post.totalComments)}
+            {kFormatter(post.replyCount)}
           </Text>
         </View>
       </TouchableRipple>
@@ -35,7 +35,7 @@ const PostAction = ({
             style={styles.iconInteraction(post.isRetweeted)}
           />
           <Text style={styles.interactionCounter(post.isRetweeted)}>
-            {kFormatter(post.totalRetweeted)}
+            {kFormatter(post.repostCount)}
           </Text>
         </View>
       </TouchableRipple>
@@ -47,7 +47,7 @@ const PostAction = ({
             style={styles.iconInteraction(post.isUpvote)}
           />
           <Text style={styles.interactionCounter(post.isUpvote)}>
-            {kFormatter(post.totalUpvoted)}
+            {kFormatter(post.likersCount)}
           </Text>
         </View>
       </TouchableRipple>

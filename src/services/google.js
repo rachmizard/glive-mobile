@@ -1,6 +1,8 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
+import { utils } from '@react-native-firebase/app';
 
 GoogleSignin.configure({
   webClientId:
@@ -8,6 +10,10 @@ GoogleSignin.configure({
 });
 
 export const getUsersCollection = () => firestore().collection('Users');
+
+export const getPostsCollection = () => firestore().collection('Posts');
+
+export const getMediaCollections = () => firestore().collection('PostMedias');
 
 export const signInWithEmailAndPassword = (email, password) => {
   return auth().signInWithEmailAndPassword(email.toLowerCase(), password);
@@ -26,6 +32,16 @@ export const signUpUserWithEmailAndPassword = (email, password) => {
 
 export const sendPasswordResetEmail = (email, actionCodeSettings = null) => {
   return auth().sendPasswordResetEmail(email, actionCodeSettings);
+};
+
+export const storeMediaToStorage = filename => {
+  const pathFile = 'posts/';
+
+  return storage().ref(`${pathFile}${filename}`);
+};
+
+export const storePostCollection = (collection, body = {}) => {
+  return firestore().collection(collection).add(body);
 };
 
 export const signInOut = () => {

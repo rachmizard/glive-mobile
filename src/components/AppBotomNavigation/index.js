@@ -56,7 +56,10 @@ const AppBotomNavigation = ({ state, descriptors, navigation }) => {
     }
     return (
       <View style={styles.appBottomNavContainer}>
-        <GameRoomControl onPressGameControl={_handlerOpenGameControl} />
+        <GameRoomControl
+          visible={false}
+          onPressGameControl={_handlerOpenGameControl}
+        />
         <View style={styles.appBotomNavWrapper}>
           {state.routes.map((route, i) => {
             const { options } = descriptors[route.key];

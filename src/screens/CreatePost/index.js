@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Image, Dimensions } from 'react-native';
-import { IconButton, Divider } from 'react-native-paper';
+import { IconButton, Divider, ProgressBar } from 'react-native-paper';
 import { color, fontConfig } from '../../assets';
 import { BaseButton, BaseSliderImage } from '../../components';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { createPostAsync } from '../../redux/postReducer/actions';
+import { connect } from 'react-redux';
 
 class CreatePostScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       caption: '',
-      previewPhotos: [],
+      media: [],
     };
   }
 
@@ -22,45 +24,69 @@ class CreatePostScreen extends Component {
 
     launchImageLibrary(options, response => {
       if (response.assets) {
-        this.setState({ previewPhotos: response.assets });
+        this.setState({ media: response.assets });
       }
 
       if (response.didCancel) {
-        this.setState({ previewPhotos: null });
+        this.setState({ media: [] });
       }
     });
   }
 
+  _submitPostHandler() {
+    this.props.createPost(this.state);
+  }
+
   _resetPreviewHandler() {
-    this.setState({ previewPhotos: [] });
+    this.setState({ media: [] });
+  }
+
+  _resetState() {
+    this.setState({ caption: '', media: [] });
   }
 
   componentWillUnmount() {
-    this.setState(() => ({ caption: '', previewPhotos: [] }));
+    this._resetState();
   }
 
-  renderPreview() {
-    const { previewPhotos } = this.state;
+  _renderPreview() {
+    const { media } = this.state;
+    const { postReducer } = this.props;
 
-    if (previewPhotos.length > 0) {
+    if (media.length > 0) {
       return (
-        <React.Fragment>
-          <BaseSliderImage images={previewPhotos} />
-          <IconButton
-            icon="delete"
-            color={color.red}
-            size={28}
-            onPress={() => this._resetPreviewHandler()}
-          />
-        </React.Fragment>
+        <View style={styles.previewContent}>
+          <BaseSliderImage images={media} />
+          {postReducer.isUploading ? null : (
+            <IconButton
+              icon="delete"
+              color={color.red}
+              size={28}
+              onPress={() => this._resetPreviewHandler()}
+            />
+          )}
+        </View>
       );
     }
 
     return null;
   }
 
+  _renderProgressbar() {
+    const { postReducer } = this.props;
+
+    if (postReducer.isUploading) {
+      return (
+        <ProgressBar progress={postReducer.transferred} color={color.blue} />
+      );
+    }
+    return null;
+  }
+
   render() {
-    const { caption } = this.state;
+    const { caption, media } = this.state;
+    const { postReducer } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.formWrapper}>
@@ -72,12 +98,16 @@ class CreatePostScreen extends Component {
             value={caption}
             onChangeText={text => this.setState({ caption: text })}
           />
-          {this.renderPreview()}
+          <View style={styles.previewWrapper}>
+            {this._renderPreview()}
+            {this._renderProgressbar()}
+          </View>
         </View>
         <View>
           <Divider style={styles.divider} />
           <View style={styles.formActionBody}>
             <IconButton
+              disabled={postReducer.isUploading}
               icon="image-area"
               color={color.white}
               size={24}
@@ -85,8 +115,12 @@ class CreatePostScreen extends Component {
             />
             <View style={styles.postButtonWrapper}>
               <BaseButton
+                disabled={
+                  postReducer.isUploading ||
+                  (caption === '' && media.length === 0)
+                }
                 uppercase={false}
-                onPress={() => console.log('Pressed')}>
+                onPress={() => this._submitPostHandler()}>
                 Post Now
               </BaseButton>
             </View>
@@ -130,6 +164,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
   },
   postButtonWrapper: { width: 150 },
+  previewWrapper: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  previewContent: {
+    marginBottom: 20,
+  },
   previewImg: {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
@@ -138,4 +179,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreatePostScreen;
+const mapStateToProps = state => ({
+  postReducer: state.postReducer,
+});
+
+const mapDispatchToProps = dispatch => ({
+  createPost: payload => dispatch(createPostAsync(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePostScreen);
