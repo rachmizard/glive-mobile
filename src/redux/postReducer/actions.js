@@ -5,7 +5,13 @@ import {
   getUsersCollection,
   storeMediaToStorage,
 } from '../../services/google';
-import { GET_POSTS, GET_POSTS_BY, SET_IS_UPLOADING, SET_TRANSFERRED } from './types';
+import {
+  GET_POSTS,
+  GET_MY_POSTS,
+  SET_IS_UPLOADING,
+  SET_TRANSFERRED,
+  GET_MY_MEDIA,
+} from './types';
 import firestore from '@react-native-firebase/firestore';
 
 const getPosts = payload => ({
@@ -13,8 +19,13 @@ const getPosts = payload => ({
   payload,
 });
 
-const getPostsBy = payload => ({
-  type: GET_POSTS_BY,
+const getPostsByAuthor = payload => ({
+  type: GET_MY_POSTS,
+  payload,
+});
+
+const getPostsMedia = payload => ({
+  type: GET_MY_MEDIA,
   payload,
 });
 
@@ -28,7 +39,7 @@ const setIsUploading = payload => ({
   payload,
 });
 
-export const getPostAsync = () => {
+export const getPostAsync = query => {
   return dispatch => {
     getPostsCollection()
       .orderBy('createdAt', 'desc')
@@ -52,16 +63,55 @@ export const getPostAsync = () => {
   };
 };
 
-export const getPostByAsync = () => {
+export const getPostByAuthorAsync = () => {
   return (dispatch, getState) => {
     const authReducer = getState().authReducer;
 
     getPostsCollection()
-      .orderBy('createdAt', 'desc')
       .where('author', '==', authReducer.user.email)
       .get()
       .then(querySnapshot => {
-        console.log(querySnapshot)
+        async function findAnAuthor(document) {
+          const post = document.data();
+
+          const findAuthor = await getUsersCollection().doc(post.author).get();
+
+          return {
+            ...post,
+            author: findAuthor.data(),
+          };
+        }
+
+        Promise.all(querySnapshot.docs.map(findAnAuthor)).then(res =>
+          dispatch(getPostsByAuthor(res)),
+        );
+      });
+  };
+};
+
+export const getPostMediaAuthorAsync = () => {
+  return (dispatch, getState) => {
+    const authReducer = getState().authReducer;
+    getPostsCollection()
+      .where('author', '==', authReducer.user.email)
+      .get()
+      .then(querySnapshot => {
+        async function findAnAuthor(document) {
+          const post = document.data();
+
+          const findAuthor = await getUsersCollection().doc(post.author).get();
+
+          return {
+            ...post,
+            author: findAuthor.data(),
+          };
+        }
+
+        Promise.all(querySnapshot.docs.map(findAnAuthor)).then(res => {
+          const filterMedia = res.filter(media => media.media.length > 0);
+
+          dispatch(getPostsMedia(filterMedia));
+        });
       });
   };
 };
@@ -118,7 +168,7 @@ export const createPostAsync = payload => {
       getPostsCollection()
         .add(body)
         .then(() => dispatch(setIsUploading(false)))
-        .catch(err => dispatch(setIsUploading(false)));
+        .catch(() => dispatch(setIsUploading(false)));
     });
   };
 };

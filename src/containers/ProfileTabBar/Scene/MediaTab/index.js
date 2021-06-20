@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, RefreshControl } from 'react-native';
 import Post from '../../../../components/Post';
 import PostAction from '../../../../components/PostAction';
-import { medias } from '../../../../mocks';
 import { color, fontConfig, theme } from '../../../../assets';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPostMediaAuthorAsync } from '../../../../redux/postReducer/actions';
 
-const MediaTabScene = props => {
-  const [contents, setContents] = useState(medias);
+const MediaTabScene = ({ route }) => {
+  const dispatch = useDispatch();
+
+  const userPostsMedia = useSelector(state => state.postReducer.userPostsMedia);
+
+  useEffect(() => {
+    dispatch(getPostMediaAuthorAsync());
+  }, [route]);
+
   const [refreshing, setRefreshing] = useState(false);
 
   const wait = timeout => {
@@ -15,11 +23,11 @@ const MediaTabScene = props => {
 
   const onRefresh = () => {
     setRefreshing(true);
-    setContents(medias);
-    wait(1000).then(() => setRefreshing(false));
+    wait(1000).then(() => {
+      setRefreshing(false);
+      dispatch(getPostMediaAuthorAsync());
+    });
   };
-
-  console.log(contents);
 
   return (
     <ScrollView
@@ -28,7 +36,7 @@ const MediaTabScene = props => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
-      {contents.map((media, index) => (
+      {userPostsMedia.map((media, index) => (
         <Post
           key={index}
           post={media}

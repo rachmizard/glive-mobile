@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { color } from '../../../../assets';
 import { Post, PostAction } from '../../../../components';
-import { postsAndReplies } from '../../../../mocks';
+import { getPostByAuthorAsync } from '../../../../redux/postReducer/actions';
 
-const PostTabScene = props => {
+const PostTabScene = ({ route }) => {
   const dispatch = useDispatch();
-  const [postAndReplies, setPostAndReplies] = useState(postsAndReplies);
+
+  const getUserPosts = useSelector(state => state.postReducer.userPosts);
+
+  useEffect(() => {
+    dispatch(getPostByAuthorAsync());
+  }, [route]);
+
   const [refreshing, setRefreshing] = useState(false);
 
   const wait = timeout => {
@@ -17,14 +23,16 @@ const PostTabScene = props => {
 
   const onRefresh = () => {
     setRefreshing(true);
-    setPostAndReplies(postsAndReplies);
-    wait(1000).then(() => setRefreshing(false));
+    wait(1000).then(() => {
+      setRefreshing(false);
+      dispatch(getPostByAuthorAsync());
+    });
   };
 
   return (
     <FlatList
       style={styles.container}
-      data={postAndReplies}
+      data={getUserPosts}
       renderItem={({ item }) => (
         <Post
           post={item}

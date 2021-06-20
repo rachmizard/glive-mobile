@@ -1,15 +1,18 @@
 import {
   CREATE_POST,
   GET_POSTS,
-  GET_POSTS_BY,
+  GET_MY_POSTS,
   SET_IS_UPLOADING,
   SET_TRANSFERRED,
+  GET_MY_MEDIA,
 } from './types';
 
 const intialState = {
   isUploading: false,
   transferred: 0,
   posts: [],
+  userPosts: [],
+  userPostsMedia: [],
   formData: {
     caption: null,
     tags: [],
@@ -33,10 +36,16 @@ const postReducer = (state = intialState, action) => {
         posts: action.payload,
       };
 
-    case GET_POSTS_BY:
+    case GET_MY_POSTS:
       return {
         ...state,
-        posts: action.payload,
+        userPosts: action.payload,
+      };
+
+    case GET_MY_MEDIA:
+      return {
+        ...state,
+        userPostsMedia: action.payload,
       };
 
     case CREATE_POST:
