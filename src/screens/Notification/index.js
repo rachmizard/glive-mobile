@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
 import AppBar from '../../components/AppBar';
 import NotificationListContainer from '../../containers/NotificationList';
 import { notifications } from '../../mocks';
@@ -38,7 +39,7 @@ export default class NotificationScreen extends Component {
     const { refreshing, notifications } = this.state;
     return (
       <SafeAreaView style={styles.container}>
-        <AppBar
+        {/* <AppBar
           title="Friend Requests"
           titleIcon="account-plus"
           touchable={true}
@@ -50,7 +51,10 @@ export default class NotificationScreen extends Component {
           notifications={notifications}
           onRefresh={() => this.onRefresh()}
           refreshing={refreshing}
-        />
+        /> */}
+        <View style={styles.container}>
+          <Text>Work In Progress</Text>
+        </View>
       </SafeAreaView>
     );
   }
@@ -59,5 +63,7 @@ export default class NotificationScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

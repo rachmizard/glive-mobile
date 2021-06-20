@@ -10,7 +10,7 @@ const ExploreDivisionContainer = ({ onNavigateDivision, exploreDivisions }) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchBarWrapper}>
-        <BaseTextInput
+        {/* <BaseTextInput
           mode="outlined"
           placeholder="Search..."
           placeHolderColor={color.black}
@@ -25,7 +25,7 @@ const ExploreDivisionContainer = ({ onNavigateDivision, exploreDivisions }) => {
               name={() => <Icon name="magnify" size={24} color={color.black} />}
             />
           }
-        />
+        /> */}
       </View>
       <View style={styles.exploreWrapper}>
         <View style={styles.exploreTitle}>

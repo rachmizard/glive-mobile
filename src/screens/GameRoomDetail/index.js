@@ -41,7 +41,7 @@ export default class GameRoomDetailScreen extends Component {
             </View>
           </View>
           <View style={styles.joinGameRoomBtn}>
-            <BaseButton uppercase={false} onPress={() => alert('Join')}>
+            <BaseButton uppercase={false} onPress={() => alert('Coming Soon')}>
               Join Gameroom
             </BaseButton>
           </View>

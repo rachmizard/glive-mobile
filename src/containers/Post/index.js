@@ -25,14 +25,7 @@ const PostContainer = ({
             key={index}
             post={post}
             onPressDetailPost={() => onPressDetailPost(post)}
-            renderAction={
-              <PostAction
-                post={post}
-                onPressComment={onPressComment}
-                onPressRetweet={() => onPressRetweet(post)}
-                onPressUpvote={() => onPressUpvote(post)}
-              />
-            }
+            renderAction={null}
           />
         ))}
       </ScrollView>

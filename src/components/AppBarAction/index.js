@@ -17,7 +17,7 @@ const AppBarAction = ({ title, navigation }) => {
     case 'Profile':
       renderIcon = {
         icon: () => <Icon name="cog" color={color.white} size={24} />,
-        onPress: () => null,
+        onPress: () => navigation.navigate('ProfileEdit'),
       };
       break;
 

@@ -46,7 +46,7 @@ export default class ActivityScreen extends Component {
 
   _handleNavigateDivision = division => {
     const { navigation } = this.props;
-    navigation.navigate('Division', { division });
+    // navigation.navigate('Division', { division });
   };
 
   _handleNavigateGameRoom = gameRoom => {

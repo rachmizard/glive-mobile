@@ -72,7 +72,7 @@ class HomeScreen extends Component {
   };
 
   _handleNavigatePostDetail = ({ id }) => {
-    Alert.alert('Navigate', `Pressed post id ${id}`);
+    Alert.alert('Navigate', `Feature is not available`);
   };
 
   fetchData() {
@@ -89,7 +89,7 @@ class HomeScreen extends Component {
         {postReducer.isUploading && (
           <ProgressBar progress={postReducer.transferred} color={color.blue} />
         )}
-        <BaseTag tags={tags} onPress={this._handlePressTag} />
+        {/* <BaseTag tags={tags} onPress={this._handlePressTag} /> */}
         <PostContainer
           refreshing={refreshing}
           onRefresh={this.onRefresh}

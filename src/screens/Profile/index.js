@@ -16,7 +16,7 @@ class ProfileScreen extends Component {
       <View style={styles.container}>
         <ProfileCard
           user={auth.user}
-          onNavigateEditProfile={() => navigation.navigate('ProfileEdit')}
+          onNavigateEditProfile={() => null}
         />
         <ProfileTabBarContainer />
       </View>

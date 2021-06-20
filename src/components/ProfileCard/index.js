@@ -12,7 +12,7 @@ const ProfileCard = ({ onNavigateEditProfile, user }) => {
   return (
     <View style={styles.cardProfileWrapper}>
       <ImageBackground
-        source={BgProfileCard}
+        source={{ uri: "https://images.ctfassets.net/hrltx12pl8hq/8MpEm5OxWXiNqLvWzCYpW/24f02cfe391aa8f25845de858982d449/shutterstock_749707636__1__copy.jpg?fit=fill&w=840&h=350" }}
         borderRadius={10}
         borderBottomLeftRadius={10}
         borderBottomRightRadius={10}
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 64 * 2,
+    resizeMode: 'contain'
   },
   cardProfileInfo: {
     flexDirection: 'row',

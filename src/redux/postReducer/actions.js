@@ -5,11 +5,16 @@ import {
   getUsersCollection,
   storeMediaToStorage,
 } from '../../services/google';
-import { GET_POSTS, SET_IS_UPLOADING, SET_TRANSFERRED } from './types';
+import { GET_POSTS, GET_POSTS_BY, SET_IS_UPLOADING, SET_TRANSFERRED } from './types';
 import firestore from '@react-native-firebase/firestore';
 
 const getPosts = payload => ({
   type: GET_POSTS,
+  payload,
+});
+
+const getPostsBy = payload => ({
+  type: GET_POSTS_BY,
   payload,
 });
 
@@ -43,6 +48,20 @@ export const getPostAsync = () => {
         Promise.all(querySnapshot.docs.map(findAnAuthor)).then(res =>
           dispatch(getPosts(res)),
         );
+      });
+  };
+};
+
+export const getPostByAsync = () => {
+  return (dispatch, getState) => {
+    const authReducer = getState().authReducer;
+
+    getPostsCollection()
+      .orderBy('createdAt', 'desc')
+      .where('author', '==', authReducer.user.email)
+      .get()
+      .then(querySnapshot => {
+        console.log(querySnapshot)
       });
   };
 };

@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
 import { color } from '../../../../assets';
 import { Post, PostAction } from '../../../../components';
 import { postsAndReplies } from '../../../../mocks';
 
 const PostTabScene = props => {
+  const dispatch = useDispatch();
   const [postAndReplies, setPostAndReplies] = useState(postsAndReplies);
   const [refreshing, setRefreshing] = useState(false);
 
